@@ -1,0 +1,14 @@
+D:\Projects\Core\Core.Database\bin\Debug\netcoreapp2.1\Core.Database.deps.json
+D:\Projects\Core\Core.Database\bin\Debug\netcoreapp2.1\Core.Database.runtimeconfig.json
+D:\Projects\Core\Core.Database\bin\Debug\netcoreapp2.1\Core.Database.runtimeconfig.dev.json
+D:\Projects\Core\Core.Database\bin\Debug\netcoreapp2.1\Core.Database.dll
+D:\Projects\Core\Core.Database\bin\Debug\netcoreapp2.1\Core.Database.pdb
+D:\Projects\Core\Core.Database\obj\Debug\netcoreapp2.1\Core.Database.csproj.CoreCompileInputs.cache
+D:\Projects\Core\Core.Database\obj\Debug\netcoreapp2.1\Core.Database.AssemblyInfoInputs.cache
+D:\Projects\Core\Core.Database\obj\Debug\netcoreapp2.1\Core.Database.AssemblyInfo.cs
+D:\Projects\Core\Core.Database\obj\Debug\netcoreapp2.1\Core.Database.dll
+D:\Projects\Core\Core.Database\obj\Debug\netcoreapp2.1\Core.Database.pdb
+D:\Projects\Core\Core.Database\bin\Debug\netcoreapp2.1\Core.DAL.dll
+D:\Projects\Core\Core.Database\bin\Debug\netcoreapp2.1\Core.DAL.pdb
+D:\Projects\Core\Core.Database\obj\Debug\netcoreapp2.1\Core.Database.csprojAssemblyReference.cache
+D:\Projects\Core\Core.Database\obj\Debug\netcoreapp2.1\Core.Database.csproj.CopyComplete

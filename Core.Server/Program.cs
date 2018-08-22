@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Core.Server
 {
-    class Program
+    static class Program
     {
         private const string AppSettingsFileName = "appsettings.json";
 
@@ -17,16 +17,15 @@ namespace Core.Server
                     .AddJsonFile(AppSettingsFileName)
                     .Build();
 
-                var server = new Core.WebApi.Server(config);
-                server.Run(arguments);
+                var webHost = Server.Build(config, arguments);
+                Server.Run(webHost);
 
                 Console.WriteLine("Running... Press any key to exit");
                 Console.ReadLine();
             }
             catch (Exception exception)
             {
-                Console.WriteLine("Message: {0}; Inner Exception: {1}",
-                    exception.Message, exception.InnerException);
+                Console.WriteLine($"Message: {exception.Message}; Inner Exception: {exception.InnerException}");
                 Console.ReadLine();
             }
         }

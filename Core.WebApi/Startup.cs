@@ -19,16 +19,17 @@ namespace Core.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext(_config);
-            services.AddRepositories();
-            services.AddServices();
             services.AddMvc();
+            services.AddServices();
+            services.AddRepositories();
+            services.AddDbContext(_config);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment evn)
         {
             app.UseStaticFiles();
             app.UseMvc();
+            app.Build();
         }
     }
 }

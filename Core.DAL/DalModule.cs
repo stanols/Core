@@ -18,13 +18,10 @@ namespace Core.DAL
 
         public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration config)
         {
-            const string connectionStringName = "connectionString";
+            const string connectionStringKey = "connectionString";
 
-            var connectionString = config[connectionStringName];
-            services.AddDbContext<CoreDbContext>(
-                optionsBuilder => optionsBuilder.UseNpgsql(connectionString), 
-                ServiceLifetime.Singleton, 
-                ServiceLifetime.Singleton);
+            var connectionString = config[connectionStringKey];
+            services.AddDbContext<CoreDbContext>(opts => opts.UseNpgsql(connectionString));
 
             return services;
         }

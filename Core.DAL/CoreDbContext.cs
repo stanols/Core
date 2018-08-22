@@ -6,9 +6,8 @@ namespace Core.DAL
 {
     public class CoreDbContext : DbContext
     {
-        public CoreDbContext(DbContextOptions options) : base(options)
+        public CoreDbContext(DbContextOptions<CoreDbContext> options) : base(options)
         {
-            //Database.SetInitializer<SchoolDBContext>(new CreateDatabaseIfNotExists<SchoolDBContext>());
         }
 
         public DbSet<User> Users { get; set; }
@@ -21,7 +20,7 @@ namespace Core.DAL
         public override int SaveChanges()
         {
             ChangeTracker.DetectChanges();
-            
+
             return base.SaveChanges();
         }
     }
