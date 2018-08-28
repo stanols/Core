@@ -5,15 +5,19 @@ using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
 using Core.DAL.Entities;
 using Core.DAL.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Core.DAL.Entities;
 
 namespace Core.BLL.Services
 {
     public class UserService : IUserService
     {
+        private readonly UserManager<User> _userManager;
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(UserManager<User> userManager, IUserRepository userRepository)
         {
+            _userManager = userManager;
             _userRepository = userRepository;
         }
 

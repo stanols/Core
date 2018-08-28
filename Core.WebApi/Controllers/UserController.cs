@@ -1,6 +1,7 @@
 ﻿using System;
 using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.WebAPI.Controllers
@@ -31,12 +32,14 @@ namespace Core.WebAPI.Controllers
         }
 
         [HttpPut]
+        [AllowAnonymous]
         public void Update([FromBody]UserViewModel user)
         {
 
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public void Delete([FromQuery]int id)
         {
 

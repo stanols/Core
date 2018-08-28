@@ -1,9 +1,12 @@
 ﻿using System;
+using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 using Core.DAL.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace Core.DAL
 {
@@ -22,6 +25,13 @@ namespace Core.DAL
 
             var connectionString = config[connectionStringKey];
             services.AddDbContext<CoreDbContext>(opts => opts.UseNpgsql(connectionString));
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<CoreDbContext>()
+                .AddDefaultTokenProviders();
+
+            
+            //services.AddAuthentication();
 
             return services;
         }
