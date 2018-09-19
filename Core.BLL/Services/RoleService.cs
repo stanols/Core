@@ -3,13 +3,11 @@ using Core.DAL.Entities;
 
 namespace Core.BLL.Services
 {
-    public class RoleService
+    public class RoleService : BaseService
     {
-        private readonly RoleManager<Role> _roleManager;
-
-        public RoleService(RoleManager<Role> roleManager)
+        public RoleService()
         {
-            _roleManager = roleManager;
+            
         }
     }
 }

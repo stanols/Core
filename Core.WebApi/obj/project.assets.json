@@ -13735,7 +13735,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pasha\\.nuget\\packages\\": {},
+    "C:\\Users\\Pavel.Kaliukhovich\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13744,22 +13744,23 @@
       "projectUniqueName": "D:\\Projects\\Core\\Core.WebApi\\Core.WebAPI.csproj",
       "projectName": "Core.WebAPI",
       "projectPath": "D:\\Projects\\Core\\Core.WebApi\\Core.WebAPI.csproj",
-      "packagesPath": "C:\\Users\\Pasha\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Pavel.Kaliukhovich\\.nuget\\packages\\",
       "outputPath": "D:\\Projects\\Core\\Core.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Pasha\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Pavel.Kaliukhovich\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
-        "C:\\Program Files\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://rmsautomotive.pkgs.visualstudio.com/_packaging/flex-packages-develop/nuget/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp2.1": {

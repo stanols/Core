@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Core.DAL.Entities
 {
-    public class User : IdentityUser<int>
-    {
-        public string Name { get; set; }
-        public Role Role { get; set; }
+    public class User : BaseEntity
+	{
+	    public string Name { get; set; }
+	    public byte[] PasswordHash { get; set; }
+	    public byte[] PasswordSalt { get; set; }
+		public Role Role { get; set; }
     }
 }

@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Core.DAL.Entities
 {
-    public class Event
-    {
-        public int Id { get; set; }
+    public class Event : BaseEntity
+	{
         public string Name { get; set; }
         public string Description { get; set; }
         public int AdventureId { get; set; }

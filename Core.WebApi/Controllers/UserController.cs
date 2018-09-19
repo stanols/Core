@@ -1,48 +1,79 @@
 ﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Authentication;
+using System.Security.Claims;
+using System.Text;
 using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Core.WebAPI.Controllers
 {
-    public class UserController : BaseController
-    {
-        private readonly IUserService _userService;
+	[Authorize]
+	public class UserController : BaseController
+	{
+		private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
-        {
-            _userService = userService;
-        }
+		public UserController(IUserService userService)
+		{
+			_userService = userService;
+		}
 
-        [HttpPost]
-        public UserViewModel Create([FromBody]UserViewModel userViewModel)
-        {
-            return _userService.Create(userViewModel);
-        }
+		[HttpPost]
+		[AllowAnonymous]
+		public void Create([FromBody]UserViewModel userViewModel)
+		{
+			_userService.Create(userViewModel);
+		}
 
-        [HttpGet]
-        public UserViewModel Get([FromQuery]int id)
-        {
-            return new UserViewModel
-            {
-                Id = 1,
-                Name = "Pasha"
-            };
-        }
+		[HttpGet]
+		public UserViewModel Get([FromQuery]int id)
+		{
+			return _userService.Get(id);
+		}
 
-        [HttpPut]
-        [AllowAnonymous]
-        public void Update([FromBody]UserViewModel user)
-        {
+		[HttpPut]
+		public void Update([FromBody]UserViewModel user)
+		{
+			_userService.Update(user);
+		}
 
-        }
+		[HttpDelete]
+		[Authorize(Roles = "Admin")]
+		public void Remove([FromQuery]int id)
+		{
+			_userService.Remove(id);
+		}
 
-        [HttpDelete]
-        [Authorize(Roles = "Admin")]
-        public void Delete([FromQuery]int id)
-        {
+		[HttpPost]
+		[AllowAnonymous]
+		public UserViewModel Authenticate([FromBody] UserViewModel userViewModel)
+		{
+			var viewModel = _userService.Authenticate(userViewModel.Name, userViewModel.Password);
+			if (viewModel == null)
+			{
+				throw new AuthenticationException();
+			}
 
-        }
-    }
+			var tokenHandler = new JwtSecurityTokenHandler();
+			var key = Encoding.ASCII.GetBytes("dotNet Core app Version 2.1 for Adventures"); //TODO: move secret to appsettings.json
+			var tokenDescriptor = new SecurityTokenDescriptor
+			{
+				Subject = new ClaimsIdentity(new Claim[]
+				{
+					new Claim(ClaimTypes.Name, viewModel.Id.ToString())
+				}),
+				Expires = DateTime.UtcNow.AddDays(1),
+				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+			};
+
+			var token = tokenHandler.CreateToken(tokenDescriptor);
+			viewModel.Token = tokenHandler.WriteToken(token);
+
+			return viewModel;
+		}
+
+	}
 }
