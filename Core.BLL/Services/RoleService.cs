@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
 using Core.DAL.Entities;
+using Core.DAL.Interfaces;
 
 namespace Core.BLL.Services
 {
-    public class RoleService : BaseService
+    public class RoleService : BaseService<Role>
     {
-        public RoleService()
+	    public RoleService(IRoleRepository roleRepository)
+			:base(roleRepository)
         {
             
         }

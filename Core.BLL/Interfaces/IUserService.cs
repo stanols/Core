@@ -1,9 +1,10 @@
 ﻿using System;
 using Core.BLL.ViewModels;
+using Core.DAL.Entities;
 
 namespace Core.BLL.Interfaces
 {
-	public interface IUserService
+	public interface IUserService : IBaseService<User>
 	{
 		void Create(UserViewModel userViewModel);
 

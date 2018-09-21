@@ -9,13 +9,11 @@ using Core.DAL.Interfaces;
 
 namespace Core.BLL.Services
 {
-	public class UserService : BaseService, IUserService
+	public class UserService : BaseService<User>, IUserService
 	{
-		private readonly IUserRepository _userRepository;
-
 		public UserService(IUserRepository userRepository)
+			: base(userRepository)
 		{
-			_userRepository = userRepository;
 		}
 
 		public void Create(UserViewModel userViewModel)
@@ -28,24 +26,19 @@ namespace Core.BLL.Services
 			userViewModel.PasswordHash = passwordHash.Item2;
 			var newUser = MapToUser(userViewModel);
 
-			_userRepository.Create(newUser);
+			base.Create(newUser);
 		}
 
-		public UserViewModel Get(int id)
+		public new UserViewModel Get(int id)
 		{
-			var user =  _userRepository.Get(id);
+			var user =  base.Get(id);
 			return MapToUserViewModel(user);
 		}
 
 		public void Update(UserViewModel userViewModel)
 		{
 			var user = MapToUser(userViewModel);
-			_userRepository.Update(user);
-		}
-
-		public void Remove(int id)
-		{
-			_userRepository.Remove(id);
+			base.Update(user);
 		}
 
 		public UserViewModel Authenticate(string name, string password)
@@ -55,7 +48,7 @@ namespace Core.BLL.Services
 				return null;
 			}
 
-			var user = _userRepository.GetBy(x => x.Name == name);
+			var user = base.GetBy(x => x.Name == name);
 
 			if (user == null || !VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
 			{
