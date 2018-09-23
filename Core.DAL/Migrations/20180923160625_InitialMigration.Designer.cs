@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Core.DAL.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20180923085441_InitialMigration")]
+    [Migration("20180923160625_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace Core.DAL.Migrations
 
             modelBuilder.Entity("Core.DAL.Entities.Adventure", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("CreatedById");
@@ -45,7 +45,7 @@ namespace Core.DAL.Migrations
 
             modelBuilder.Entity("Core.DAL.Entities.Event", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AdventureId");
@@ -67,7 +67,7 @@ namespace Core.DAL.Migrations
 
             modelBuilder.Entity("Core.DAL.Entities.Location", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<double>("Latitude");
@@ -81,36 +81,28 @@ namespace Core.DAL.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("Core.DAL.Entities.Role", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("Core.DAL.Entities.User", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(450);
 
                     b.Property<byte[]>("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt");
 
-                    b.Property<int?>("RoleId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -120,13 +112,6 @@ namespace Core.DAL.Migrations
                     b.HasOne("Core.DAL.Entities.User", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById");
-                });
-
-            modelBuilder.Entity("Core.DAL.Entities.User", b =>
-                {
-                    b.HasOne("Core.DAL.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }

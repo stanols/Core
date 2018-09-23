@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using AutoMapper;
 
 namespace Core.WebApi
 {
@@ -30,6 +31,7 @@ namespace Core.WebApi
 			services.AddRepositories();
 			services.AddServices();
 		    services.AddCors();
+            services.AddAutoMapper();
 		    services.AddMvc();
 
 		    var secretKey = _config[secret];

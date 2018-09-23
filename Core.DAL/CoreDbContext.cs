@@ -13,13 +13,16 @@ namespace Core.DAL
         }
 
 	    public DbSet<User> Users { get; set; }
-	    public DbSet<Role> Roles { get; set; }
 	    public DbSet<Location> Locations { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Adventure> Adventures { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<User>()
+                .HasIndex(b => b.Name)
+                .IsUnique();
+
             base.OnModelCreating(builder);
         }
 

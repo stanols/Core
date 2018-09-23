@@ -5,40 +5,78 @@ using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
 using Core.DAL.Entities;
 using Core.DAL.Interfaces;
+using AutoMapper;
 
 
 namespace Core.BLL.Services
 {
-	public class UserService : BaseService<User>, IUserService
+	public class UserService : BaseService<User, UserViewModel>, IUserService
 	{
-		public UserService(IUserRepository userRepository)
-			: base(userRepository)
+		public UserService(IUserRepository userRepository, IMapper mapper)
+			: base(userRepository, mapper)
 		{
-		}
+        }
 
-		public void Create(UserViewModel userViewModel)
+		public new void Create(UserViewModel userViewModel)
 		{
 			var password = userViewModel.Password;
 			var confirmedPassword = userViewModel.ConfirmedPassword;
-
 			var passwordHash = CreatePasswordHash(password, confirmedPassword);
-			userViewModel.PasswordSalt = passwordHash.Item1;
-			userViewModel.PasswordHash = passwordHash.Item2;
-			var newUser = MapToUser(userViewModel);
-            newUser.Id = null;
-			base.Create(newUser);
+
+            var newUser = new User
+            {
+                Name = userViewModel.Name,
+                FirstName = userViewModel.FirstName,
+                LastName = userViewModel.LastName,
+                Email = userViewModel.Email,
+                PasswordSalt = passwordHash.Item1,
+                PasswordHash = passwordHash.Item2
+            };
+
+            Repository.Create(newUser);
 		}
 
 		public new UserViewModel Get(int id)
 		{
-			var user =  base.Get(id);
+			var user = Repository.Get(id);
 			return MapToUserViewModel(user);
 		}
 
-		public void Update(UserViewModel userViewModel)
+		public new void Update(UserViewModel userViewModel)
 		{
-			var user = MapToUser(userViewModel);
-			base.Update(user);
+            var id = userViewModel.Id;            
+            var user = Repository.Get(id);
+            if (user == null)
+            {
+                throw new InvalidOperationException($"User with id='{id}' is not found");
+            }
+
+            var name = userViewModel.Name;
+            if (name != user.Name)
+            {
+                var existingUser = Repository.GetBy(x => x.Name == name);
+                if (existingUser != null)
+                {
+                    throw new InvalidOperationException($"User with name '{name}' is already exist");
+                }
+                user.Name = userViewModel.Name;
+            }
+                        
+            user.FirstName = userViewModel.FirstName;
+            user.LastName = userViewModel.LastName;
+            user.Email = userViewModel.Email;
+
+            var password = userViewModel.Password;
+            var confirmedPassword = userViewModel.ConfirmedPassword;
+            if (!string.IsNullOrWhiteSpace(password))
+            {
+                var passwordHash = CreatePasswordHash(userViewModel.Password, userViewModel.ConfirmedPassword);
+
+                user.PasswordSalt = passwordHash.Item1;
+                user.PasswordHash = passwordHash.Item2;
+            }
+            
+			Repository.Update(user);
 		}
 
 		public UserViewModel Authenticate(string name, string password)
@@ -48,7 +86,7 @@ namespace Core.BLL.Services
 				return null;
 			}
 
-			var user = base.GetBy(x => x.Name == name);
+			var user = Repository.GetBy(x => x.Name == name);
 
 			if (user == null || !VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
 			{
@@ -58,29 +96,15 @@ namespace Core.BLL.Services
 			return MapToUserViewModel(user);
 		}
 
-		private User MapToUser(UserViewModel userViewModel, bool includeSecretData = false)
-		{
-			var user = new User
-			{
-				Id = userViewModel.Id,
-				Name = userViewModel.Name
-			};
-
-            if (includeSecretData)
-            {
-                user.PasswordSalt = userViewModel.PasswordSalt;
-                user.PasswordHash = userViewModel.PasswordHash;
-            }
-
-			return user;
-		}
-
 		private UserViewModel MapToUserViewModel(User user, bool includeSecretData = false)
 		{
 			var userViewModel = new UserViewModel
 			{
 				Id = user.Id,
-				Name = user.Name
+				Name = user.Name,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email
 			};
 
 			if (includeSecretData)

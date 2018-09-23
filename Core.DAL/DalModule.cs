@@ -1,8 +1,6 @@
 ﻿using System;
-using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 using Core.DAL.Repositories;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +13,6 @@ namespace Core.DAL
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IRoleRepository, RoleRepository>();
 
             return services;
         }
