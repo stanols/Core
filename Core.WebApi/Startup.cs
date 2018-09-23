@@ -25,13 +25,16 @@ namespace Core.WebApi
 		public void ConfigureServices(IServiceCollection services)
 		{
 			const string secret = "secret";
-			
+            
 			services.AddDbContext(_config);
 			services.AddRepositories();
 			services.AddServices();
-			services.AddMvc();
+		    services.AddCors();
+		    services.AddMvc();
 
-			services
+		    var secretKey = _config[secret];
+            var key = Encoding.ASCII.GetBytes(secretKey);
+            services
 				.AddAuthentication(x =>
 				{
 					x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -59,12 +62,12 @@ namespace Core.WebApi
 					x.TokenValidationParameters = new TokenValidationParameters
 					{
 						ValidateIssuerSigningKey = true,
-						IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_config[secret])),
+						IssuerSigningKey = new SymmetricSecurityKey(key),
 						ValidateIssuer = false,
 						ValidateAudience = false
 					};
 				});
-		}
+        }
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment evn)
 		{
@@ -74,9 +77,9 @@ namespace Core.WebApi
 				.AllowAnyMethod()
 				.AllowAnyHeader()
 				.AllowCredentials());
-			app.UseAuthentication();
-			app.UseMvc();
-			app.Build();
+		    app.UseAuthentication();
+		    app.UseMvc();
+            app.Build();
 		}
 	}
 }

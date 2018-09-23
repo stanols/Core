@@ -25,7 +25,7 @@ namespace Core.BLL.Services
 			userViewModel.PasswordSalt = passwordHash.Item1;
 			userViewModel.PasswordHash = passwordHash.Item2;
 			var newUser = MapToUser(userViewModel);
-
+            newUser.Id = null;
 			base.Create(newUser);
 		}
 
@@ -58,15 +58,19 @@ namespace Core.BLL.Services
 			return MapToUserViewModel(user);
 		}
 
-		private User MapToUser(UserViewModel userViewModel)
+		private User MapToUser(UserViewModel userViewModel, bool includeSecretData = false)
 		{
 			var user = new User
 			{
 				Id = userViewModel.Id,
-				Name = userViewModel.Name,
-				PasswordSalt = userViewModel.PasswordSalt,
-				PasswordHash = userViewModel.PasswordHash
+				Name = userViewModel.Name
 			};
+
+            if (includeSecretData)
+            {
+                user.PasswordSalt = userViewModel.PasswordSalt;
+                user.PasswordHash = userViewModel.PasswordHash;
+            }
 
 			return user;
 		}

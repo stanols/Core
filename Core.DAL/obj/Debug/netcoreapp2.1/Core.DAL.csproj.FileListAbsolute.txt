@@ -8,3 +8,4 @@ D:\Projects\Core\Core.DAL\obj\Debug\netcoreapp2.1\Core.DAL.dll
 D:\Projects\Core\Core.DAL\obj\Debug\netcoreapp2.1\Core.DAL.pdb
 D:\Projects\Core\Core.DAL\bin\Debug\netcoreapp2.1\Core.DAL.runtimeconfig.json
 D:\Projects\Core\Core.DAL\bin\Debug\netcoreapp2.1\Core.DAL.runtimeconfig.dev.json
+D:\Projects\Core\Core.DAL\obj\Debug\netcoreapp2.1\Core.DAL.csprojAssemblyReference.cache

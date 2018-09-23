@@ -15,6 +15,7 @@ namespace Core.DAL
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
 
             return services;
         }
@@ -25,13 +26,6 @@ namespace Core.DAL
 
             var connectionString = config[connectionStringKey];
             services.AddDbContext<CoreDbContext>(opts => opts.UseNpgsql(connectionString));
-
-            services.AddIdentity<User, Role>()
-                .AddEntityFrameworkStores<CoreDbContext>()
-                .AddDefaultTokenProviders();
-
-            
-            //services.AddAuthentication();
 
             return services;
         }
