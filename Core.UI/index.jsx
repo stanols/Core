@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import ReactDom from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import CreateSagaMiddleware from 'redux-saga';
 import { appReducer } from './app/reducers/appReducer';

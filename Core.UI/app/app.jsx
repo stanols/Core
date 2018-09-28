@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import './app.less';
+import Registration from './pages/registration/registration.jsx';
 
 
 class App extends React.Component {
@@ -10,7 +11,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                Hello!
+                Welcome to Adventure!
+                <Registration/>
             </div>
         );
     }

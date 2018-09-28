@@ -61,7 +61,7 @@
         "pluralize": "^5.0.0",
         "prop-types": "^15.5.10",
         "rc-slider": "^8.2.0",
-        "react": "^15.6.1",
+        "react": "^15.6.2",
         "react-addons-pure-render-mixin": "^15.5.2",
         "react-addons-test-utils": "^15.6.0",
         "react-autosuggest": "^9.3.2",
