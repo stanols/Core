@@ -3,8 +3,7 @@ using Core.DAL.Entities;
 
 namespace Core.DAL.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<User>
     {
-        User Create(User user);
     }
 }
