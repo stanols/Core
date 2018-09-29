@@ -1,6 +1,8 @@
 ﻿import React from 'react';
+import Header from './components/layout/header/header';
+import Footer from './components/layout/footer/footer';
+import Registration from './pages/registration/registration';
 import './app.less';
-import Registration from './pages/registration/registration.jsx';
 
 
 class App extends React.Component {
@@ -11,8 +13,10 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <Header/>
                 Welcome to Adventure!
-                <Registration/>
+                <Registration />
+                <Footer/>
             </div>
         );
     }

@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import './registration.less';
 
+
 class Registration extends React.Component
 {
 	constructor(props) {
