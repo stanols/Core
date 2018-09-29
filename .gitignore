@@ -4,6 +4,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+.git/
 
 [Dd]ebug/
 [Dd]ebugPublic/
