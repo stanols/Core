@@ -4,19 +4,12 @@ using Core.DAL.Interfaces;
 
 namespace Core.DAL.Repositories
 {
-    public class UserRepository : BaseRepository, IUserRepository
-    {
-        private readonly CoreDbContext _context;
-        public UserRepository(CoreDbContext context)
-        {
-            _context = context;
-        }
+	public class UserRepository : BaseRepository<User>, IUserRepository
+	{
+		public UserRepository(CoreDbContext context)
+			: base(context)
+		{
+		}
 
-        public User Create(User user)
-        {
-            var entity = _context.Users.Add(user);
-            _context.SaveChanges();
-            return entity.Entity;
-        }
-    }
+	}
 }
