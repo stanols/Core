@@ -63,7 +63,7 @@ namespace Core.WebAPI.Controllers
 			}
 
 			var tokenHandler = new JwtSecurityTokenHandler();
-			var key = Encoding.ASCII.GetBytes(_config[secret]); //TODO: move secret to appsettings.json
+			var key = Encoding.ASCII.GetBytes(_config[secret]);
 			var tokenDescriptor = new SecurityTokenDescriptor
 			{
 				Subject = new ClaimsIdentity(new Claim[]

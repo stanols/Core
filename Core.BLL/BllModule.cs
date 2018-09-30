@@ -10,6 +10,7 @@ namespace Core.BLL
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAdventureService, AdventureService>();
 
             return services;
         }

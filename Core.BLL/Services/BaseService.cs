@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using Core.DAL.Entities;
 using Core.DAL.Interfaces;
+using Core.BLL.Interfaces;
+using Core.BLL.ViewModels;
 using AutoMapper;
+
 
 namespace Core.BLL.Services
 {
-	public class BaseService<TEntity, TViewModel> 
+	public class BaseService<TEntity, TViewModel> : IBaseService<TEntity, TViewModel>
         where TEntity : BaseEntity
-        where TViewModel : class
+        where TViewModel : BaseViewModel
 	{
 		protected IBaseRepository<TEntity> Repository { get; private set; }
         protected IMapper Mapper { get; private set; }

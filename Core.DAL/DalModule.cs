@@ -13,6 +13,7 @@ namespace Core.DAL
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IAdventureRepository, AdventureRepository>();
 
             return services;
         }

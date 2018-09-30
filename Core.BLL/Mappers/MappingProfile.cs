@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using AutoMapper;
 using Core.BLL.ViewModels;
 using Core.DAL.Entities;
+
 
 namespace Core.BLL.Mappers
 {
@@ -12,6 +11,10 @@ namespace Core.BLL.Mappers
         public MappingProfile()
         {
             CreateMap<User, UserViewModel>();
+            CreateMap<UserViewModel, User>();
+
+            CreateMap<Adventure, AdventureViewModel>();            
+            CreateMap<AdventureViewModel, Adventure>();
         }
     }
 }

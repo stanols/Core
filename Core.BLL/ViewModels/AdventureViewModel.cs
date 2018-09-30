@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Core.DAL.Entities
+namespace Core.BLL.ViewModels
 {
-    public class Adventure : BaseEntity
-	{
-        public string Name { get; set; }
+    public class AdventureViewModel : BaseViewModel
+    {
         public string Description { get; set; }
-        public User CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
         public DateTime StartsOn { get; set; }
         public DateTime EndsOn { get; set; }
     }

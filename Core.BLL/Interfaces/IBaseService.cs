@@ -1,11 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Core.DAL.Entities;
+using Core.BLL.ViewModels;
 
 namespace Core.BLL.Interfaces
 {
-    public interface IBaseService<T> where T : BaseEntity
+    public interface IBaseService<TEntity, TViewModel> 
+        where TEntity : BaseEntity
+        where TViewModel : BaseViewModel
     {
+        void Create(TViewModel userViewModel);
+
+        TViewModel Get(int id);
+
+        void Update(TViewModel userViewModel);
+
+        void Remove(int id);
     }
 }
