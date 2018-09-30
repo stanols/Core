@@ -27,8 +27,9 @@ namespace Core.WebApi
 		public void ConfigureServices(IServiceCollection services)
 		{
 			const string secret = "secret";
-            
-			services.AddDbContext(_config);
+
+            services.AddSingleton(_config);
+            services.AddDbContext(_config);
 			services.AddRepositories();
 			services.AddServices();
 		    services.AddCors();

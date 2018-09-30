@@ -17,11 +17,8 @@ namespace Core.Server
                     .AddJsonFile(AppSettingsFileName)
                     .Build();
 
-                var webHost = Server.Build(config, arguments);
-                Server.Run(webHost);
-
-                Console.WriteLine("Running... Press any key to exit");
-                Console.ReadLine();
+                var server = new Server(config, arguments);
+                server.Run();
             }
             catch (Exception exception)
             {

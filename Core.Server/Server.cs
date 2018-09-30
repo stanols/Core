@@ -3,37 +3,59 @@ using Core.WebApi;
 using Microsoft.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+
 
 namespace Core.Server
 {
-    public static class Server
+    public class Server
     {
-        public static IWebHost Build(IConfiguration config, string[] arguments)
+        private readonly IConfiguration _config;
+        private readonly IWebHost _webHost;
+
+        public Server(IConfiguration config, string[] arguments)
+        {
+            _config = config;
+            var builder = CreateBuilder(arguments);
+            _webHost = Build(builder);
+        }
+
+        public void Run()
+        {
+            _webHost.Run();
+        }
+
+        private IWebHostBuilder CreateBuilder(string[] arguments)
         {
             const string webRootKey = "webRoot";
             const string urlKey = "url";
 
             var builder = WebHost.CreateDefaultBuilder(arguments);
-            var webRoot = Path.Combine(Directory.GetCurrentDirectory(), config[webRootKey]);
-            var urls = new[] { config[urlKey] };
-
-            var webHostBuilder = builder.UseConfiguration(config)
+            var webRoot = Path.Combine(Directory.GetCurrentDirectory(), _config[webRootKey]);
+            var urls = new[] { _config[urlKey] };
+            var webHostBuilder = builder.UseConfiguration(_config)
                 .UseUrls(urls)
                 .UseWebRoot(webRoot)
                 .UseKestrel()
                 .UseIISIntegration()
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    logging.AddConsole();
+                    logging.AddDebug();
+                })
                 .UseStartup<Startup>()
                 .UseDefaultServiceProvider((context, options) =>
                 {
                     options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
                 });
 
-            return webHostBuilder.Build();
+            return builder;
         }
 
-        public static void Run(IWebHost webHost)
+        private IWebHost Build(IWebHostBuilder webHostBuilder)
         {
-            webHost.Run();
-        }
+            var webHost = webHostBuilder.Build();
+            return webHost;
+        }        
     }
 }

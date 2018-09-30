@@ -8,6 +8,7 @@ using Core.BLL.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
 
 namespace Core.WebAPI.Controllers
 {
@@ -15,10 +16,12 @@ namespace Core.WebAPI.Controllers
 	public class UserController : BaseController
 	{
 		private readonly IUserService _userService;
+        private readonly IConfiguration _config;
 
-		public UserController(IUserService userService)
+		public UserController(IUserService userService, IConfiguration config)
 		{
 			_userService = userService;
+            _config = config;
 		}
 
 		[HttpPost]
@@ -51,6 +54,8 @@ namespace Core.WebAPI.Controllers
 		[AllowAnonymous]
 		public UserViewModel Authenticate([FromBody] UserViewModel userViewModel)
 		{
+            const string secret = "secret";
+
 			var viewModel = _userService.Authenticate(userViewModel.Name, userViewModel.Password);
 			if (viewModel == null)
 			{
@@ -58,7 +63,7 @@ namespace Core.WebAPI.Controllers
 			}
 
 			var tokenHandler = new JwtSecurityTokenHandler();
-			var key = Encoding.ASCII.GetBytes("dotNet Core app Version 2.1 for Adventures"); //TODO: move secret to appsettings.json
+			var key = Encoding.ASCII.GetBytes(_config[secret]); //TODO: move secret to appsettings.json
 			var tokenDescriptor = new SecurityTokenDescriptor
 			{
 				Subject = new ClaimsIdentity(new Claim[]

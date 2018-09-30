@@ -88,7 +88,7 @@ namespace Core.BLL.Services
 
 			var user = Repository.GetBy(x => x.Name == name);
 
-			if (user == null || !VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+			if (user == null || !VerifyPasswordHash(password, user.PasswordSalt, user.PasswordHash))
 			{
 				return null;
 			}
@@ -144,29 +144,29 @@ namespace Core.BLL.Services
 			return Tuple.Create(salt, hash);
 		}
 
-		private static bool VerifyPasswordHash(string password, byte[] hash, byte[] salt)
+		private static bool VerifyPasswordHash(string password, byte[] salt, byte[] hash)
 		{
-			const int hashLength = 64;
-			const int saltLength = 128;
+            const int saltLength = 128;
+            const int hashLength = 64;			
 
 			if (string.IsNullOrWhiteSpace(password))
 			{
 				throw new ArgumentException("Value can't be empty or whitespace.", nameof(password));
 			}
 
-			if (hash.Length != hashLength)
+            if (salt.Length != saltLength)
+            {
+                throw new ArgumentException("Invalid password salt length of (128 bytes expected).", nameof(salt));
+            }
+
+            if (hash.Length != hashLength)
 			{
 				throw new ArgumentException("Invalid password hash length (64 bytes expected).", nameof(hash));
-			}
+			}			
 
-			if (salt.Length != saltLength)
+			using (var hmac = new HMACSHA512(salt))
 			{
-				throw new ArgumentException("Invalid password salt length of (128 bytes expected).", nameof(salt));
-			}
-
-			using (var hmac = new System.Security.Cryptography.HMACSHA512(salt))
-			{
-				var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+				var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 				for (var i = 0; i < computedHash.Length; i++)
 				{
 					if (computedHash[i] != hash[i])
