@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Core.BLL.ViewModels
+﻿namespace Core.BLL.ViewModels
 {
-    public class BaseViewModel
-    {
-        public int Id { get; set; }
-    }
+	public class BaseViewModel
+	{
+		public int Id { get; set; }
+	}
 }

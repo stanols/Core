@@ -2,9 +2,9 @@
 
 namespace Core.WebAPI.Controllers
 {
-    [Route("api/[Controller]/[Action]")]
-    [ApiController]
-    public abstract class BaseController
-    {
-    }
+	[Route("api/[Controller]/[Action]")]
+	[ApiController]
+	public abstract class BaseController
+	{
+	}
 }

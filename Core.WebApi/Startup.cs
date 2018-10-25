@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using Core.BLL;
 using Core.BLL.Interfaces;
@@ -7,11 +6,11 @@ using Core.DAL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
+
 
 namespace Core.WebApi
 {
@@ -28,17 +27,17 @@ namespace Core.WebApi
 		{
 			const string secret = "secret";
 
-            services.AddSingleton(_config);
-            services.AddDbContext(_config);
+			services.AddSingleton(_config);
+			services.AddDbContext(_config);
 			services.AddRepositories();
 			services.AddServices();
-		    services.AddCors();
-            services.AddAutoMapper();
-		    services.AddMvc();
+			services.AddCors();
+			services.AddAutoMapper();
+			services.AddMvc();
 
-		    var secretKey = _config[secret];
-            var key = Encoding.ASCII.GetBytes(secretKey);
-            services
+			var secretKey = _config[secret];
+			var key = Encoding.ASCII.GetBytes(secretKey);
+			services
 				.AddAuthentication(x =>
 				{
 					x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -71,7 +70,7 @@ namespace Core.WebApi
 						ValidateAudience = false
 					};
 				});
-        }
+		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment evn)
 		{
@@ -81,9 +80,9 @@ namespace Core.WebApi
 				.AllowAnyMethod()
 				.AllowAnyHeader()
 				.AllowCredentials());
-		    app.UseAuthentication();
-		    app.UseMvc();
-            app.Build();
+			app.UseAuthentication();
+			app.UseMvc();
+			app.Build();
 		}
 	}
 }

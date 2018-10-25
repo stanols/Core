@@ -16,12 +16,12 @@ namespace Core.WebAPI.Controllers
 	public class UserController : BaseController
 	{
 		private readonly IUserService _userService;
-        private readonly IConfiguration _config;
+		private readonly IConfiguration _config;
 
 		public UserController(IUserService userService, IConfiguration config)
 		{
 			_userService = userService;
-            _config = config;
+			_config = config;
 		}
 
 		[HttpPost]
@@ -54,7 +54,7 @@ namespace Core.WebAPI.Controllers
 		[AllowAnonymous]
 		public UserViewModel Authenticate([FromBody] UserViewModel userViewModel)
 		{
-            const string secret = "secret";
+			const string secret = "secret";
 
 			var viewModel = _userService.Authenticate(userViewModel.Name, userViewModel.Password);
 			if (viewModel == null)

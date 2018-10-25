@@ -1,5 +1,4 @@
-﻿using System;
-using Core.DAL.Entities;
+﻿using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 
 namespace Core.DAL.Repositories

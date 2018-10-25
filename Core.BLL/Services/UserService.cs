@@ -15,7 +15,7 @@ namespace Core.BLL.Services
 		public UserService(IUserRepository userRepository, IMapper mapper)
 			: base(userRepository, mapper)
 		{
-        }
+		}
 
 		public new void Create(UserViewModel userViewModel)
 		{
@@ -23,17 +23,17 @@ namespace Core.BLL.Services
 			var confirmedPassword = userViewModel.ConfirmedPassword;
 			var passwordHash = CreatePasswordHash(password, confirmedPassword);
 
-            var newUser = new User
-            {
-                Name = userViewModel.Name,
-                FirstName = userViewModel.FirstName,
-                LastName = userViewModel.LastName,
-                Email = userViewModel.Email,
-                PasswordSalt = passwordHash.Item1,
-                PasswordHash = passwordHash.Item2
-            };
+			var newUser = new User
+			{
+				Name = userViewModel.Name,
+				FirstName = userViewModel.FirstName,
+				LastName = userViewModel.LastName,
+				Email = userViewModel.Email,
+				PasswordSalt = passwordHash.Item1,
+				PasswordHash = passwordHash.Item2
+			};
 
-            Repository.Create(newUser);
+			Repository.Create(newUser);
 		}
 
 		public new UserViewModel Get(int id)
@@ -44,38 +44,38 @@ namespace Core.BLL.Services
 
 		public new void Update(UserViewModel userViewModel)
 		{
-            var id = userViewModel.Id;            
-            var user = Repository.Get(id);
-            if (user == null)
-            {
-                throw new InvalidOperationException($"User with id='{id}' is not found");
-            }
+			var id = userViewModel.Id;
+			var user = Repository.Get(id);
+			if (user == null)
+			{
+				throw new InvalidOperationException($"User with id='{id}' is not found");
+			}
 
-            var name = userViewModel.Name;
-            if (name != user.Name)
-            {
-                var existingUser = Repository.GetBy(x => x.Name == name);
-                if (existingUser != null)
-                {
-                    throw new InvalidOperationException($"User with name '{name}' is already exist");
-                }
-                user.Name = userViewModel.Name;
-            }
-                        
-            user.FirstName = userViewModel.FirstName;
-            user.LastName = userViewModel.LastName;
-            user.Email = userViewModel.Email;
+			var name = userViewModel.Name;
+			if (name != user.Name)
+			{
+				var existingUser = Repository.GetBy(x => x.Name == name);
+				if (existingUser != null)
+				{
+					throw new InvalidOperationException($"User with name '{name}' is already exist");
+				}
+				user.Name = userViewModel.Name;
+			}
 
-            var password = userViewModel.Password;
-            var confirmedPassword = userViewModel.ConfirmedPassword;
-            if (!string.IsNullOrWhiteSpace(password))
-            {
-                var passwordHash = CreatePasswordHash(userViewModel.Password, userViewModel.ConfirmedPassword);
+			user.FirstName = userViewModel.FirstName;
+			user.LastName = userViewModel.LastName;
+			user.Email = userViewModel.Email;
 
-                user.PasswordSalt = passwordHash.Item1;
-                user.PasswordHash = passwordHash.Item2;
-            }
-            
+			var password = userViewModel.Password;
+			var confirmedPassword = userViewModel.ConfirmedPassword;
+			if (!string.IsNullOrWhiteSpace(password))
+			{
+				var passwordHash = CreatePasswordHash(userViewModel.Password, userViewModel.ConfirmedPassword);
+
+				user.PasswordSalt = passwordHash.Item1;
+				user.PasswordHash = passwordHash.Item2;
+			}
+
 			Repository.Update(user);
 		}
 
@@ -102,9 +102,9 @@ namespace Core.BLL.Services
 			{
 				Id = user.Id,
 				Name = user.Name,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email
+				FirstName = user.FirstName,
+				LastName = user.LastName,
+				Email = user.Email
 			};
 
 			if (includeSecretData)
@@ -146,23 +146,23 @@ namespace Core.BLL.Services
 
 		private static bool VerifyPasswordHash(string password, byte[] salt, byte[] hash)
 		{
-            const int saltLength = 128;
-            const int hashLength = 64;			
+			const int saltLength = 128;
+			const int hashLength = 64;
 
 			if (string.IsNullOrWhiteSpace(password))
 			{
 				throw new ArgumentException("Value can't be empty or whitespace.", nameof(password));
 			}
 
-            if (salt.Length != saltLength)
-            {
-                throw new ArgumentException("Invalid password salt length of (128 bytes expected).", nameof(salt));
-            }
+			if (salt.Length != saltLength)
+			{
+				throw new ArgumentException("Invalid password salt length of (128 bytes expected).", nameof(salt));
+			}
 
-            if (hash.Length != hashLength)
+			if (hash.Length != hashLength)
 			{
 				throw new ArgumentException("Invalid password hash length (64 bytes expected).", nameof(hash));
-			}			
+			}
 
 			using (var hmac = new HMACSHA512(salt))
 			{

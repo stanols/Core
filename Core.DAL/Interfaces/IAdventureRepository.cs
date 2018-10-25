@@ -1,9 +1,8 @@
-﻿using System;
-using Core.DAL.Entities;
+﻿using Core.DAL.Entities;
 
 namespace Core.DAL.Interfaces
 {
-    public interface IAdventureRepository : IBaseRepository<Adventure>
-    {
-    }
+	public interface IAdventureRepository : IBaseRepository<Adventure>
+	{
+	}
 }

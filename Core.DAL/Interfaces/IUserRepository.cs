@@ -1,9 +1,8 @@
-﻿using System;
-using Core.DAL.Entities;
+﻿using Core.DAL.Entities;
 
 namespace Core.DAL.Interfaces
 {
-    public interface IUserRepository : IBaseRepository<User>
-    {
-    }
+	public interface IUserRepository : IBaseRepository<User>
+	{
+	}
 }
