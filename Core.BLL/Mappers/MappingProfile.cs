@@ -14,6 +14,12 @@ namespace Core.BLL.Mappers
 
 			CreateMap<Adventure, AdventureViewModel>();
 			CreateMap<AdventureViewModel, Adventure>();
+
+			CreateMap<Event, EventViewModel>();
+			CreateMap<EventViewModel, Event>();
+
+			CreateMap<Location, LocationViewModel>();
+			CreateMap<LocationViewModel, Location>();
 		}
 	}
 }

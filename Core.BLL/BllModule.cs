@@ -10,6 +10,8 @@ namespace Core.BLL
 		{
 			services.AddTransient<IUserService, UserService>();
 			services.AddTransient<IAdventureService, AdventureService>();
+			services.AddTransient<IEventService, EventService>();
+			services.AddTransient<ILocationService, LocationService>();
 
 			return services;
 		}

@@ -44,7 +44,6 @@ namespace Core.WebAPI.Controllers
 		}
 
 		[HttpDelete]
-		[Authorize]
 		public void Remove([FromQuery]int id)
 		{
 			_userService.Remove(id);
