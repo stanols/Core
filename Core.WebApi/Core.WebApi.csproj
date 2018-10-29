@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0-preview3-35497" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.1.1" />
@@ -23,6 +24,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core.BLL\Core.BLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Middlewares\" />
   </ItemGroup>
 
 </Project>

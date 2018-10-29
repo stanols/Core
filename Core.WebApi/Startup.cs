@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
+using Core.WebAPI.Hubs;
 
 
 namespace Core.WebApi
@@ -70,6 +71,8 @@ namespace Core.WebApi
 						ValidateAudience = false
 					};
 				});
+
+			services.AddSignalR();
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment evn)
@@ -82,6 +85,10 @@ namespace Core.WebApi
 				.AllowAnyHeader()
 				.AllowCredentials());
 			app.UseAuthentication();
+			app.UseSignalR(routes =>
+			{
+				routes.MapHub<ChatHub>($"/{nameof(ChatHub)}");
+			});
 			app.UseMvc();
 			app.Build();
 		}
