@@ -77,7 +77,7 @@ namespace Core.WebApi
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment evn)
 		{
-            app.UseDefaultFiles();
+			app.UseDefaultFiles();
 			app.UseStaticFiles();
 			app.UseCors(x => x
 				.AllowAnyOrigin()

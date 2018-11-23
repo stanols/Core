@@ -1,4 +1,4 @@
-﻿namespace Core.WebAPI.Hubs.Messages
+﻿namespace Core.WebAPI.Hubs.Clients.Messages
 {
 	public class ChatMessage : BaseMessage
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Core.WebAPI.Hubs.Clients.Interfaces;
-using Core.WebAPI.Hubs.Messages;
+using Core.WebAPI.Hubs.Clients.Messages;
 
 namespace Core.WebAPI.Hubs
 {
