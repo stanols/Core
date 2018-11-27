@@ -4,8 +4,6 @@
 	"private": true,
 	"description": "DotNetCore App",
 	"main": "./index.html",
-	"scripts": {
-	},
 	"dependencies": {
 		"babel-cli": "^6.26.0",
 		"babel-core": "^6.26.3",
