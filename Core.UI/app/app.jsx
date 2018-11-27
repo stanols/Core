@@ -2,7 +2,6 @@
 import Header from './components/layout/header/header';
 import Footer from './components/layout/footer/footer';
 import Registration from './pages/registration/registration';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import './app.less';
 
 
@@ -14,7 +13,6 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <CssBaseline />
                 <Header/>
                 <Registration />
                 <Footer/>

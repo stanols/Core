@@ -4,13 +4,13 @@ const webpack = require('webpack');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const babelPolyfill = require('babel-polyfill');
-const whatwgFetch = require('whatwg-fetch');
+//const babelPolyfill = require('babel-polyfill');
+//const whatwgFetch = require('whatwg-fetch');
 
 const useGzip = process.env.USE_GZIP === 'true';
 const isWatch = process.env.WATCH === 'true';
-const developmentEnvironment = 'development';
-const environment = process.env.NODE_ENV || developmentEnvironment;
+//const developmentEnvironment = 'development';
+//const environment = 'development'; // process.env.NODE_ENV || developmentEnvironment;
 
 const onlyJsx = process.env.ONLY_JSX === 'true';
 const babelExtensions = onlyJsx ? /\.jsx$/ : /\.js|jsx$/;
@@ -18,6 +18,7 @@ const babelExtensions = onlyJsx ? /\.jsx$/ : /\.js|jsx$/;
 process.traceDeprecation = true;
 
 const conf = {
+    mode: 'development',
     entry: [
         'babel-polyfill',
         'whatwg-fetch',
@@ -121,11 +122,11 @@ const conf = {
     watch: isWatch
 };
 
-if (environment !== developmentEnvironment) {
-    conf.plugins.push(new webpack.optimize.UglifyJsPlugin());
-} else {
-    conf.devtool = 'source-map';
-}
+//if (environment !== developmentEnvironment) {
+//    conf.plugins.push(new webpack.optimize.UglifyJsPlugin());
+//} else {
+//    conf.devtool = 'source-map';
+//}
 
 if (useGzip) {
     conf.plugins.push(
