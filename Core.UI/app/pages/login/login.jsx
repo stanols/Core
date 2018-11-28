@@ -6,15 +6,29 @@ class Login extends React.Component {
 		super(props);
 
 		this.state = {
-			login: "",
+			name: "",
 			password: ""
 		};
 
+		this.onChange = this.onChange.bind(this);
 		this.onSignIn = this.onSignIn.bind(this);
 	}
 
-	onSignIn() {
+	onChange(event) {
+		const checkboxTargetType = "checkbox";
+		const target = event.target;
+		const value = target.type === checkboxTargetType
+			? target.checked
+			: target.value;
+		const name = target.name;
 
+		this.setState({
+			[name]: value
+		});
+	}
+
+	onSignIn(event) {
+		//TODO: add api call
 	}
 
 	render() {
@@ -22,8 +36,9 @@ class Login extends React.Component {
 			<div>
 				<h3>Sign In</h3>
 				<form onSubmit={this.onSignIn}>
-					<input type="text" placeholder="login" />
-					<input type="password" placeholder="login" />
+					<input name="name" value={this.state.name} onChange={this.onChange} type="text" placeholder="Login" />
+					<input name="password" value={this.state.password} onChange={this.onChange} type="password" placeholder="Password" />
+					<input type="submit" value="Sign In" />
 				</form>
 			</div>
 		);
