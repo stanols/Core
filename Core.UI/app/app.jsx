@@ -4,7 +4,7 @@ import Footer from './components/layout/footer/footer';
 import Home from './pages/home/home';
 import Registration from './pages/registration/registration';
 import Login from './pages/login/login';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom';
 import './app.less';
 
 class App extends React.Component {
@@ -15,15 +15,13 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-                <Header />
-                <Router>
-                    <Switch>
-					    <Route path="/" component={Home} />
-					    <Route path="/home" component={Home} />
-					    <Route path="/registration" component={Registration} />
-                        <Route path="/login" component={Login} />
-                    </Switch>
-				</Router>
+				<Header />
+				<Switch>
+					<Route path="/" exact component={Home} />
+					<Route path="/home" exact component={Home} />
+					<Route path="/registration" exact component={Registration} />
+					<Route path="/login" exact component={Login} />
+				</Switch>
 				<Footer />
 			</div>
 		);
