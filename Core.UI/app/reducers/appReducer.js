@@ -4,5 +4,5 @@ import { loginReducer } from './pageReducers/loginReducer';
 
 export default combineReducers({
 	registrationReducer,
-	counter
+    loginReducer
 });

@@ -9,8 +9,7 @@ import App from './app/app';
 
 
 const sagaMiddleware = CreateSagaMiddleware();
-var reducer = appReducer(); 
-const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+const store = createStore(appReducer, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(appSaga);
 
 ReactDom.render(
