@@ -19,6 +19,13 @@ namespace Core.BLL.Services
 
 		public new void Create(UserViewModel userViewModel)
 		{
+			var name = userViewModel.Name;
+			var existingUser = Repository.GetBy(x => x.Name == name);
+			if (existingUser != null)
+			{
+				throw new InvalidOperationException($"User with name='{name}' is already exist");
+			}
+
 			var password = userViewModel.Password;
 			var confirmedPassword = userViewModel.ConfirmedPassword;
 			var passwordHash = CreatePasswordHash(password, confirmedPassword);

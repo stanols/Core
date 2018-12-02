@@ -4,9 +4,11 @@ const webpack = require('webpack');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const babelPolyfill = require('babel-polyfill');
 
 const conf = {
-    mode: 'development',
+	mode: 'development',
+	devtool: 'source-map',
     entry: [
         'babel-polyfill',
         'whatwg-fetch',

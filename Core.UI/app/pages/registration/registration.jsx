@@ -32,7 +32,7 @@ class Registration extends React.Component {
 	}
 
 	onSignUp(event) {
-		//TODO: add api call
+		this.props.onSignUp(this.state);
 	}
 
 	render() {

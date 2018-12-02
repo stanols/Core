@@ -28,7 +28,7 @@ class Login extends React.Component {
 	}
 
 	onSignIn(event) {
-		//TODO: add api call
+		this.props.onSignIn(this.state);
 	}
 
 	render() {

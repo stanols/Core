@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core.DAL\Core.DAL.csproj" />
     <ProjectReference Include="..\Core.WebApi\Core.WebAPI.csproj" />
   </ItemGroup>
 
