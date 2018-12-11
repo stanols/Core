@@ -3,7 +3,7 @@
 class BaseService {
 	constructor(path) {
 		const tokenKey = 'token';
-		const token = localStorage.getItem(tokenKey);
+		const token = sessionStorage.getItem(tokenKey);
 
 		this.basePath = `/api/${path}`;
 		this.api = axios.create({

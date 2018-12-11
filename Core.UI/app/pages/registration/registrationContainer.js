@@ -11,12 +11,12 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
 		onSignUp: (data) => {
-			dispatch({
+			return dispatch({
 				type: actions.USER_CREATE,
 				data: data
 			});
 		}
-	}
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);

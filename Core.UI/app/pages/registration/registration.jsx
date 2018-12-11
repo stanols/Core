@@ -31,8 +31,10 @@ class Registration extends React.Component {
 		});
 	}
 
-	onSignUp(event) {
-		this.props.onSignUp(this.state);
+	async onSignUp(event) {
+		const { onSignUp, history } = this.props;
+		await onSignUp(this.state);
+		history.push("/login");
 	}
 
 	render() {

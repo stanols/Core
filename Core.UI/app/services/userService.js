@@ -12,7 +12,7 @@ class UserService extends BaseService {
 		const { token } = data;
 
 		this.api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-		localStorage.setItem(tokenKey, data.token);
+		sessionStorage.setItem(tokenKey, data.token);
 
 		return data;
 	}

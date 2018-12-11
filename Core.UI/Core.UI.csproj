@@ -9,8 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="app\components\common\list\" />
+    <Folder Include="app\components\common\dashboard\" />
+    <Folder Include="app\components\common\popup\" />
     <Folder Include="img\" />
     <Folder Include="Properties\" />
+    <Folder Include="styles\bootstrap\" />
   </ItemGroup>
 
   <ItemGroup>

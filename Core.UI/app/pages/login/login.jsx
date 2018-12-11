@@ -27,8 +27,10 @@ class Login extends React.Component {
 		});
 	}
 
-	onSignIn(event) {
-		this.props.onSignIn(this.state);
+	async onSignIn(event) {
+		const { onSignIn, history } = this.props;
+		await onSignIn(this.state);
+		history.push('/home');
 	}
 
 	render() {
