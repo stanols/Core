@@ -2,6 +2,8 @@
 import { Button } from 'react-bootstrap';
 import _ from 'lodash';
 import Navigation from '../../components/layout/navigation/navigation';
+import Adventures from '../../components/adventures/adventures';
+import Events from '../../components/events/events';
 import './home.less';
 
 class Home extends React.Component {
@@ -14,15 +16,18 @@ class Home extends React.Component {
 			{
 				name: "adventures",
 				title: "Adventures",
-				component: null	//TODO: add specific component here
+				component: <Adventures/>
+			},
+			{
+				name: "events",
+				title: "Events",
+				component: <Events/>
 			}
 		];
 		const active = _.first(navigationItems);
 
 		return (
 			<div className="home">
-				<h3>Welcome to adventure app!</h3>
-
 				<Navigation
 					items={navigationItems}
 					active={active}
