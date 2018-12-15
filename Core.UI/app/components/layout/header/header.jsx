@@ -11,33 +11,35 @@ class Header extends React.Component {
 
 	render() {
 		return (
-			<Navbar inverse collapseOnSelect>
-				<Navbar.Header>
-					<Navbar.Brand>
-						<Link to="/">
-							Home
-						</Link>
-					</Navbar.Brand>
-					<Navbar.Toggle />
-				</Navbar.Header>
+			<div className="header">
+				<Navbar inverse collapseOnSelect>
+					<Navbar.Header>
+						<Navbar.Brand>
+							<Link to="/home">
+								Home
+							</Link>
+						</Navbar.Brand>
+						<Navbar.Toggle />
+					</Navbar.Header>
 
-				<Navbar.Collapse>
-					<Nav>
-						<LinkContainer to="/summary" >
-							<NavItem >Summary</NavItem>
-						</LinkContainer>
-					</Nav>
+					<Navbar.Collapse>
+						<Nav>
+							<LinkContainer to="/summary" >
+								<NavItem >Summary</NavItem>
+							</LinkContainer>
+						</Nav>
 
-					<Nav pullRight={true}>
-						<LinkContainer to="/registration" >
-							<NavItem>Registration</NavItem>
-						</LinkContainer>
-						<LinkContainer to="/login" >
-							<NavItem>Login</NavItem>
-						</LinkContainer>
-					</Nav>
-				</Navbar.Collapse>
-			</Navbar>
+						<Nav pullRight={true}>
+							<LinkContainer to="/registration" >
+								<NavItem>Registration</NavItem>
+							</LinkContainer>
+							<LinkContainer to="/login" >
+								<NavItem>Login</NavItem>
+							</LinkContainer>
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
+			</div>
 		);
 	}
 }

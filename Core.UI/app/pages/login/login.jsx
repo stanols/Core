@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { Row, Col, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import './login.less';
 
 class Login extends React.Component {
@@ -35,12 +36,18 @@ class Login extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="login">
 				<h3>Sign In</h3>
 				<form onSubmit={this.onSignIn}>
-					<input name="name" value={this.state.name} onChange={this.onChange} type="text" placeholder="Login" />
-					<input name="password" value={this.state.password} onChange={this.onChange} type="password" placeholder="Password" />
-					<input type="submit" value="Sign In" />
+					<FormGroup>
+						<ControlLabel>Name</ControlLabel>
+						<FormControl name="name" value={this.state.name} onChange={this.onChange} type="text" placeholder="Login" />
+					</FormGroup>
+					<FormGroup>
+						<ControlLabel>Password</ControlLabel>
+						<FormControl name="password" value={this.state.password} onChange={this.onChange} type="password" placeholder="Password" />
+					</FormGroup>
+					<FormControl type="submit" value="Sign In" />
 				</form>
 			</div>
 		);
