@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Row, Col, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import './login.less';
 
 class Login extends React.Component {
@@ -34,6 +34,12 @@ class Login extends React.Component {
 		history.push('/home');
 	}
 
+	async validateForm() {
+		const { name, password } = this.state;
+		const isValid = name.length > 0 && password.length > 0;
+		return isValid;
+	}
+
 	render() {
 		return (
 			<div className="login">
@@ -47,7 +53,7 @@ class Login extends React.Component {
 						<ControlLabel>Password</ControlLabel>
 						<FormControl name="password" value={this.state.password} onChange={this.onChange} type="password" placeholder="Password" />
 					</FormGroup>
-					<FormControl type="submit" value="Sign In" />
+					<FormControl type="submit" value="Sign In" className="login-button" />
 				</form>
 			</div>
 		);
