@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Core.WebAPI.Hubs.Clients.Messages;
+using Core.WebApi.Hubs.Clients.Messages;
 
-namespace Core.WebAPI.Hubs.Clients.Interfaces
+namespace Core.WebApi.Hubs.Clients.Interfaces
 {
 	public interface IAdventureClient
 	{

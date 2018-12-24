@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 
-namespace Core.WebAPI.Controllers
+namespace Core.WebApi.Controllers
 {
 	[Authorize]
 	public class UserController : BaseController

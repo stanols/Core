@@ -18,7 +18,7 @@ export function* loginSaga() {
 			} catch (ex) {
 				yield put({
 					type: loginActions.AUTHENTICATE_USER_FAILURE,
-					data: 'Authentication failed'
+					data: { error: 'Authentication failed' }
 				});
 			}
 		})

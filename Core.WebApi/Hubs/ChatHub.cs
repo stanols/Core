@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
-using Core.WebAPI.Hubs.Clients.Interfaces;
-using Core.WebAPI.Hubs.Clients.Messages;
+using Core.WebApi.Hubs.Clients.Interfaces;
+using Core.WebApi.Hubs.Clients.Messages;
 
-namespace Core.WebAPI.Hubs
+namespace Core.WebApi.Hubs
 {
 	public class ChatHub : Hub<IChartClient>
 	{

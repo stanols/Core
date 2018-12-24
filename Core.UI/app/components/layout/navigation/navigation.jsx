@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Tab, Row, Col, Nav, NavItem } from 'react-bootstrap';
+import { Tab, Row, Col, Nav, NavItem, Glyphicon } from 'react-bootstrap';
 import _ from 'lodash';
 import './navigation.less';
 
@@ -26,17 +26,20 @@ class Navigation extends React.Component {
 	}
 
 	renderNavigationItems(items) {
-		return items.map(item => 
-			<NavItem key={item.name} eventKey={item.name}>{item.title}</NavItem>
+		return items.map(item =>
+			<NavItem key={item.name} eventKey={item.name}>
+				<Glyphicon glyph={item.icon} /> {item.title}
+			</NavItem>
 		);
 	}
 
 	render() {
 		const { items, active } = this.state;
 		const navigationItems = this.renderNavigationItems(items);
+		const { name, component } = active;
 
 		return (
-			<Tab.Container id="left-tabs" defaultActiveKey={active} onSelect={this.onSelect}>
+			<Tab.Container id="left-tabs" defaultActiveKey={name} onSelect={this.onSelect}>
 				<Row className="clearfix">
 					<Col sm={3}>
 						<Nav bsStyle="pills" stacked>
@@ -45,8 +48,8 @@ class Navigation extends React.Component {
 					</Col>
 					<Col sm={9}>
 						<Tab.Content animation>
-							<Tab.Pane eventKey={active.name}>
-								{active.component}
+							<Tab.Pane eventKey={name}>
+								{component}
 							</Tab.Pane>
 						</Tab.Content>
 					</Col>

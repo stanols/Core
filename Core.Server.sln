@@ -5,13 +5,13 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.DAL", "Core.DAL\Core.DAL.csproj", "{1584B464-5D47-4629-9034-DA150522C50C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.WebAPI", "Core.WebApi\Core.WebAPI.csproj", "{B3C70CD0-EC5C-4276-A293-89B91D838312}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.WebApi", "Core.WebApi\Core.WebApi.csproj", "{B3C70CD0-EC5C-4276-A293-89B91D838312}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.BLL", "Core.BLL\Core.BLL.csproj", "{4A4C9FE0-5D2E-4424-863D-9F7FD1133A18}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Server", "Core.Server\Core.Server.csproj", "{F3C9E709-B384-4B97-B72B-931A47E383BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.UI", "Core.UI\Core.UI.csproj", "{E4DF7705-223F-4B88-A080-FE1CE5600FF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.UI", "Core.UI\Core.UI.csproj", "{E4DF7705-223F-4B88-A080-FE1CE5600FF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

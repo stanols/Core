@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using AutoMapper;
-using Core.WebAPI.Hubs;
+using Core.WebApi.Hubs;
 
 
 namespace Core.WebApi

@@ -1,17 +1,19 @@
 ﻿import React from 'react';
 import { connect } from 'react-redux';
 import actions from '../../actions/actions';
-import Login from './Login';
+import Login from './login';
 
 const mapStateToProps = (state, ownProps) => {
+	const { authorizationData } = state;
 	return {
+		authorizationData
 	};
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
 		onSignIn: (data) => {
-			return dispatch({
+			dispatch({
 				type: actions.USER_LOGIN,
 				data: data
 			});

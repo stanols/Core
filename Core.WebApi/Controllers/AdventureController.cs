@@ -1,9 +1,10 @@
 ﻿using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
+using Core.WebApi.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.WebAPI.Controllers
+namespace Core.WebApi.Controllers
 {
 	[Authorize]
 	public class AdventureController : BaseController

@@ -19,16 +19,18 @@ class App extends React.Component {
 		return (
 			<div>
 				<Header />
-				<Grid>
-					<Switch>
-						<Route path="/" exact component={LoginContainer} />
-						<Route path="/login" exact component={LoginContainer} />
-						<Route path="/registration" exact component={RegistrationContainer} />
+				<div className="content">
+					<Grid>
+						<Switch>
+							<Route path="/" exact component={LoginContainer} />
+							<Route path="/login" exact component={LoginContainer} />
+							<Route path="/registration" exact component={RegistrationContainer} />
 
-						<Route path="/home" exact component={HomeContainer} />
-						<Route path="/summary" exact component={SummaryContainer} />
-					</Switch>
-				</Grid>
+							<Route path="/home" exact component={HomeContainer} />
+							<Route path="/summary" exact component={SummaryContainer} />
+						</Switch>
+					</Grid>
+				</div>
 				<Footer />
 			</div>
 		);

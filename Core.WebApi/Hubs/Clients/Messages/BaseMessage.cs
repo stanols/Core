@@ -1,4 +1,4 @@
-﻿namespace Core.WebAPI.Hubs.Clients.Messages
+﻿namespace Core.WebApi.Hubs.Clients.Messages
 {
 	public abstract class BaseMessage
 	{

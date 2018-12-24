@@ -8,7 +8,8 @@ class Login extends React.Component {
 
 		this.state = {
 			name: "",
-			password: ""
+			password: "",
+			errors: []
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -28,19 +29,18 @@ class Login extends React.Component {
 		});
 	}
 
-	async onSignIn(event) {
-		const { onSignIn, history } = this.props;
-		await onSignIn(this.state);
-		history.push('/home');
-	}
-
-	async validateForm() {
-		const { name, password } = this.state;
-		const isValid = name.length > 0 && password.length > 0;
-		return isValid;
+	onSignIn(event) {
+		const { onSignIn } = this.props;
+		onSignIn(this.state);
 	}
 
 	render() {
+		const { authorizationData } = this.props;
+
+		if (authorizationData && authorizationData.token) {
+			this.history.push("/home");
+		}
+
 		return (
 			<div className="login">
 				<h3>Sign In</h3>

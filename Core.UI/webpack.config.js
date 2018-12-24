@@ -9,11 +9,10 @@ const babelPolyfill = require('babel-polyfill');
 const conf = {
 	mode: 'development',
 	devtool: 'source-map',
-    entry: [
-        'babel-polyfill',
-        'whatwg-fetch',
-        './index.jsx'
-    ],
+	entry: [
+		'babel-polyfill',
+		'./index.jsx'
+	],
     externals: {
         cheerio: 'window',
         'react/addons': 'react',
@@ -34,7 +33,12 @@ const conf = {
         rules: [
             {
                 test: /\.js|jsx$/,
-                use: 'babel',
+				use: {
+					loader: 'babel',
+					options: {
+						presets: ['env']
+					}
+				},
                 exclude: /node_modules/
             },
             {
