@@ -30,6 +30,7 @@ class Login extends React.Component {
 	}
 
 	onSignIn(event) {
+		event.preventDefault();
 		const { onSignIn } = this.props;
 		onSignIn(this.state);
 	}
@@ -37,9 +38,9 @@ class Login extends React.Component {
 	render() {
 		const { authorizationData } = this.props;
 
-		if (authorizationData && authorizationData.token) {
-			this.history.push("/home");
-		}
+		//if (authorizationData && authorizationData.token) {
+		//	this.history.push("/home");
+		//}
 
 		return (
 			<div className="login">

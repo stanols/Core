@@ -10,8 +10,9 @@ import App from './app/app';
 
 const sagaMiddleware = CreateSagaMiddleware();
 const store = createStore(appReducer, applyMiddleware(sagaMiddleware));
+const { dispatch } = store;
 
-sagaMiddleware.run(appSaga);
+sagaMiddleware.run(appSaga.bind(this, dispatch));
 
 ReactDom.render(
 	<Provider store={store}>

@@ -2,9 +2,9 @@
 import { registrationSaga } from './pageSagas/registrationSaga';
 import { loginSaga } from './pageSagas/loginSaga';
 
-export function* appSaga() {
+export function* appSaga(dispatch) {
 	yield all([
-		registrationSaga(),
-		loginSaga()
+		registrationSaga(dispatch),
+		loginSaga(dispatch)
 	]);
 }

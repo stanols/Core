@@ -33,6 +33,7 @@ class Registration extends React.Component {
 	}
 
 	async onSignUp(event) {
+		event.preventDefault();
 		const { onSignUp, history } = this.props;
 		await onSignUp(this.state);
 		history.push("/login");

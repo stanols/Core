@@ -3,20 +3,21 @@ import actions from '../../actions/actions';
 import registrationActions from '../../actions/reducerActions/registrationActions';
 import UserService from "../../services/userService";
 
-export function* registrationSaga() {
+export function* registrationSaga(dispatch) {
 	const userService = new UserService();
 
 	yield [
-		takeLatest(actions.USER_CREATE, async function* createUser(action) {
+		takeLatest(actions.USER_CREATE, async function createUser(action) {
 			try {
-				await userService.create(action.data);
+				const { data } = action;
+				await userService.create(data);
 
-				yield put({
+				dispatch({
 					type: registrationActions.CREATE_USER_SUCCESS,
 					data: {}
 				});
 			} catch (ex) {
-				yield put({
+				dispatch({
 					type: registrationActions.CREATE_USER_FAILURE,
 					data: 'User is not registered'
 				});

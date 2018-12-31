@@ -32,16 +32,6 @@ const conf = {
     module: {
         rules: [
             {
-                test: /\.js|jsx$/,
-				use: {
-					loader: 'babel',
-					options: {
-						presets: ['env']
-					}
-				},
-                exclude: /node_modules/
-            },
-            {
                 test: /\.html$/,
                 use: 'html'
             },
@@ -60,12 +50,12 @@ const conf = {
                 })
             },
             {
-                test: /.jsx?$/,
+                test: /\.js|jsx$/,
                 loader: 'babel',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['es2017', 'stage-1', 'react']
-                }
+				exclude: /node_modules/,
+				query: {
+					presets: ['es2017', 'stage-1', 'react']
+				}
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -97,8 +87,8 @@ const conf = {
             from: 'img',
             to: 'img'
         }], {
-                copyUnmodified: false
-            }),
+            copyUnmodified: false
+        }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
         })
