@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import AuthorizationHelper from 'app/helpers/authorizationHelper';
 import './header.less';
 
 class Header extends React.Component {
@@ -9,7 +10,33 @@ class Header extends React.Component {
 		super(props);
 	}
 
+	renderAuthorizationPanel() {
+		const isAuthorized = AuthorizationHelper.isAuthorized();
+
+		if (isAuthorized) {
+			return (
+				<Nav pullRight={true}>
+					<NavItem>{`Hello!`}</NavItem>
+					<NavItem>Logout</NavItem>
+				</Nav>
+			);
+		}
+
+		return (
+			<Nav pullRight={true}>
+				<LinkContainer to="/registration" >
+					<NavItem>Registration</NavItem>
+				</LinkContainer>
+				<LinkContainer to="/login" >
+					<NavItem>Login</NavItem>
+				</LinkContainer>
+			</Nav>
+		);
+	}
+
 	render() {
+		const authorizationPanel = this.renderAuthorizationPanel();
+
 		return (
 			<div className="header">
 				<Navbar inverse collapseOnSelect>
@@ -29,14 +56,7 @@ class Header extends React.Component {
 							</LinkContainer>
 						</Nav>
 
-						<Nav pullRight={true}>
-							<LinkContainer to="/registration" >
-								<NavItem>Registration</NavItem>
-							</LinkContainer>
-							<LinkContainer to="/login" >
-								<NavItem>Login</NavItem>
-							</LinkContainer>
-						</Nav>
+						{authorizationPanel}
 					</Navbar.Collapse>
 				</Navbar>
 			</div>

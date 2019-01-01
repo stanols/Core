@@ -7,6 +7,7 @@ import HomeContainer from './pages/home/homeContainer';
 import RegistrationContainer from './pages/registration/registrationContainer';
 import SummaryContainer from './pages/summary/summaryContainer';
 import { Grid } from 'react-bootstrap';
+import PrivateRoute from './components/layout/navigation/privateRoute/privateRoute';
 import '../styles/bootstrap/bootstrap.less';
 import './app.less';
 
@@ -26,8 +27,8 @@ class App extends React.Component {
 							<Route path="/login" exact component={LoginContainer} />
 							<Route path="/registration" exact component={RegistrationContainer} />
 
-							<Route path="/home" exact component={HomeContainer} />
-							<Route path="/summary" exact component={SummaryContainer} />
+							<PrivateRoute path="/home" exact component={HomeContainer} />
+							<PrivateRoute path="/summary" exact component={SummaryContainer} />
 						</Switch>
 					</Grid>
 				</div>

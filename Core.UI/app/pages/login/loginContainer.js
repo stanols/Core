@@ -4,9 +4,11 @@ import actions from '../../actions/actions';
 import Login from './login';
 
 const mapStateToProps = (state, ownProps) => {
-	const { authorizationData } = state;
+	const { loginReducer } = state;
+	const { authorizationData, authorizationError } = loginReducer;
 	return {
-		authorizationData
+		authorizationData,
+		authorizationError
 	};
 }
 

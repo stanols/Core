@@ -6,13 +6,11 @@ class UserService extends BaseService {
 	}
 
 	async authenticate(requestData) {
-		const tokenKey = 'token';
 		const response = await this.api.post(`${this.basePath}/Authenticate`, requestData);
 		const { data } = response;
-		const { token } = data;
+		const { token } = response;
 
 		this.api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-		sessionStorage.setItem(tokenKey, data.token);
 
 		return data;
 	}
