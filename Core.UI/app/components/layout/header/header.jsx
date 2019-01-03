@@ -8,6 +8,13 @@ import './header.less';
 class Header extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.onLogout = this.onLogout.bind(this);
+	}
+
+	onLogout(event) {
+		const { authorizationData } = this.props;
+		this.props.onLogout(authorizationData);
 	}
 
 	renderAuthorizationPanel() {
@@ -16,8 +23,7 @@ class Header extends React.Component {
 		if (isAuthorized) {
 			return (
 				<Nav pullRight={true}>
-					<NavItem>{`Hello!`}</NavItem>
-					<NavItem>Logout</NavItem>
+					<NavItem onClick={this.onLogout}>Logout</NavItem>
 				</Nav>
 			);
 		}

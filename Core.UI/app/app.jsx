@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import LoginContainer from './pages/login/loginContainer';
 import { Switch, Route } from 'react-router-dom';
-import Header from './components/layout/header/header';
+import HeaderContainer from './components/layout/header/headerContainer';
 import Footer from './components/layout/footer/footer';
 import HomeContainer from './pages/home/homeContainer';
 import RegistrationContainer from './pages/registration/registrationContainer';
@@ -19,7 +19,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header />
+				<HeaderContainer />
 				<div className="content">
 					<Grid>
 						<Switch>

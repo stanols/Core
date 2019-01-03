@@ -11,12 +11,11 @@ export function* loginSaga(dispatch) {
 		takeLatest(actions.USER_LOGIN, async function loginUser(action) {
 			try {
 				const data = await userService.authenticate(action.data);
-				const { token } = data;
 
-				if (token) {
-					AuthorizationHelper.setAuthorizationToken(token);
+				if (data) {
+					AuthorizationHelper.setAuthorizationData(data);
 				} else {
-					AuthorizationHelper.removeAuthorizationToken();
+					AuthorizationHelper.removeAuthorizationData();
 					throw new Error("Authentication failed");
 				}
 
@@ -26,6 +25,15 @@ export function* loginSaga(dispatch) {
 					type: loginActions.AUTHENTICATE_USER_FAILURE,
 					data: error
 				});
+			}
+		}),
+		takeLatest(actions.USER_LOGOUT, async function logoutUser(action) {
+			try {
+				const data = await userService.logout(action.data);
+
+				dispatch({ type: loginActions.LOGOUT_USER_SUCCESS, data });
+			} catch (error) {
+				dispatch({ type: loginActions.LOGOUT_USER_FAILURE, error });
 			}
 		})
 	]); 

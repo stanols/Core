@@ -1,9 +1,14 @@
 ﻿import axios from 'axios';
+import authorizationHelper from 'app/helpers/authorizationHelper';
 
 class BaseService {
 	constructor(path) {
-		const tokenKey = 'token';
-		const token = sessionStorage.getItem(tokenKey);
+		let token = null;
+		const authorizationData = authorizationHelper.getAuthorizationData();
+
+		if (authorizationData) {
+			token = authorizationData.token;
+		}
 
 		this.basePath = `/api/${path}`;
 		this.api = axios.create({

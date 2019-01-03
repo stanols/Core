@@ -14,6 +14,13 @@ class UserService extends BaseService {
 
 		return data;
 	}
+
+	async logout(requestData) {
+		const response = await this.api.post(`${this.basePath}/Logout`, requestData);
+		const { data } = response;
+
+		return data;
+	}
 }
 
 export default UserService;

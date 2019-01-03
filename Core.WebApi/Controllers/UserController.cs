@@ -51,7 +51,7 @@ namespace Core.WebApi.Controllers
 
 		[HttpPost]
 		[AllowAnonymous]
-		public UserViewModel Authenticate([FromBody] UserViewModel userViewModel)
+		public UserViewModel Authenticate([FromBody]UserViewModel userViewModel)
 		{
 			const string secret = "secret";
 
@@ -79,5 +79,10 @@ namespace Core.WebApi.Controllers
 			return viewModel;
 		}
 
+		[HttpPost]
+		public void Logout([FromBody]UserViewModel userViewModel)
+		{
+			throw new NotSupportedException("Logout method is not supported");
+		}
 	}
 }

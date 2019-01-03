@@ -2,24 +2,38 @@
 
 class AuthorizationHelper {
 	static isAuthorized() {
-		const tokenKey = "token";
-		const token = sessionStorage.getItem(tokenKey);
+		let data = null;
+		const authorizationDataKey = "authorizationData";
+		const authorizationData = sessionStorage.getItem(authorizationDataKey);
 
-		if (token) {
+		if (authorizationData) {
+			data = JSON.parse(authorizationData);
+		}
+
+		if (data && data.token) {
 			return true;
 		}
 
 		return false;
 	}
 
-	static setAuthorizationToken(token) {
-		const tokenKey = 'token';
-		sessionStorage.setItem(tokenKey, token);
+	static setAuthorizationData(data) {
+		const authorizationDataKey = "authorizationData";
+		sessionStorage.setItem(authorizationDataKey, JSON.stringify(data));
 	}
 
-	static removeAuthorizationToken() {
-		const tokenKey = 'token';
-		sessionStorage.removeItem(tokenKey);
+	static getAuthorizationData() {
+		const authorizationDataKey = "authorizationData";
+		const authorizationData = sessionStorage.getItem(authorizationDataKey);
+		if (authorizationData) {
+			return JSON.parse(authorizationData);
+		}
+		return null;
+	}
+
+	static removeAuthorizationData() {
+		const authorizationDataKey = "authorizationData";
+		sessionStorage.removeItem(authorizationDataKey);
 	}
 }
 
