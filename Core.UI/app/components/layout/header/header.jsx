@@ -13,11 +13,11 @@ class Header extends React.Component {
 	}
 
 	onLogout(event) {
-		const { authorizationData } = this.props;
-		this.props.onLogout(authorizationData);
+		const { authorizationData, onLogout } = this.props;
+		onLogout(authorizationData);
 	}
 
-	renderAuthorizationPanel() {
+	renderLoginPanel() {
 		const isAuthorized = AuthorizationHelper.isAuthorized();
 
 		if (isAuthorized) {
@@ -41,7 +41,7 @@ class Header extends React.Component {
 	}
 
 	render() {
-		const authorizationPanel = this.renderAuthorizationPanel();
+		const authorizationPanel = this.renderLoginPanel();
 
 		return (
 			<div className="header">

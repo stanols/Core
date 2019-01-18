@@ -17,11 +17,13 @@ namespace Core.WebApi.Controllers
 	{
 		private readonly IUserService _userService;
 		private readonly IConfiguration _config;
+		private readonly JwtSecurityTokenHandler _tokenHandler;
 
 		public UserController(IUserService userService, IConfiguration config)
 		{
 			_userService = userService;
 			_config = config;
+			_tokenHandler = new JwtSecurityTokenHandler();
 		}
 
 		[HttpPost]
@@ -51,7 +53,7 @@ namespace Core.WebApi.Controllers
 
 		[HttpPost]
 		[AllowAnonymous]
-		public UserViewModel Authenticate([FromBody]UserViewModel userViewModel)
+		public UserViewModel Login([FromBody]UserViewModel userViewModel)
 		{
 			const string secret = "secret";
 
@@ -61,7 +63,6 @@ namespace Core.WebApi.Controllers
 				throw new AuthenticationException();
 			}
 
-			var tokenHandler = new JwtSecurityTokenHandler();
 			var key = Encoding.ASCII.GetBytes(_config[secret]);
 			var tokenDescriptor = new SecurityTokenDescriptor
 			{
@@ -73,8 +74,8 @@ namespace Core.WebApi.Controllers
 				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 			};
 
-			var token = tokenHandler.CreateToken(tokenDescriptor);
-			viewModel.Token = tokenHandler.WriteToken(token);
+			var token = _tokenHandler.CreateToken(tokenDescriptor);
+			viewModel.Token = _tokenHandler.WriteToken(token);
 
 			return viewModel;
 		}
@@ -82,7 +83,7 @@ namespace Core.WebApi.Controllers
 		[HttpPost]
 		public void Logout([FromBody]UserViewModel userViewModel)
 		{
-			throw new NotSupportedException("Logout method is not supported");
+			_tokenHandler.TokenLifetimeInMinutes = 1;
 		}
 	}
 }

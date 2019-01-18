@@ -8,9 +8,9 @@ export function* loginSaga(dispatch) {
 	const userService = new UserService();
 
 	yield all([
-		takeLatest(actions.USER_LOGIN, async function loginUser(action) {
+		takeLatest(actions.USER_LOGIN, async action => {
 			try {
-				const data = await userService.authenticate(action.data);
+				const data = await userService.login(action.data);
 
 				if (data) {
 					AuthorizationHelper.setAuthorizationData(data);
@@ -19,15 +19,15 @@ export function* loginSaga(dispatch) {
 					throw new Error("Authentication failed");
 				}
 
-				dispatch({ type: loginActions.AUTHENTICATE_USER_SUCCESS, data });
+				dispatch({ type: loginActions.LOGIN_USER_SUCCESS, data });
 			} catch (error) {
 				dispatch({
-					type: loginActions.AUTHENTICATE_USER_FAILURE,
+					type: loginActions.LOGIN_USER_FAILURE,
 					data: error
 				});
 			}
 		}),
-		takeLatest(actions.USER_LOGOUT, async function logoutUser(action) {
+		takeEvery(actions.USER_LOGOUT, async action => {
 			try {
 				const data = await userService.logout(action.data);
 

@@ -5,12 +5,12 @@ class UserService extends BaseService {
 		super('User');
 	}
 
-	async authenticate(requestData) {
-		const response = await this.api.post(`${this.basePath}/Authenticate`, requestData);
+	async login(requestData) {
+		const response = await this.api.post(`${this.basePath}/Login`, requestData);
 		const { data } = response;
-		const { token } = response;
+		const { token } = data;
 
-		this.api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+		this.api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 		return data;
 	}
@@ -18,6 +18,8 @@ class UserService extends BaseService {
 	async logout(requestData) {
 		const response = await this.api.post(`${this.basePath}/Logout`, requestData);
 		const { data } = response;
+
+		delete this.api.defaults.headers.common["Authorization"];
 
 		return data;
 	}

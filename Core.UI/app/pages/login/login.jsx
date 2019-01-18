@@ -14,7 +14,7 @@ class Login extends React.Component {
 		};
 
 		this.onChange = this.onChange.bind(this);
-		this.onSignIn = this.onSignIn.bind(this);
+		this.onLogin = this.onLogin.bind(this);
 	}
 
 	onChange(event) {
@@ -30,10 +30,10 @@ class Login extends React.Component {
 		});
 	}
 
-	onSignIn(event) {
+	onLogin(event) {
 		event.preventDefault();
-		const { onSignIn } = this.props;
-		onSignIn(this.state);
+		const { onLogin } = this.props;
+		onLogin(this.state);
 	}
 
 	render() {
@@ -53,7 +53,7 @@ class Login extends React.Component {
 					</Alert>
 				}
 				<h3>Sign In</h3>
-				<form onSubmit={this.onSignIn}>
+				<form onSubmit={this.onLogin}>
 					<FormGroup>
 						<ControlLabel>Name</ControlLabel>
 						<FormControl name="name" value={this.state.name} onChange={this.onChange} type="text" placeholder="Login" />

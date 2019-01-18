@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
-		onSignIn: (data) => {
+		onLogin: (data) => {
 			dispatch({
 				type: actions.USER_LOGIN,
 				data: data

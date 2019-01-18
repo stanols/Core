@@ -3,21 +3,18 @@ import authorizationHelper from 'app/helpers/authorizationHelper';
 
 class BaseService {
 	constructor(path) {
-		let token = null;
-		const authorizationData = authorizationHelper.getAuthorizationData();
-
-		if (authorizationData) {
-			token = authorizationData.token;
-		}
-
 		this.basePath = `/api/${path}`;
 		this.api = axios.create({
 			baseURL: 'http://localhost:3000',
 			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
+				'Content-Type': 'application/json'
 			}
 		});
+
+		const authorizationData = authorizationHelper.getAuthorizationData();
+		if (authorizationData && authorizationData.token) {
+			this.api.defaults.headers.common['Authorization'] = `Bearer ${authorizationData.token}`;
+		}
 	}
 
 	async create(data) {
