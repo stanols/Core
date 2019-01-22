@@ -13,16 +13,22 @@ class Header extends React.Component {
 	}
 
 	onLogout(event) {
-		const { authorizationData, onLogout } = this.props;
-		onLogout(authorizationData);
+		const { history, onLogout } = this.props;
+		const data = { history };
+		onLogout(data);
 	}
 
 	renderLoginPanel() {
 		const isAuthorized = AuthorizationHelper.isAuthorized();
 
 		if (isAuthorized) {
+			const { authorizationData } = this.props;
+
 			return (
 				<Nav pullRight={true}>
+					{authorizationData &&
+						<NavItem>Hello, {authorizationData.firstName}!</NavItem>
+					}
 					<NavItem onClick={this.onLogout}>Logout</NavItem>
 				</Nav>
 			);

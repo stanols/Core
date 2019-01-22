@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import AuthorizationHelper from 'app/helpers/authorizationHelper';
 import './login.less';
 
 class Login extends React.Component {
@@ -37,7 +36,8 @@ class Login extends React.Component {
 	}
 
 	render() {
-		const { authorizationData, authorizationError } = this.props;
+		const { error, authorizationData } = this.props;
+		const { name, password } = this.state;
 
 		if (authorizationData) {
 			return (
@@ -47,20 +47,20 @@ class Login extends React.Component {
 
 		return (
 			<div className="login">
-				{authorizationError &&
+				{error &&
 					<Alert bsStyle="danger" className="error">
-						{authorizationError.message}
+						{error.message}
 					</Alert>
 				}
 				<h3>Sign In</h3>
 				<form onSubmit={this.onLogin}>
 					<FormGroup>
 						<ControlLabel>Name</ControlLabel>
-						<FormControl name="name" value={this.state.name} onChange={this.onChange} type="text" placeholder="Login" />
+						<FormControl name="name" value={name} onChange={this.onChange} type="text" placeholder="Login" />
 					</FormGroup>
 					<FormGroup>
 						<ControlLabel>Password</ControlLabel>
-						<FormControl name="password" value={this.state.password} onChange={this.onChange} type="password" placeholder="Password" />
+						<FormControl name="password" value={password} onChange={this.onChange} type="password" placeholder="Password" />
 					</FormGroup>
 					<FormControl type="submit" value="Sign In" className="login-button" />
 				</form>

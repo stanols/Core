@@ -15,13 +15,10 @@ class UserService extends BaseService {
 		return data;
 	}
 
-	async logout(requestData) {
-		const response = await this.api.post(`${this.basePath}/Logout`, requestData);
-		const { data } = response;
+	async logout() {
+		await this.api.post(`${this.basePath}/Logout`);
 
 		delete this.api.defaults.headers.common["Authorization"];
-
-		return data;
 	}
 }
 

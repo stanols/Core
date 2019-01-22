@@ -5,26 +5,23 @@ export function loginReducer(state = {}, action) {
 		case loginActions.LOGIN_USER_SUCCESS:
 			return Object.assign({}, state,
 				{
-					authorizationData: action.data,
-					authorizationError: null
+					authorizationData: action.data
 				});
 		case loginActions.LOGIN_USER_FAILURE:
 			return Object.assign({}, state,
 				{
-					authorizationData: null,
-					authorizationError: action.data
+					error: action.data
 				});
 		case loginActions.LOGOUT_USER_SUCCESS:
 			return Object.assign({}, state,
 				{
-					authorizationData: null,
-					logoutError: null
+					authorizationData: null
 				});
 		case loginActions.LOGOUT_USER_FAILURE:
 			return Object.assign({}, state,
 				{
 					authorizationData: null,
-					logoutError: action.data
+					error: action.data
 				});
 		default:
 			return state;

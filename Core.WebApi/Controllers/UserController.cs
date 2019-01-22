@@ -81,7 +81,7 @@ namespace Core.WebApi.Controllers
 		}
 
 		[HttpPost]
-		public void Logout([FromBody]UserViewModel userViewModel)
+		public void Logout()
 		{
 			_tokenHandler.TokenLifetimeInMinutes = 1;
 		}

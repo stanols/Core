@@ -1,11 +1,13 @@
 ﻿import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import actions from 'app/actions/actions';
 import Header from './header';
-import authorizationHelper from 'app/helpers/authorizationHelper';
+import AuthorizationHelper from 'app/helpers/authorizationHelper';
 
 const mapStateToProps = (state, ownProps) => {
-	const authorizationData = authorizationHelper.getAuthorizationData();
+	const authorizationData = AuthorizationHelper.getAuthorizationData();
+
 	return {
 		authorizationData
 	};
@@ -22,4 +24,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

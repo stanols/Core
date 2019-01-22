@@ -1,13 +1,16 @@
 ﻿import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import actions from '../../actions/actions';
 import Login from './login';
+import AuthorizationHelper from 'app/helpers/authorizationHelper';
 
 const mapStateToProps = (state, ownProps) => {
 	const { loginReducer } = state;
-	const { authorizationData, authorizationError } = loginReducer;
+	const { authorizationError } = loginReducer;
+
 	return {
-		authorizationData,
+		authorizationData: AuthorizationHelper.getAuthorizationData(),
 		authorizationError
 	};
 }
@@ -17,10 +20,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		onLogin: (data) => {
 			dispatch({
 				type: actions.USER_LOGIN,
-				data: data
+				data
 			});
 		}
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

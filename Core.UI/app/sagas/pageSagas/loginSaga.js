@@ -18,22 +18,27 @@ export function* loginSaga(dispatch) {
 					AuthorizationHelper.removeAuthorizationData();
 					throw new Error("Authentication failed");
 				}
-
 				dispatch({ type: loginActions.LOGIN_USER_SUCCESS, data });
 			} catch (error) {
+				AuthorizationHelper.removeAuthorizationData();
 				dispatch({
 					type: loginActions.LOGIN_USER_FAILURE,
 					data: error
 				});
 			}
 		}),
-		takeEvery(actions.USER_LOGOUT, async action => {
+		takeEvery(actions.USER_LOGOUT, async (action) => {
 			try {
-				const data = await userService.logout(action.data);
-
-				dispatch({ type: loginActions.LOGOUT_USER_SUCCESS, data });
+				await userService.logout();
+				AuthorizationHelper.removeAuthorizationData();
+				const { data: { history } } = action;
+				history.push("/login");
+				dispatch({ type: loginActions.LOGOUT_USER_SUCCESS });
 			} catch (error) {
-				dispatch({ type: loginActions.LOGOUT_USER_FAILURE, error });
+				dispatch({
+					type: loginActions.LOGOUT_USER_FAILURE,
+					data: error
+				});
 			}
 		})
 	]); 
