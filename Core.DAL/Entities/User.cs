@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.DAL.Entities
 {
@@ -11,5 +12,7 @@ namespace Core.DAL.Entities
 		public string Email { get; set; }
 		public byte[] PasswordSalt { get; set; }
 		public byte[] PasswordHash { get; set; }
+
+		public ICollection<AdventureUser> AdventureUsers { get; set; }
 	}
 }

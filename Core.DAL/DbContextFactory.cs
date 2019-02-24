@@ -1,10 +1,9 @@
 ﻿using System.IO;
-using Core.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace Core.Server
+namespace Core.DAL
 {
 	public class DbContextFactory : IDesignTimeDbContextFactory<CoreDbContext>
 	{

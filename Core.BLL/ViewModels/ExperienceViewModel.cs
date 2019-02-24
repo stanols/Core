@@ -1,13 +1,12 @@
 ﻿using System;
 
-namespace Core.DAL.Entities
+namespace Core.BLL.ViewModels
 {
-	public class Event : BaseEntity
+	public class ExperienceViewModel : BaseViewModel
 	{
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public int AdventureId { get; set; }
-		public int LocationId { get; set; }
+		public LocationViewModel Location { get; set; }
 		public DateTime StartsOn { get; set; }
 		public DateTime EndsOn { get; set; }
 	}

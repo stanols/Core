@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import _ from 'lodash';
 import Navigation from '../../components/layout/navigation/navigation';
 import Adventures from '../../components/adventures/adventures';
-import Events from '../../components/events/events';
+import Experiences from '../../components/experiences/experiences';
 import './home.less';
 
 class Home extends React.Component {
@@ -19,10 +19,10 @@ class Home extends React.Component {
 					component: <Adventures />
 				},
 				{
-					name: "events",
-					title: "Events",
+					name: "experiences",
+					title: "Experiences",
 					icon: "tasks",
-					component: <Events />
+					component: <Experiences />
 				}
 			]
 		};

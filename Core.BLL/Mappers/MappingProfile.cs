@@ -2,7 +2,6 @@
 using Core.BLL.ViewModels;
 using Core.DAL.Entities;
 
-
 namespace Core.BLL.Mappers
 {
 	public class MappingProfile : Profile
@@ -15,8 +14,8 @@ namespace Core.BLL.Mappers
 			CreateMap<Adventure, AdventureViewModel>();
 			CreateMap<AdventureViewModel, Adventure>();
 
-			CreateMap<Event, EventViewModel>();
-			CreateMap<EventViewModel, Event>();
+			CreateMap<Experience, ExperienceViewModel>();
+			CreateMap<ExperienceViewModel, Experience>();
 
 			CreateMap<Location, LocationViewModel>();
 			CreateMap<LocationViewModel, Location>();

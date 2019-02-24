@@ -7,9 +7,9 @@ using Core.DAL.Interfaces;
 
 namespace Core.BLL.Services
 {
-	public class EventService : BaseService<Event, EventViewModel>, IEventService
+	public class ExperienceService : BaseService<Experience, ExperienceViewModel>, IExperienceService
 	{
-		public EventService(IEventRepository eventRepository, IMapper mapper)
+		public ExperienceService(IExperienceRepository eventRepository, IMapper mapper)
 			: base(eventRepository, mapper)
 		{
 		}

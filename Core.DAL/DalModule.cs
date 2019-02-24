@@ -12,6 +12,7 @@ namespace Core.DAL
 		{
 			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<IAdventureRepository, AdventureRepository>();
+			services.AddTransient<IExperienceRepository, ExperienceRepository>();
 
 			return services;
 		}

@@ -1,8 +1,8 @@
 ﻿import React from 'react';
-import './event.less';
+import './experience.less';
 
 
-class Event extends React.Component {
+class Experience extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -10,10 +10,10 @@ class Event extends React.Component {
 	render() {
 		return (
 			<div>
-				Event Panel
+				Experience Panel
 			</div>
 		);
 	}
 }
 
-export default Event;
+export default Experience;
