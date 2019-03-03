@@ -1,4 +1,6 @@
-﻿using Core.DAL.Entities;
+﻿using System;
+using System.Collections.Generic;
+using Core.DAL.Entities;
 using Core.BLL.ViewModels;
 
 namespace Core.BLL.Interfaces
@@ -10,6 +12,10 @@ namespace Core.BLL.Interfaces
 		void Create(TViewModel userViewModel);
 
 		TViewModel Get(int id);
+
+		List<TViewModel> GetAll();
+
+		List<TViewModel> GetAllBy(Func<TViewModel, bool> predicate);
 
 		void Update(TViewModel userViewModel);
 

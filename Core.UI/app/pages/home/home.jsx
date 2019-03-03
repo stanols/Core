@@ -10,22 +10,52 @@ class Home extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			navigationItems: [
-				{
-					name: "adventures",
-					title: "Adventures",
-					icon: "th-list",
-					component: <Adventures />
-				},
-				{
-					name: "experiences",
-					title: "Experiences",
-					icon: "tasks",
-					component: <Experiences />
-				}
-			]
+		const { adventures } = props;
+
+		this.getNavigationItems = this.getNavigationItems.bind(this);
+
+		const data = {
+			adventures
 		};
+
+		this.state = {
+			navigationItems: this.getNavigationItems(data)
+		};
+	}
+
+	getNavigationItems(data) {
+		const { adventures } = data;
+
+		return [
+			{
+				name: "adventures",
+				title: "Adventures",
+				icon: "th-list",
+				component: <Adventures adventures={adventures}/>
+			},
+			{
+				name: "experiences",
+				title: "Experiences",
+				icon: "tasks",
+				component: <Experiences/>
+			}
+		];
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const { adventures } = nextProps;
+		const data = { adventures };
+
+		const navigationItems = this.getNavigationItems(data);
+
+		this.setState({
+			navigationItems: navigationItems
+		});
+	}
+
+	componentWillMount() {
+		const { onGetAllAdventures } = this.props;
+		onGetAllAdventures();
 	}
 
 	render() {

@@ -1,0 +1,6 @@
+﻿const homeActions = {
+	GET_ALL_ADVENTURES_SUCCESS: "GET_ALL_ADVENTURES_SUCCESS",
+	GET_ALL_ADVENTURES_FAILURE: "GET_ALL_ADVENTURES_FAILURE"
+};
+
+export default homeActions;

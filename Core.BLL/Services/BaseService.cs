@@ -6,7 +6,6 @@ using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
 using AutoMapper;
 
-
 namespace Core.BLL.Services
 {
 	public class BaseService<TEntity, TViewModel> : IBaseService<TEntity, TViewModel>
