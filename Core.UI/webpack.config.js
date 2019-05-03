@@ -82,6 +82,10 @@ const conf = {
 		]
 	},
 	plugins: [
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery'
+		}),
 		new ExtractTextPlugin({
 			filename: 'bundle.css',
 			allChunks: true
@@ -95,8 +99,8 @@ const conf = {
 			from: 'img',
 			to: 'img'
 		}], {
-				copyUnmodified: false
-			}),
+			copyUnmodified: false
+		}),
 		new webpack.LoaderOptionsPlugin({
 			minimize: true
 		})

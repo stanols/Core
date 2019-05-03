@@ -13,8 +13,8 @@ class Experiences extends React.Component {
 
 	render() {
 		return (
-			<div>
-				Experiences
+			<div className={"experiences"}>
+				<h3>Experiences</h3>
 			</div>
 		);
 	}

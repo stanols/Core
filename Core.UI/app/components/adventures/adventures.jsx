@@ -1,5 +1,8 @@
 ﻿import React from 'react';
 import Adventure from './adventure/adventure';
+import { Button, FormGroup, ControlLabel, FormControl, Alert } from 'react-bootstrap';
+import GenericModal from 'app/components/common/genericModal/genericModal';
+import '../../../styles/bootstrap/mixins/buttons.less';
 import './adventures.less';
 
 class Adventures extends React.Component {
@@ -8,8 +11,17 @@ class Adventures extends React.Component {
 		const { adventures } = props;
 
 		this.state = {
-			adventures: adventures || []
+			adventures: adventures || [],
+			isPopupVisible: false,
+			model: {
+				name: '',
+				description: ''
+			}
 		};
+
+		this.onRemove = this.onRemove.bind(this);
+		this.onEdit = this.onEdit.bind(this);
+		this.onSave = this.onSave.bind(this);
 
 		this.renderAdventures = this.renderAdventures.bind(this);
 	}
@@ -21,14 +33,31 @@ class Adventures extends React.Component {
 		});
 	}
 
+	onRemove(event) {
+	}
+
+	onEdit(event) {
+		this.setState({ isPopupVisible: true });
+	}
+
+	onSave(data) {
+		this.setState({ isPopupVisible: false });
+	}
+
 	renderAdventures() {
 		const { adventures } = this.state;
 
-		return adventures.map(x => {
+		return adventures.map((adventure, index) => {
 			return (
-				<div>
-					<span>Name:{x.name}</span>
-					<span>Description:{x.description}</span>
+				<div key={index}>
+					<div>
+						<span>Name:{adventure.name}</span>
+						<span>Description:{adventure.description}</span>
+					</div>
+					<div>
+						<Button onClick={this.OnEdit} className={'button-variant'}>Edit</Button>
+						<Button onClick={this.OnRemove} className={'remove-button'}>Remove</Button>
+					</div>
 				</div>
 			);
 		});
@@ -36,11 +65,29 @@ class Adventures extends React.Component {
 
 	render() {
 		const adventures = this.renderAdventures();
+		const { model, isPopupVisible } = this.state;
 
 		return (
-			<div>
-				Adventures
-				{adventures}
+			<div className={"adventures"}>
+				<div>
+					<h3>Adventures</h3>
+					<span>
+						<Button onClick={this.onRemove} className={"remove-button"}>Remove</Button>
+						<Button onClick={this.onEdit} disabled={this.isPopupVisible} className={"button-variant"}>Create</Button>
+					</span>
+				</div>
+
+				<div>
+					{adventures}
+				</div>
+
+				<GenericModal
+					title={"Adventure"}
+					isVisible={isPopupVisible}
+					onSave={this.onSave}
+					component={Adventure}
+					model={model}
+				/>
 			</div>
 		);
 	}
