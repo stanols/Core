@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import Adventure from './adventure/adventure';
-import { Row, Col, Button, FormGroup, ControlLabel, FormControl, Alert } from 'react-bootstrap';
+import { Row, Col, Button, FormGroup, ControlLabel, FormControl, Alert, Jumbotron } from 'react-bootstrap';
 import GenericModal from 'app/components/common/genericModal/genericModal';
 import './adventures.less';
 
@@ -48,16 +48,18 @@ class Adventures extends React.Component {
 
 		return adventures.map((adventure, index) => {
 			return (
-				<div key={index} className={"adventure-info"}>
-					<div>
-						<span>Name:{adventure.name}</span>
-						<span>Description:{adventure.description}</span>
-					</div>
-					<div className={"controls"}>
-						<Button onClick={this.OnEdit} className={"btn btn-primary btn-sm"}>Edit</Button>
-						<Button onClick={this.OnRemove} className={"btn btn-danger btn-sm"}>Remove</Button>
-					</div>
-				</div>
+				<Jumbotron key={index}>
+					<Row className={"adventure-info"}>
+						<Col>
+							<div>Name:{adventure.name}</div>
+							<div>Description:{adventure.description}</div>
+						</Col>
+						<Col className={"controls"}>
+							<Button onClick={this.OnEdit} className={"btn btn-primary btn-sm"}>Edit</Button>
+							<Button onClick={this.OnRemove} className={"btn btn-danger btn-sm"}>Remove</Button>
+						</Col>
+					</Row>
+				</Jumbotron>
 			);
 		});
 	}
