@@ -1,8 +1,7 @@
 ﻿import React from 'react';
 import Adventure from './adventure/adventure';
-import { Button, FormGroup, ControlLabel, FormControl, Alert } from 'react-bootstrap';
+import { Row, Col, Button, FormGroup, ControlLabel, FormControl, Alert } from 'react-bootstrap';
 import GenericModal from 'app/components/common/genericModal/genericModal';
-import '../../../styles/bootstrap/mixins/buttons.less';
 import './adventures.less';
 
 class Adventures extends React.Component {
@@ -49,14 +48,14 @@ class Adventures extends React.Component {
 
 		return adventures.map((adventure, index) => {
 			return (
-				<div key={index}>
+				<div key={index} className={"adventure-info"}>
 					<div>
 						<span>Name:{adventure.name}</span>
 						<span>Description:{adventure.description}</span>
 					</div>
-					<div>
-						<Button onClick={this.OnEdit} className={'button-variant'}>Edit</Button>
-						<Button onClick={this.OnRemove} className={'remove-button'}>Remove</Button>
+					<div className={"controls"}>
+						<Button onClick={this.OnEdit} className={"btn btn-primary btn-sm"}>Edit</Button>
+						<Button onClick={this.OnRemove} className={"btn btn-danger btn-sm"}>Remove</Button>
 					</div>
 				</div>
 			);
@@ -69,17 +68,19 @@ class Adventures extends React.Component {
 
 		return (
 			<div className={"adventures"}>
-				<div>
-					<h3>Adventures</h3>
-					<span>
-						<Button onClick={this.onRemove} className={"remove-button"}>Remove</Button>
-						<Button onClick={this.onEdit} disabled={this.isPopupVisible} className={"button-variant"}>Create</Button>
-					</span>
-				</div>
+				<Row>
+					<div className={"title"}>
+						<h3>Adventures</h3>
+					</div>
+					<div className={"controls"}>
+						<Button onClick={this.onEdit} disabled={this.isPopupVisible} className={"btn btn-primary btn-sm"}>Create</Button>
+						<Button onClick={this.onRemove} className={"btn btn-danger btn-sm"}>Remove</Button>
+					</div>
+				</Row>
 
-				<div>
+				<Row>
 					{adventures}
-				</div>
+				</Row>
 
 				<GenericModal
 					title={"Adventure"}

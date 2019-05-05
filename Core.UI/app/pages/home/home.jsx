@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Button } from 'react-bootstrap';
 import _ from 'lodash';
-import Navigation from '../../components/layout/navigation/navigation';
+import Navigation from '../../pages/layout/navigation/navigation';
 import Adventures from '../../components/adventures/adventures';
 import Experiences from '../../components/experiences/experiences';
 import './home.less';

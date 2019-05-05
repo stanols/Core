@@ -81,6 +81,7 @@ namespace Core.WebApi.Controllers
 		}
 
 		[HttpPost]
+		[AllowAnonymous]
 		public void Logout()
 		{
 			_tokenHandler.TokenLifetimeInMinutes = 1;

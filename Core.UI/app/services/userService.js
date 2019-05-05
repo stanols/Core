@@ -1,4 +1,5 @@
 ﻿import BaseService from './baseService';
+import _ from 'lodash';
 
 class UserService extends BaseService {
 	constructor() {
@@ -16,7 +17,10 @@ class UserService extends BaseService {
 	}
 
 	async logout() {
-		await this.api.post(`${this.basePath}/Logout`);
+		const authHeader = this.api.defaults.headers.common["Authorization"];
+		if (!_.isEmpty(authHeader)) {
+			await this.api.post(`${this.basePath}/Logout`);
+		}
 
 		delete this.api.defaults.headers.common["Authorization"];
 	}

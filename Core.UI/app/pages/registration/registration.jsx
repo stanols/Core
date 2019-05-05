@@ -68,7 +68,7 @@ class Registration extends React.Component {
 						<ControlLabel>Confirm Password</ControlLabel>
 						<FormControl name="confirmedPassword" value={this.state.confirmedPassword} onChange={this.onChange} type="password" placeholder="Confirm Password" />
 					</FormGroup>
-					<FormControl type="submit" value="Sign Up" className="register-button" />
+					<FormControl type="submit" value="Sign Up" className={"btn btn-primary btn-sm"} />
 				</form>
 			</div>
 		);

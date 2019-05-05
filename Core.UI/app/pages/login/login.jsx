@@ -62,7 +62,7 @@ class Login extends React.Component {
 						<ControlLabel>Password</ControlLabel>
 						<FormControl name="password" value={password} onChange={this.onChange} type="password" placeholder="Password" />
 					</FormGroup>
-					<FormControl type="submit" value="Sign In" className="login-button" />
+					<FormControl type="submit" value="Sign In" className={"btn btn-primary btn-sm"} />
 				</form>
 			</div>
 		);

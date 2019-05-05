@@ -15,7 +15,7 @@ class PrivateRoute extends React.Component {
 			return <Route {...props} />;
 		}
 
-		return <Redirect to="/login" />;
+		return <Redirect to="/login"/>;
 	}
 }
 

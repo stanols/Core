@@ -36,10 +36,10 @@ class Header extends React.Component {
 
 		return (
 			<Nav pullRight={true}>
-				<LinkContainer to="/registration" >
+				<LinkContainer to="/registration" replace>
 					<NavItem>Registration</NavItem>
 				</LinkContainer>
-				<LinkContainer to="/login" >
+				<LinkContainer to="/login" replace>
 					<NavItem>Login</NavItem>
 				</LinkContainer>
 			</Nav>
@@ -54,7 +54,7 @@ class Header extends React.Component {
 				<Navbar inverse collapseOnSelect>
 					<Navbar.Header>
 						<Navbar.Brand>
-							<Link to="/home">
+							<Link to="/home" replace>
 								Home
 							</Link>
 						</Navbar.Brand>
@@ -63,7 +63,7 @@ class Header extends React.Component {
 
 					<Navbar.Collapse>
 						<Nav>
-							<LinkContainer to="/summary" >
+							<LinkContainer to="/summary" replace>
 								<NavItem >Summary</NavItem>
 							</LinkContainer>
 						</Nav>

@@ -47,7 +47,7 @@ class Navigation extends React.Component {
 		const { name, component } = active;
 
 		return (
-			<Tab.Container id="left-tabs" defaultActiveKey={name} onSelect={this.onSelect}>
+			<Tab.Container id="left-tabs" defaultActiveKey={name} onSelect={this.onSelect} className={"navigation"}>
 				<Row className="clearfix">
 					<Col sm={3}>
 						<Nav bsStyle="pills" stacked>
