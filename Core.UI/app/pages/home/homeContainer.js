@@ -13,12 +13,30 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-	return {
-		onGetAllAdventures: () => {
+    return {
+        onSave: (data) => {
+            dispatch({
+                type: actions.CREATE_ADVENTURE,
+                data
+            });
+        },
+		onGetAll: () => {
 			dispatch({
 				type: actions.GET_ALL_ADVENTURES
 			});
-		}
+        },
+        onUpdate: (data) => {
+            dispatch({
+                type: actions.UPDATE_ADVENTURE,
+                data
+            });
+        },
+        onDelete: (data) => {
+            dispatch({
+                type: actions.DELETE_ADVENTURE,
+                data
+            });
+        }
 	};
 };
 

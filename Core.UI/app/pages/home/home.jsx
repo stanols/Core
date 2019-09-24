@@ -31,7 +31,12 @@ class Home extends React.Component {
 				name: "adventures",
 				title: "Adventures",
 				icon: "th-list",
-				component: <Adventures adventures={adventures}/>
+                component: <Adventures
+                    adventures={adventures}
+                    onCreate={this.props.onCreate}
+                    onUpdate={this.props.onUpdate}
+                    onRemove={this.props.onRemove}
+                />
 			},
 			{
 				name: "experiences",
@@ -54,8 +59,8 @@ class Home extends React.Component {
 	}
 
 	componentWillMount() {
-		const { onGetAllAdventures } = this.props;
-		onGetAllAdventures();
+		const { onGetAll } = this.props;
+		onGetAll();
 	}
 
 	render() {

@@ -18,9 +18,10 @@ class Adventures extends React.Component {
 			}
 		};
 
-		this.onRemove = this.onRemove.bind(this);
-		this.onEdit = this.onEdit.bind(this);
-		this.onSave = this.onSave.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
+        this.onRemove = this.onRemove.bind(this);
+
+        this.onEdit = this.onEdit.bind(this);
 
 		this.renderAdventures = this.renderAdventures.bind(this);
 	}
@@ -30,18 +31,20 @@ class Adventures extends React.Component {
 		this.setState({
 			adventures: adventures
 		});
+    }
+
+    onUpdate(data) {
+        this.props.onUpdate(data);
+        this.setState({ isPopupVisible: false });
+    }
+
+    onRemove(event) {
+        this.props.onRemove(event.target)
 	}
 
-	onRemove(event) {
-	}
-
-	onEdit(event) {
+    onEdit(event) {
 		this.setState({ isPopupVisible: true });
-	}
-
-	onSave(data) {
-		this.setState({ isPopupVisible: false });
-	}
+    }
 
 	renderAdventures() {
 		const { adventures } = this.state;
@@ -87,7 +90,7 @@ class Adventures extends React.Component {
 				<GenericModal
 					title={"Adventure"}
 					isVisible={isPopupVisible}
-					onSave={this.onSave}
+					onSave={this.onUpdate}
 					component={Adventure}
 					model={model}
 				/>

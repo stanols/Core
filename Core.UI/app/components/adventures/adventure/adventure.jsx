@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Alert } from 'react-bootstrap';
+//import DateTimePicker from 'react-datetime-picker';
 import './adventure.less';
 
 class Adventure extends React.Component {
@@ -35,7 +36,7 @@ class Adventure extends React.Component {
 	}
 
 	render() {
-		const { name, description } = this.state;
+		const { name, description, startsOn } = this.state;
 
 		return (
 			<div>
@@ -47,8 +48,10 @@ class Adventure extends React.Component {
 					<ControlLabel>Description</ControlLabel>
 					<textarea rows="3" name="description" value={description} onChange={this.onChange} placeholder={"Description"} className={"form-control"}>
 					</textarea>
-				</FormGroup>
-				
+                </FormGroup>
+                <FormGroup>
+                    <ControlLabel>Starts On</ControlLabel>
+                </FormGroup>				
 			</div>
 		);
 	}
