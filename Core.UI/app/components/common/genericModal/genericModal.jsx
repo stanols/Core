@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import _ from 'lodash';
 import './genericModal.less';
 
 class GenericModal extends React.Component {
@@ -59,8 +60,8 @@ class GenericModal extends React.Component {
 					</Modal.Body>
 
 					<Modal.Footer>
-						<Button onClick={this.onClose} variant="secondary">Close</Button>
-						<Button onClick={this.onSave} variant="primary">Save changes</Button>
+						<Button onClick={this.onSave} className={"btn btn-primary btn-sm"}>Save changes</Button>
+						<Button onClick={this.onClose} className={"btn btn-danger btn-sm"}>Close</Button>
 					</Modal.Footer>
 				</Modal>
 			</div>

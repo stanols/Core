@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Alert } from 'react-bootstrap';
-import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
+import DateTimePicker from 'react-datetime-picker';
+import _ from 'lodash';
 import './adventure.less';
 
 class Adventure extends React.Component {
@@ -10,7 +11,7 @@ class Adventure extends React.Component {
 		this.state = {
 			name: "",
 			description: "",
-			creactedBy: "",
+			createdBy: "",
 			startsOn: new Date(),
 			endsOn: new Date(),
 			events: [],
@@ -48,15 +49,41 @@ class Adventure extends React.Component {
 					<ControlLabel>Description</ControlLabel>
 					<textarea rows="3" name="description" value={description} onChange={this.onChange} placeholder={"Description"} className={"form-control"}>
 					</textarea>
-                </FormGroup>
-                <FormGroup>
-                    <ControlLabel>Starts On</ControlLabel>
-                    <DateTimePicker value={startsOn} onChange={this.onChange} className={"form-control"} />
-                </FormGroup>	
-                <FormGroup>
-                    <ControlLabel>Ends On</ControlLabel>
-                    <DateTimePicker value={endsOn} onChange={this.onChange} className={"form-control"} />
-                </FormGroup>
+				</FormGroup>
+				<FormGroup>
+					<ControlLabel>Starts On</ControlLabel>
+					<DateTimePicker
+						name="startsOn"
+						value={startsOn}
+						onChange={date =>
+							this.onChange({
+								target: {
+									type: "date",
+									name: "startsOn",
+									value: date
+								}
+							})
+						}
+						className={"form-control"}
+					/>
+				</FormGroup>
+				<FormGroup>
+					<ControlLabel>Ends On</ControlLabel>
+					<DateTimePicker
+						name="endsOn"
+						value={endsOn}
+						onChange={date =>
+							this.onChange({
+								target: {
+									type: "date",
+									name: "endsOn",
+									value: date
+								}
+							})
+						}
+						className={"form-control"}
+					/>
+				</FormGroup>
 			</div>
 		);
 	}

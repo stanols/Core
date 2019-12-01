@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onSave: (data) => {
+        onCreate: data => {
             dispatch({
                 type: actions.CREATE_ADVENTURE,
                 data
@@ -25,13 +25,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				type: actions.GET_ALL_ADVENTURES
 			});
         },
-        onUpdate: (data) => {
+        onUpdate: data => {
             dispatch({
                 type: actions.UPDATE_ADVENTURE,
                 data
             });
         },
-        onDelete: (data) => {
+        onDelete: data => {
             dispatch({
                 type: actions.DELETE_ADVENTURE,
                 data
