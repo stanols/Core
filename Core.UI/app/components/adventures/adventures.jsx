@@ -14,7 +14,8 @@ class Adventures extends React.Component {
 			isPopupVisible: false,
 			model: {
 				name: '',
-				description: ''
+                description: '',
+                startsOn: Date.now()
 			}
 		};
 

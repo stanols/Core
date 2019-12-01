@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Alert } from 'react-bootstrap';
-//import DateTimePicker from 'react-datetime-picker';
+import DateTimePicker from 'react-datetime-picker/dist/entry.nostyle';
 import './adventure.less';
 
 class Adventure extends React.Component {
@@ -11,8 +11,8 @@ class Adventure extends React.Component {
 			name: "",
 			description: "",
 			creactedBy: "",
-			startsOn: null,
-			endsOn: null,
+			startsOn: new Date(),
+			endsOn: new Date(),
 			events: [],
 			participants: []
 		};
@@ -36,7 +36,7 @@ class Adventure extends React.Component {
 	}
 
 	render() {
-		const { name, description, startsOn } = this.state;
+		const { name, description, startsOn, endsOn } = this.state;
 
 		return (
 			<div>
@@ -51,7 +51,12 @@ class Adventure extends React.Component {
                 </FormGroup>
                 <FormGroup>
                     <ControlLabel>Starts On</ControlLabel>
-                </FormGroup>				
+                    <DateTimePicker value={startsOn} onChange={this.onChange} className={"form-control"} />
+                </FormGroup>	
+                <FormGroup>
+                    <ControlLabel>Ends On</ControlLabel>
+                    <DateTimePicker value={endsOn} onChange={this.onChange} className={"form-control"} />
+                </FormGroup>
 			</div>
 		);
 	}
