@@ -17,6 +17,7 @@ namespace Core.BLL.Mappers
 				.ForMember(x => x.Id, x => x.MapFrom(y => y.Id))
 				.ForMember(x => x.Name, x => x.MapFrom(y => y.Name))
 				.ForMember(x => x.Description, x => x.MapFrom(y => y.Description))
+				.ForMember(x => x.CreatedBy, x => x.MapFrom(y => y.CreatedBy))
 				.ForMember(x => x.StartsOn, x => x.MapFrom(y => y.StartsOn))
 				.ForMember(x => x.EndsOn, x => x.MapFrom(y => y.EndsOn))
 				.ForMember(x => x.AdventureUsers, x => x.MapFrom(y => y.Participants));
