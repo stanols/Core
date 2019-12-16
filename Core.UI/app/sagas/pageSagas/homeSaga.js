@@ -12,7 +12,7 @@ export function* homeSaga(dispatch) {
                 const { data } = msg;
                 const createResult = await adventureService.create(data);
 
-                dispatch({ type: homeActions.CREATE_ADVENTURE_SUCCESS, createResult });
+                dispatch({ type: homeActions.CREATE_ADVENTURE_SUCCESS, data: createResult });
             } catch (error) {
                 dispatch({ type: homeActions.CREATE_ADVENTURE_FAILURE, error });
             }
@@ -21,7 +21,7 @@ export function* homeSaga(dispatch) {
 			try {
 				const getResult = await adventureService.getAll();
 
-                dispatch({ type: homeActions.GET_ALL_ADVENTURES_SUCCESS, getResult});
+				dispatch({ type: homeActions.GET_ALL_ADVENTURES_SUCCESS, data: getResult});
 			} catch (error) {
 				dispatch({ type: homeActions.GET_ALL_ADVENTURES_FAILURE, error });
 			}
@@ -31,7 +31,7 @@ export function* homeSaga(dispatch) {
                 const { data } = msg;
                 const updateResult = await adventureService.update(data);
 
-                dispatch({ type: homeActions.UPDATE_ADVENTURE_SUCCESS, updateResult });
+                dispatch({ type: homeActions.UPDATE_ADVENTURE_SUCCESS, data: updateResult });
             } catch (error) {
                 dispatch({ type: homeActions.UPDATE_ADVENTURE_FAILURE, error });
             }
@@ -41,7 +41,7 @@ export function* homeSaga(dispatch) {
                 const { data } = msg;
                 const removeResult = await adventureService.remove(data);
 
-                dispatch({ type: homeActions.DELETE_ADVENTURE_SUCCESS, removeResult });
+                dispatch({ type: homeActions.DELETE_ADVENTURE_SUCCESS, data: removeResult });
             } catch (error) {
                 dispatch({ type: homeActions.DELETE_ADVENTURE_FAILURE, error });
             }

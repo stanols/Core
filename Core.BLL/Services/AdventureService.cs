@@ -4,7 +4,6 @@ using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 using AutoMapper;
 
-
 namespace Core.BLL.Services
 {
 	public class AdventureService : BaseService<Adventure, AdventureViewModel>, IAdventureService

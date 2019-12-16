@@ -16,7 +16,7 @@ class Adventures extends React.Component {
 				id: null,
 				name: "",
 				description: "",
-				createdBy: "",
+				createdBy: null,
 				startsOn: new Date(),
 				endsOn: new Date(),
 				events: [],
@@ -25,9 +25,9 @@ class Adventures extends React.Component {
 		};
 
 		this.onSave = this.onSave.bind(this);
-        this.onRemove = this.onRemove.bind(this);
+		this.onRemove = this.onRemove.bind(this);
 
-        this.onEdit = this.onEdit.bind(this);
+		this.onEdit = this.onEdit.bind(this);
 
 		this.renderAdventures = this.renderAdventures.bind(this);
 	}
@@ -37,27 +37,44 @@ class Adventures extends React.Component {
 		this.setState({
 			adventures: adventures
 		});
-    }
+	}
 
 	onSave(data) {
 		if (_.isNull(data.id || null)) {
+			const { authorizationData } = this.props;
+			const {
+				id,
+				name,
+				firstName,
+				lastName,
+				email
+			} = authorizationData;
+
+			data.createdBy = {
+				id: authorizationData.id,
+				name: name,
+				firstName: firstName,
+				lastName: lastName,
+				email: email
+			};
+
 			this.props.onCreate(data);
 		} else {
 			this.props.onUpdate(data);
 		}
 
-        this.setState({ isPopupVisible: false });
-    }
+		this.setState({ isPopupVisible: false });
+	}
 
-    onRemove(event) {
+	onRemove(event) {
 		this.props.onRemove(event.target);
 	}
 
-    onEdit(event) {
+	onEdit(event) {
 		this.setState({
 			isPopupVisible: true
 		});
-    }
+	}
 
 	renderAdventures() {
 		const { adventures } = this.state;

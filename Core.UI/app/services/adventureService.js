@@ -10,7 +10,7 @@ class AdventureService extends BaseService {
 		const { data } = response;
 
 		return data;
-    }
+	}
 }
 
 export default AdventureService;

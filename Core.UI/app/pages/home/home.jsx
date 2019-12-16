@@ -10,12 +10,13 @@ class Home extends React.Component {
 	constructor(props) {
 		super(props);
 
-		const { adventures } = props;
+		const { adventures, authorizationData } = props;
 
 		this.getNavigationItems = this.getNavigationItems.bind(this);
 
 		const data = {
-			adventures
+			adventures,
+			authorizationData
 		};
 
 		this.state = {
@@ -24,32 +25,33 @@ class Home extends React.Component {
 	}
 
 	getNavigationItems(data) {
-		const { adventures } = data;
+		const { adventures, authorizationData } = data;
 
 		return [
 			{
 				name: "adventures",
 				title: "Adventures",
 				icon: "th-list",
-                component: <Adventures
-                    adventures={adventures}
-                    onCreate={this.props.onCreate}
-                    onUpdate={this.props.onUpdate}
-                    onRemove={this.props.onRemove}
-                />
+				component: <Adventures
+					adventures={adventures}
+					authorizationData={authorizationData}
+					onCreate={this.props.onCreate}
+					onUpdate={this.props.onUpdate}
+					onRemove={this.props.onRemove}
+				/>
 			},
 			{
 				name: "experiences",
 				title: "Experiences",
 				icon: "tasks",
-				component: <Experiences/>
+				component: <Experiences />
 			}
 		];
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { adventures } = nextProps;
-		const data = { adventures };
+		const { adventures, authorizationData } = nextProps;
+		const data = { adventures, authorizationData };
 
 		const navigationItems = this.getNavigationItems(data);
 

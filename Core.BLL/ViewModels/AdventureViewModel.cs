@@ -7,7 +7,7 @@ namespace Core.BLL.ViewModels
 	{
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public string CreatedBy { get; set; }
+		public UserInfoViewModel CreatedBy { get; set; }
 		public DateTime StartsOn { get; set; }
 		public DateTime EndsOn { get; set; }
 		public List<ExperienceViewModel> Events { get; set; }

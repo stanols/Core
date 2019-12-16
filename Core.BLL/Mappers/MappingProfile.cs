@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using Core.BLL.ViewModels;
 using Core.DAL.Entities;
 
@@ -11,6 +10,17 @@ namespace Core.BLL.Mappers
 		{
 			CreateMap<User, UserViewModel>();
 			CreateMap<UserViewModel, User>();
+
+			CreateMap<User, UserInfoViewModel>()
+				.ForMember(x => x.Name, x => x.MapFrom(y => y.Name))
+				.ForMember(x => x.FirstName, x => x.MapFrom(y => y.FirstName))
+				.ForMember(x => x.LastName, x => x.MapFrom(y => y.LastName))
+				.ForMember(x => x.Email, x => x.MapFrom(y => y.Email));
+			CreateMap<UserInfoViewModel, User>()
+				.ForMember(x => x.Name, x => x.MapFrom(y => y.Name))
+				.ForMember(x => x.FirstName, x => x.MapFrom(y => y.FirstName))
+				.ForMember(x => x.LastName, x => x.MapFrom(y => y.LastName))
+				.ForMember(x => x.Email, x => x.MapFrom(y => y.Email));
 
 			CreateMap<Adventure, AdventureViewModel>();
 			CreateMap<AdventureViewModel, Adventure>()

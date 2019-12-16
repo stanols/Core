@@ -11,7 +11,7 @@ class Adventure extends React.Component {
 		this.state = {
 			name: "",
 			description: "",
-			createdBy: "",
+			createdBy: null,
 			startsOn: new Date(),
 			endsOn: new Date(),
 			events: [],

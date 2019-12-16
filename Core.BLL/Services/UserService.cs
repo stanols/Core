@@ -51,7 +51,13 @@ namespace Core.BLL.Services
 		public new void Update(UserViewModel userViewModel)
 		{
 			var id = userViewModel.Id;
-			var user = Repository.Get(id);
+
+			if (!id.HasValue)
+			{
+				throw new InvalidOperationException("User Id is required");
+			}
+
+			var user = Repository.Get(id.Value);
 			if (user == null)
 			{
 				throw new InvalidOperationException($"User with id='{id}' is not found");
