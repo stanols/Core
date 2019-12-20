@@ -30,7 +30,7 @@ class BaseService {
 	}
 
 	async remove(data) {
-		return await this.api.delete(`${this.basePath}/Remove`, data);
+		return await this.api.delete(`${this.basePath}/Remove`, { params: { id: data.id } });
 	}
 }
 

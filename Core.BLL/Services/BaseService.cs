@@ -21,10 +21,13 @@ namespace Core.BLL.Services
 			Mapper = mapper;
 		}
 
-		public void Create(TViewModel entity)
+		public TViewModel Create(TViewModel entity)
 		{
 			var newEntity = Mapper.Map<TEntity>(entity);
-			Repository.Create(newEntity);
+			var model = Repository.Create(newEntity);
+			var entityViewModel = Mapper.Map<TViewModel>(model);
+
+			return entityViewModel;
 		}
 
 		public TViewModel Get(int id)

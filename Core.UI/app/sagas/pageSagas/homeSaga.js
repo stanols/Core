@@ -12,7 +12,7 @@ export function* homeSaga(dispatch) {
                 const { data } = msg;
                 const createResult = await adventureService.create(data);
 
-                dispatch({ type: homeActions.CREATE_ADVENTURE_SUCCESS, data: createResult });
+                dispatch({ type: homeActions.CREATE_ADVENTURE_SUCCESS, data: createResult.data });
             } catch (error) {
                 dispatch({ type: homeActions.CREATE_ADVENTURE_FAILURE, error });
             }
@@ -41,7 +41,7 @@ export function* homeSaga(dispatch) {
                 const { data } = msg;
                 const removeResult = await adventureService.remove(data);
 
-                dispatch({ type: homeActions.DELETE_ADVENTURE_SUCCESS, data: removeResult });
+                dispatch({ type: homeActions.DELETE_ADVENTURE_SUCCESS, data: data });
             } catch (error) {
                 dispatch({ type: homeActions.DELETE_ADVENTURE_FAILURE, error });
             }

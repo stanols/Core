@@ -18,7 +18,7 @@ class Navigation extends React.Component {
 		this.renderNavPills = this.renderNavigationItems.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		const { items, active } = nextProps;
 		this.setState({
 			items: items,

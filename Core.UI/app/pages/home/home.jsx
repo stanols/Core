@@ -49,7 +49,7 @@ class Home extends React.Component {
 		];
 	}
 
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		const { adventures, authorizationData } = nextProps;
 		const data = { adventures, authorizationData };
 

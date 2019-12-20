@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				data
 			});
 		},
-		onDelete: data => {
+		onRemove: data => {
 			dispatch({
 				type: actions.DELETE_ADVENTURE,
 				data

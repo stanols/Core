@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import _ from 'lodash';
 import Adventure from './adventure/adventure';
 import { Row, Col, Button, FormGroup, ControlLabel, FormControl, Alert, Jumbotron } from 'react-bootstrap';
 import GenericModal from 'app/components/common/genericModal/genericModal';
@@ -32,14 +33,14 @@ class Adventures extends React.Component {
 		this.renderAdventures = this.renderAdventures.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		const { adventures } = nextProps;
 		this.setState({
 			adventures: adventures
 		});
 	}
 
-	onSave(data) {
+	onSave = data => {
 		if (_.isNull(data.id || null)) {
 			const { authorizationData } = this.props;
 			const {
@@ -64,21 +65,23 @@ class Adventures extends React.Component {
 		}
 
 		this.setState({ isPopupVisible: false });
-	}
+	};
 
-	onRemove(event) {
-		this.props.onRemove(event.target);
-	}
+	onRemove = model => {
+		if (_.isNull(model)) {
+			return;
+		}
+		this.props.onRemove(model);
+	};
 
-	onEdit(event) {
+	onEdit = model => {
 		this.setState({
-			isPopupVisible: true
+			isPopupVisible: true,
+			model: model
 		});
-	}
+	};
 
-	renderAdventures() {
-		const { adventures } = this.state;
-
+	renderAdventures = adventures => {
 		return adventures.map((adventure, index) => {
 			return (
 				<Jumbotron key={index}>
@@ -88,19 +91,19 @@ class Adventures extends React.Component {
 							<div>Description:{adventure.description}</div>
 						</Col>
 						<Col className={"controls"}>
-							<Button onClick={this.OnEdit} className={"btn btn-primary btn-sm"}>Edit</Button>
-							<Button onClick={this.OnRemove} className={"btn btn-danger btn-sm"}>Remove</Button>
+							<Button onClick={() => this.onEdit(adventure)} className={"btn btn-primary btn-sm"}>Edit</Button>
+							<Button onClick={() => this.onRemove(adventure)} className={"btn btn-danger btn-sm"}>Remove</Button>
 						</Col>
 					</Row>
 				</Jumbotron>
 			);
-		});
-	}
+		}, this);
+	};
 
 	render() {
-		const adventures = this.renderAdventures();
-		const { model, isPopupVisible } = this.state;
-
+		const { adventures, model, isPopupVisible } = this.state;
+		const adventuresList = this.renderAdventures(adventures);
+		
 		return (
 			<div className={"adventures"}>
 				<Row>
@@ -108,13 +111,12 @@ class Adventures extends React.Component {
 						<h3>Adventures</h3>
 					</div>
 					<div className={"controls"}>
-						<Button onClick={this.onEdit} disabled={this.isPopupVisible} className={"btn btn-primary btn-sm"}>Create</Button>
-						<Button onClick={this.onRemove} className={"btn btn-danger btn-sm"}>Remove</Button>
+						<Button onClick={() => this.onEdit(model)} disabled={this.isPopupVisible} className={"btn btn-primary btn-sm"}>Create</Button>
 					</div>
 				</Row>
 
 				<Row>
-					{adventures}
+					{adventuresList}
 				</Row>
 
 				<GenericModal

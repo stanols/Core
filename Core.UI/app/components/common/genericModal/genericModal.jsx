@@ -19,28 +19,29 @@ class GenericModal extends React.Component {
 		this.onModelChanged = this.onModelChanged.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps) {
+	UNSAFE_componentWillReceiveProps = nextProps => {
 		const { isVisible } = nextProps;
 		this.setState({
 			isVisible: isVisible
 		});
-	}
+	};
 
-	onSave(event) {
+	onSave = event => {
 		event.preventDefault();
+
 		this.setState({ isVisible: false });
 		this.props.onSave(this.state.model);
-	}
+	};
 
-	onClose(event) {
+	onClose = event => {
 		event.preventDefault();
 
 		this.setState({ isVisible: false });
-	}
+	};
 
-	onModelChanged(newModel) {
+	onModelChanged = newModel => {
 		this.setState({ model: newModel });
-	}
+	};
 
 	render() {
 		const { title, component, model } = this.props;
@@ -60,8 +61,8 @@ class GenericModal extends React.Component {
 					</Modal.Body>
 
 					<Modal.Footer>
-						<Button onClick={this.onSave} className={"btn btn-primary btn-sm"}>Save changes</Button>
-						<Button onClick={this.onClose} className={"btn btn-danger btn-sm"}>Close</Button>
+						<Button onClick={event => this.onSave(event)} className={"btn btn-primary btn-sm"}>Save changes</Button>
+						<Button onClick={event => this.onClose(event)} className={"btn btn-danger btn-sm"}>Close</Button>
 					</Modal.Footer>
 				</Modal>
 			</div>
