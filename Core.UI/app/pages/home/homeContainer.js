@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
 	const { authorizationData } = loginReducer;
 
 	return {
-		adventures,
+		adventures: adventures || [],
 		authorizationData
 	};
 };
