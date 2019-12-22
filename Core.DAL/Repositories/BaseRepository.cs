@@ -40,7 +40,7 @@ namespace Core.DAL.Repositories
 			return _entities.Where(predicate);
 		}
 
-		public void Create(T entity)
+		public T Create(T entity)
 		{
 			if (entity == null)
 			{
@@ -49,6 +49,8 @@ namespace Core.DAL.Repositories
 
 			_entities.Add(entity);
 			_context.SaveChanges();
+
+			return entity;
 		}
 
 		public void Update(T entity)

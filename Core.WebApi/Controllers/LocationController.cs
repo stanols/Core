@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 
 
-namespace Core.WebAPI.Controllers
+namespace Core.WebApi.Controllers
 {
 	[Authorize]
 	public class LocationController : BaseController

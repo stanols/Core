@@ -1,9 +1,10 @@
-﻿using Core.BLL.Interfaces;
+﻿using System.Collections.Generic;
+using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.WebAPI.Controllers
+namespace Core.WebApi.Controllers
 {
 	[Authorize]
 	public class AdventureController : BaseController
@@ -16,15 +17,31 @@ namespace Core.WebAPI.Controllers
 		}
 
 		[HttpPost]
-		public void Create([FromBody]AdventureViewModel adventureViewModel)
+		public AdventureViewModel Create([FromBody]AdventureViewModel adventureViewModel)
 		{
-			_adventureService.Create(adventureViewModel);
+			var adventure = _adventureService.Create(adventureViewModel);
+			return adventure;
 		}
 
 		[HttpGet]
-		public void Get([FromQuery] int id)
+		public AdventureViewModel Get([FromQuery] int id)
 		{
-			_adventureService.Get(id);
+			var adventure = _adventureService.Get(id);
+			return adventure;
+		}
+
+		[HttpGet]
+		public List<AdventureViewModel> GetAll()
+		{
+			var adventures = _adventureService.GetAll();
+			return adventures;
+		}
+
+		[HttpGet]
+		public List<AdventureViewModel> GetAllBy([FromQuery] string name)
+		{
+			var adventures = _adventureService.GetAllBy(x => x.Name == name);
+			return adventures;
 		}
 
 		[HttpPut]

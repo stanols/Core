@@ -7,6 +7,7 @@ namespace Core.DAL.Entities
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int Id { get; set; }
+		[Column("Id", Order = 1, TypeName = "integer")]
+		public int? Id { get; set; }
 	}
 }

@@ -10,18 +10,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 
-namespace Core.WebAPI.Controllers
+namespace Core.WebApi.Controllers
 {
 	[Authorize]
 	public class UserController : BaseController
 	{
 		private readonly IUserService _userService;
 		private readonly IConfiguration _config;
+		private readonly JwtSecurityTokenHandler _tokenHandler;
 
 		public UserController(IUserService userService, IConfiguration config)
 		{
 			_userService = userService;
 			_config = config;
+			_tokenHandler = new JwtSecurityTokenHandler();
 		}
 
 		[HttpPost]
@@ -51,7 +53,7 @@ namespace Core.WebAPI.Controllers
 
 		[HttpPost]
 		[AllowAnonymous]
-		public UserViewModel Authenticate([FromBody] UserViewModel userViewModel)
+		public UserViewModel Login([FromBody]UserViewModel userViewModel)
 		{
 			const string secret = "secret";
 
@@ -61,7 +63,6 @@ namespace Core.WebAPI.Controllers
 				throw new AuthenticationException();
 			}
 
-			var tokenHandler = new JwtSecurityTokenHandler();
 			var key = Encoding.ASCII.GetBytes(_config[secret]);
 			var tokenDescriptor = new SecurityTokenDescriptor
 			{
@@ -73,11 +74,17 @@ namespace Core.WebAPI.Controllers
 				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
 			};
 
-			var token = tokenHandler.CreateToken(tokenDescriptor);
-			viewModel.Token = tokenHandler.WriteToken(token);
+			var token = _tokenHandler.CreateToken(tokenDescriptor);
+			viewModel.Token = _tokenHandler.WriteToken(token);
 
 			return viewModel;
 		}
 
+		[HttpPost]
+		[AllowAnonymous]
+		public void Logout()
+		{
+			_tokenHandler.TokenLifetimeInMinutes = 1;
+		}
 	}
 }

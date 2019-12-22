@@ -1,12 +1,10 @@
 ﻿import { combineReducers } from 'redux';
-import actions from '../actions/actions';
+import { registrationReducer } from './pageReducers/registrationReducer';
+import { loginReducer } from './pageReducers/loginReducer';
+import { homeReducer } from './pageReducers/homeReducer';
 
-export function appReducer(state = {}, action) {
-	switch (action.type) {
-		case actions.USER_CREATE:
-			var { data } = action;
-			return Object.assign({}, state, { newUser: data });
-		default:
-			return state;
-	}
-}
+export default combineReducers({
+	registrationReducer,
+	loginReducer,
+	homeReducer
+});

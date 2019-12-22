@@ -7,7 +7,6 @@ using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 using AutoMapper;
 
-
 namespace Core.BLL.Services
 {
 	public class UserService : BaseService<User, UserViewModel>, IUserService
@@ -19,6 +18,13 @@ namespace Core.BLL.Services
 
 		public new void Create(UserViewModel userViewModel)
 		{
+			var name = userViewModel.Name;
+			var existingUser = Repository.GetBy(x => x.Name == name);
+			if (existingUser != null)
+			{
+				throw new InvalidOperationException($"User with name='{name}' is already exist");
+			}
+
 			var password = userViewModel.Password;
 			var confirmedPassword = userViewModel.ConfirmedPassword;
 			var passwordHash = CreatePasswordHash(password, confirmedPassword);
@@ -45,7 +51,13 @@ namespace Core.BLL.Services
 		public new void Update(UserViewModel userViewModel)
 		{
 			var id = userViewModel.Id;
-			var user = Repository.Get(id);
+
+			if (!id.HasValue)
+			{
+				throw new InvalidOperationException("User Id is required");
+			}
+
+			var user = Repository.Get(id.Value);
 			if (user == null)
 			{
 				throw new InvalidOperationException($"User with id='{id}' is not found");
