@@ -31,7 +31,7 @@ export function* homeSaga(dispatch) {
                 const { data } = msg;
                 const updateResult = await adventureService.update(data);
 
-                dispatch({ type: homeActions.UPDATE_ADVENTURE_SUCCESS, data: updateResult });
+                dispatch({ type: homeActions.UPDATE_ADVENTURE_SUCCESS, data: updateResult.data });
             } catch (error) {
                 dispatch({ type: homeActions.UPDATE_ADVENTURE_FAILURE, error });
             }

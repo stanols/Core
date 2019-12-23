@@ -33,9 +33,7 @@ class GenericModal extends React.Component {
 		this.props.onSave(this.state.model);
 	};
 
-	onClose = event => {
-		event.preventDefault();
-
+	onClose = () => {
 		this.setState({ isVisible: false });
 	};
 
@@ -51,7 +49,7 @@ class GenericModal extends React.Component {
 
 		return (
 			<div className={"generic-modal"}>
-				<Modal show={isVisible} onHide={this.onClose}>
+				<Modal show={isVisible} onHide={() => this.onClose()}>
 					<Modal.Header>
 						<Modal.Title>{title}</Modal.Title>
 					</Modal.Header>
@@ -62,7 +60,7 @@ class GenericModal extends React.Component {
 
 					<Modal.Footer>
 						<Button onClick={event => this.onSave(event)} className={"btn btn-primary btn-sm"}>Save changes</Button>
-						<Button onClick={event => this.onClose(event)} className={"btn btn-danger btn-sm"}>Close</Button>
+						<Button onClick={() => this.onClose()} className={"btn btn-danger btn-sm"}>Close</Button>
 					</Modal.Footer>
 				</Modal>
 			</div>

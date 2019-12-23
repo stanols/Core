@@ -53,7 +53,7 @@ namespace Core.DAL.Repositories
 			return entity;
 		}
 
-		public void Update(T entity)
+		public T Update(T entity)
 		{
 			if (entity == null)
 			{
@@ -62,6 +62,7 @@ namespace Core.DAL.Repositories
 
 			_entities.Update(entity);
 			_context.SaveChanges();
+			return entity;
 		}
 
 		public void Remove(T entity)

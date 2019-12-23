@@ -45,9 +45,9 @@ namespace Core.WebApi.Controllers
 		}
 
 		[HttpPut]
-		public void Update([FromBody] AdventureViewModel adventureViewModel)
+		public AdventureViewModel Update([FromBody] AdventureViewModel adventureViewModel)
 		{
-			_adventureService.Update(adventureViewModel);
+			return _adventureService.Update(adventureViewModel);
 		}
 
 		[HttpDelete]

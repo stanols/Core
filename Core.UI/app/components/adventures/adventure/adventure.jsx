@@ -8,14 +8,26 @@ class Adventure extends React.Component {
 	constructor(props) {
 		super(props);
 
+		const {
+			id,
+			name,
+			description,
+			createBy,
+			startsOn,
+			endsOn,
+			events,
+			participants
+		} = this.props;
+
 		this.state = {
-			name: "",
-			description: "",
-			createdBy: null,
-			startsOn: new Date(),
-			endsOn: new Date(),
-			events: [],
-			participants: []
+			id: id || null,
+			name: name || "",
+			description: description || "",
+			createdBy: createBy || null,
+			startsOn: startsOn || new Date(),
+			endsOn: endsOn || new Date(),
+			events: events || [],
+			participants: participants || []
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -31,9 +43,9 @@ class Adventure extends React.Component {
 
 		this.setState({
 			[name]: value
+		}, () => {
+			this.props.onModelChanged(this.state);
 		});
-
-		this.props.onModelChanged(this.state);
 	}
 
 	render() {
