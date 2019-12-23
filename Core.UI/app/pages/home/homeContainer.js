@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
 
 	return {
 		adventures: adventures || [],
-		authorizationData
+		authorizationData: authorizationData || null
 	};
 };
 

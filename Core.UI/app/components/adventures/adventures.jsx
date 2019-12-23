@@ -8,10 +8,11 @@ import './adventures.less';
 class Adventures extends React.Component {
 	constructor(props) {
 		super(props);
-		const { adventures } = props;
+		const { adventures, authorizationData } = props;
 
 		this.state = {
 			adventures: adventures || [],
+			authorizationData: authorizationData || null,
 			isPopupVisible: false,
 			model: {
 				id: null,
@@ -34,31 +35,33 @@ class Adventures extends React.Component {
 	}
 
 	UNSAFE_componentWillReceiveProps(nextProps) {
-		const { adventures } = nextProps;
+		const { adventures, authorizationData } = nextProps;
 		this.setState({
-			adventures: adventures
+			adventures: adventures,
+			authorizationData: authorizationData
 		});
 	}
 
 	onSave = data => {
+		const { authorizationData } = this.props;
+
+		const {
+			id,
+			name,
+			firstName,
+			lastName,
+			email
+		} = authorizationData;
+
+		data.createdBy = {
+			id: id,
+			name: name,
+			firstName: firstName,
+			lastName: lastName,
+			email: email
+		};
+
 		if (_.isNull(data.id || null)) {
-			const { authorizationData } = this.props;
-			const {
-				id,
-				name,
-				firstName,
-				lastName,
-				email
-			} = authorizationData;
-
-			data.createdBy = {
-				id: authorizationData.id,
-				name: name,
-				firstName: firstName,
-				lastName: lastName,
-				email: email
-			};
-
 			this.props.onCreate(data);
 		} else {
 			this.props.onUpdate(data);
@@ -111,7 +114,22 @@ class Adventures extends React.Component {
 						<h3>Adventures</h3>
 					</div>
 					<div className={"controls"}>
-						<Button onClick={() => this.onEdit(model)} disabled={this.isPopupVisible} className={"btn btn-primary btn-sm"}>Create</Button>
+						<Button
+							onClick={() => this.onEdit({
+								id: null,
+								name: "",
+								description: "",
+								createdBy: null,
+								startsOn: new Date(),
+								endsOn: new Date(),
+								events: [],
+								participants: []
+							})}
+							disabled={this.isPopupVisible}
+							className={"btn btn-primary btn-sm"}
+						>
+							Create
+						</Button>
 					</div>
 				</Row>
 

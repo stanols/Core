@@ -40,7 +40,7 @@ namespace Core.DAL.Repositories
 			return _entities.Where(predicate);
 		}
 
-		public T Create(T entity)
+		public int Create(T entity)
 		{
 			if (entity == null)
 			{
@@ -50,7 +50,12 @@ namespace Core.DAL.Repositories
 			_entities.Add(entity);
 			_context.SaveChanges();
 
-			return entity;
+			if (!entity.Id.HasValue)
+			{
+				throw new InvalidOperationException($"Unable to create entity of type {entity.GetType().FullName}");
+			}
+
+			return entity.Id.Value;
 		}
 
 		public void Update(T entity)

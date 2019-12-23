@@ -17,10 +17,9 @@ namespace Core.WebApi.Controllers
 		}
 
 		[HttpPost]
-		public AdventureViewModel Create([FromBody]AdventureViewModel adventureViewModel)
+		public int Create([FromBody]AdventureViewModel adventureViewModel)
 		{
-			var adventure = _adventureService.Create(adventureViewModel);
-			return adventure;
+			return _adventureService.Create(adventureViewModel);
 		}
 
 		[HttpGet]

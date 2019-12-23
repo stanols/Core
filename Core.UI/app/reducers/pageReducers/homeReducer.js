@@ -27,10 +27,24 @@ export function homeReducer(state = {}, action) {
 					adventures: [],
 					error: action.error
 				});
+		case homeActions.UPDATE_ADVENTURE_SUCCESS:
+			return Object.assign({}, state,
+				{
+					adventures: state.adventures.map(x =>
+						x.id === action.data.id ? action.data : x),
+					error: null
+				});
+		case homeActions.UPDATE_ADVENTURE_FAILURE:
+			return Object.assign({}, state,
+				{
+					adventures: [],
+					error: action.error
+				});
 		case homeActions.DELETE_ADVENTURE_SUCCESS:
 			return Object.assign({}, state,
 				{
-					adventures: state.adventures.filter(x => x.id !== action.data.id),
+					adventures: state.adventures.filter(x =>
+						x.id !== action.data.id),
 					error: null
 				});
 		case homeActions.DELETE_ADVENTURE_FAILURE:

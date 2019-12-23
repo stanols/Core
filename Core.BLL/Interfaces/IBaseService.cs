@@ -9,7 +9,7 @@ namespace Core.BLL.Interfaces
 		where TEntity : BaseEntity
 		where TViewModel : BaseViewModel
 	{
-		TViewModel Create(TViewModel userViewModel);
+		int Create(TViewModel userViewModel);
 
 		TViewModel Get(int id);
 
