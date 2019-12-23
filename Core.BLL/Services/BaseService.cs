@@ -54,12 +54,10 @@ namespace Core.BLL.Services
 			return MapCollection(entities);
 		}
 
-		public TViewModel Update(TViewModel viewModel)
+		public void Update(TViewModel viewModel)
 		{
 			var entity = Mapper.Map<TEntity>(viewModel);
-			var updatedEntity = Repository.Update(entity);
-			var updatedViewModel = Mapper.Map<TViewModel>(updatedEntity);
-			return updatedViewModel;
+			Repository.Update(entity);
 		}
 
 		public void Remove(int id)

@@ -11,7 +11,7 @@ namespace Core.DAL.Interfaces
 		IEnumerable<T> GetAll();
 		IEnumerable<T> GetAllBy(Func<T, bool> predicate);
 		T Create(T entity);
-		T Update(T entity);
+		void Update(T entity);
 		void Remove(T entity);
 		void Remove(int id);
 	}

@@ -17,7 +17,7 @@ namespace Core.BLL.Interfaces
 
 		List<TViewModel> GetAllBy(Func<TViewModel, bool> predicate);
 
-		TViewModel Update(TViewModel userViewModel);
+		void Update(TViewModel userViewModel);
 
 		void Remove(int id);
 	}

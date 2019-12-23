@@ -40,9 +40,9 @@ namespace Core.WebApi.Controllers
 		}
 
 		[HttpPut]
-		public UserViewModel Update([FromBody]UserViewModel user)
+		public void Update([FromBody]UserViewModel user)
 		{
-			return _userService.Update(user);
+			_userService.Update(user);
 		}
 
 		[HttpDelete]
