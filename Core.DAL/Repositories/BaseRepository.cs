@@ -5,7 +5,6 @@ using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace Core.DAL.Repositories
 {
 	public class BaseRepository<T> : IBaseRepository<T>
