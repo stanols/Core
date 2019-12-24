@@ -9,6 +9,5 @@ namespace Core.DAL.Repositories
 			: base(context)
 		{
 		}
-
 	}
 }

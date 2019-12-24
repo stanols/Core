@@ -1,7 +1,6 @@
 ﻿using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 
-
 namespace Core.DAL.Repositories
 {
 	public class LocationRepository : BaseRepository<Location>, ILocationRepository
@@ -10,6 +9,5 @@ namespace Core.DAL.Repositories
 			: base(context)
 		{
 		}
-
 	}
 }
