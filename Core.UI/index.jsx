@@ -17,7 +17,7 @@ sagaMiddleware.run(appSaga.bind(this, dispatch));
 ReactDom.render(
 	<Provider store={store}>
 		<HashRouter>
-			<App />
+			<App dispatch={dispatch} />
 		</HashRouter>
 	</Provider>,
 	document.getElementById('app')

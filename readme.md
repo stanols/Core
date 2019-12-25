@@ -60,7 +60,7 @@ npm run build
 ```
 for development environment in watch mode
 ```
-npm run watch
+npm run build-watch
 ```
 for production environment
 ```

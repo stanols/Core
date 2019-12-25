@@ -8,6 +8,15 @@ export function* loginSaga(dispatch) {
 	const userService = new UserService();
 
 	yield all([
+		takeLatest(actions.USER_RESTORE_AUTHORIZATION_DATA, async action => {
+			if (AuthorizationHelper.isAuthorized()) {
+				const authorizationData = AuthorizationHelper.getAuthorizationData();
+				dispatch({ type: loginActions.LOGIN_USER_SUCCESS, data: authorizationData });
+			} else {
+				const error = "Not authorized error";
+				dispatch({ type: loginActions.LOGIN_USER_FAILURE, data: error });
+			}
+		}),
 		takeLatest(actions.USER_LOGIN, async action => {
 			try {
 				const data = await userService.login(action.data);

@@ -1,6 +1,4 @@
-﻿
-
-class AuthorizationHelper {
+﻿class AuthorizationHelper {
 	static isAuthorized() {
 		let data = null;
 		const authorizationDataKey = "authorizationData";

@@ -8,6 +8,7 @@ import RegistrationContainer from './pages/registration/registrationContainer';
 import SummaryContainer from './pages/summary/summaryContainer';
 import { Grid } from 'react-bootstrap';
 import PrivateRoute from './pages/layout/navigation/privateRoute/privateRoute';
+import actions from './actions/actions';
 import '../styles/bootstrap/bootstrap.less';
 import '../styles/bootstrap/theme.less';
 import './app.less';
@@ -15,6 +16,11 @@ import './app.less';
 class App extends React.Component {
 	constructor(props) {
 		super(props);
+
+		const { dispatch } = this.props;
+		dispatch({
+			type: actions.USER_RESTORE_AUTHORIZATION_DATA
+		});
 	}
 
 	render() {
