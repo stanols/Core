@@ -21,10 +21,10 @@ namespace Core.BLL.Services
 			Mapper = mapper;
 		}
 
-		public int Create(TViewModel entity)
+		public int Create(TViewModel viewModel)
 		{
-			var newEntity = Mapper.Map<TEntity>(entity);
-			var id = Repository.Create(newEntity);
+			var entity = Mapper.Map<TEntity>(viewModel);
+			var id = Repository.Create(entity);
 
 			return id;
 		}
@@ -73,11 +73,13 @@ namespace Core.BLL.Services
 		private List<TViewModel> MapCollection(IEnumerable<TEntity> entities)
 		{
 			var result = new List<TViewModel>();
-			var enumerator = entities.GetEnumerator();
 
-			while (enumerator.MoveNext())
+			using (var enumerator = entities.GetEnumerator())
 			{
-				result.Add(Mapper.Map<TViewModel>(enumerator.Current));
+				while (enumerator.MoveNext())
+				{
+					result.Add(Mapper.Map<TViewModel>(enumerator.Current));
+				}
 			}
 
 			return result;

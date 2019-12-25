@@ -9,7 +9,7 @@ namespace Core.BLL.Interfaces
 		where TEntity : BaseEntity
 		where TViewModel : BaseViewModel
 	{
-		int Create(TViewModel userViewModel);
+		int Create(TViewModel viewModel);
 
 		TViewModel Get(int id);
 
@@ -17,7 +17,7 @@ namespace Core.BLL.Interfaces
 
 		List<TViewModel> GetAllBy(Func<TViewModel, bool> predicate);
 
-		void Update(TViewModel userViewModel);
+		void Update(TViewModel viewModel);
 
 		void Remove(int id);
 	}

@@ -19,6 +19,13 @@ class Registration extends React.Component {
 		this.onSignUp = this.onSignUp.bind(this);
 	}
 
+	UNSAFE_componentWillReceiveProps(nextProps) {
+		const { history, isUserCreated } = nextProps;
+		if (isUserCreated) {
+			history.push("/login");
+		}
+	}
+
 	onChange(event) {
 		const checkboxTargetType = "checkbox";
 		const target = event.target;
@@ -32,11 +39,10 @@ class Registration extends React.Component {
 		});
 	}
 
-	async onSignUp(event) {
+	onSignUp(event) {
 		event.preventDefault();
 		const { onSignUp, history } = this.props;
-		await onSignUp(this.state);
-		history.push("/login");
+		onSignUp(this.state);
 	}
 
 	render() {

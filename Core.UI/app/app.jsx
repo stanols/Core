@@ -25,8 +25,6 @@ class App extends React.Component {
 	}
 
 	render() {
-		const isAuthorized = AuthorizationHelper.isAuthorized();
-
 		return (
 			<div>
 				<HeaderContainer />

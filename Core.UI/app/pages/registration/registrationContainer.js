@@ -4,14 +4,16 @@ import actions from '../../actions/actions';
 import Registration from './registration';
 
 const mapStateToProps = (state, ownProps) => {
-	return {
-	};
+	const { registrationReducer } = state;
+	const { isUserCreated } = registrationReducer;
+
+	return { isUserCreated: isUserCreated };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
 		onSignUp: (data) => {
-			return dispatch({
+			dispatch({
 				type: actions.USER_CREATE,
 				data: data
 			});

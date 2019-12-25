@@ -1,4 +1,5 @@
-﻿import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+﻿import _ from 'lodash';
+import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import actions from '../../actions/actions';
 import registrationActions from '../../actions/reducerActions/registrationActions';
 import UserService from "../../services/userService";
@@ -6,22 +7,22 @@ import UserService from "../../services/userService";
 export function* registrationSaga(dispatch) {
 	const userService = new UserService();
 
-	yield [
-		takeLatest(actions.USER_CREATE, async function createUser(action) {
+	yield all([
+		takeLatest(actions.USER_CREATE, async (msg) => {
 			try {
-				const { data } = action;
-				await userService.create(data);
+				const { data } = msg;
+				const createResult = await userService.create(data);
 
 				dispatch({
 					type: registrationActions.CREATE_USER_SUCCESS,
-					data: {}
+					data: true
 				});
 			} catch (ex) {
 				dispatch({
 					type: registrationActions.CREATE_USER_FAILURE,
-					data: 'User is not registered'
+					data: 'User was not registered'
 				});
 			}
 		})
-	];
+	]);
 }
