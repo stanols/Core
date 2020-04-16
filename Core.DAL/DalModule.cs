@@ -22,7 +22,7 @@ namespace Core.DAL
 			const string connectionStringKey = "connectionString";
 
 			var connectionString = config[connectionStringKey];
-			services.AddDbContext<CoreDbContext>(opts => opts.UseNpgsql(connectionString));
+			services.AddDbContext<CoreDbContext>(options => options.UseNpgsql(connectionString));
 
 			return services;
 		}
