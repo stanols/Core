@@ -18,14 +18,6 @@ class Navigation extends React.Component {
 		this.renderNavPills = this.renderNavigationItems.bind(this);
 	}
 
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		const { items, active } = nextProps;
-		this.setState({
-			items: items,
-			active: active
-		});
-	}
-
 	onSelect(name) {
 		const active = _.find(this.state.items, item => item.name === name);
 		this.setState({

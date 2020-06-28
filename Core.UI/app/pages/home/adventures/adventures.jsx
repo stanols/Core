@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import _ from 'lodash';
-import Adventure from './adventure/adventure';
+import Adventure from 'app/components/adventure/adventure';
 import { Row, Col, Button, FormGroup, ControlLabel, FormControl, Alert, Jumbotron } from 'react-bootstrap';
 import GenericModal from 'app/components/common/genericModal/genericModal';
 import './adventures.less';
@@ -8,10 +8,9 @@ import './adventures.less';
 class Adventures extends React.Component {
 	constructor(props) {
 		super(props);
-		const { adventures, authorizationData } = props;
+		const { authorizationData } = props;
 
 		this.state = {
-			adventures: adventures || [],
 			authorizationData: authorizationData || null,
 			isPopupVisible: false,
 			model: {
@@ -21,25 +20,17 @@ class Adventures extends React.Component {
 				createdBy: null,
 				startsOn: new Date(),
 				endsOn: new Date(),
-				events: [],
+				experiences: [],
 				participants: []
 			}
 		};
 
 		this.onSave = this.onSave.bind(this);
 		this.onRemove = this.onRemove.bind(this);
-
 		this.onEdit = this.onEdit.bind(this);
-
 		this.renderAdventures = this.renderAdventures.bind(this);
-	}
 
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		const { adventures, authorizationData } = nextProps;
-		this.setState({
-			adventures: adventures,
-			authorizationData: authorizationData
-		});
+		this.props.onGetAll();
 	}
 
 	onSave = data => {
@@ -68,6 +59,7 @@ class Adventures extends React.Component {
 		}
 
 		this.setState({ isPopupVisible: false });
+		this.props.onGetAll();
 	};
 
 	onRemove = model => {
@@ -75,6 +67,7 @@ class Adventures extends React.Component {
 			return;
 		}
 		this.props.onRemove(model);
+		this.props.onGetAll();
 	};
 
 	onEdit = model => {
@@ -104,7 +97,8 @@ class Adventures extends React.Component {
 	};
 
 	render() {
-		const { adventures, model, isPopupVisible } = this.state;
+		const { adventures } = this.props;
+		const { model, isPopupVisible } = this.state;
 		const adventuresList = this.renderAdventures(adventures);
 		
 		return (
@@ -122,7 +116,7 @@ class Adventures extends React.Component {
 								createdBy: null,
 								startsOn: new Date(),
 								endsOn: new Date(),
-								events: [],
+								experiences: [],
 								participants: []
 							})}
 							disabled={this.isPopupVisible}

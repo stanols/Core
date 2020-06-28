@@ -5,13 +5,12 @@ import registrationActions from '../../actions/reducerActions/registrationAction
 import UserService from "../../services/userService";
 
 export function* registrationSaga(dispatch) {
-	const userService = new UserService();
-
 	yield all([
 		takeLatest(actions.USER_CREATE, async (msg) => {
 			try {
 				const { data } = msg;
-				const createResult = await userService.create(data);
+				const userService = new UserService();
+				await userService.create(data);
 
 				dispatch({
 					type: registrationActions.CREATE_USER_SUCCESS,

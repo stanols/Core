@@ -4,12 +4,11 @@ import homeActions from '../../actions/reducerActions/homeActions';
 import AdventureService from "../../services/adventureService";
 
 export function* homeSaga(dispatch) {
-	const adventureService = new AdventureService();
-
 	yield all([
 		takeLatest(actions.CREATE_ADVENTURE, async (msg) => {
 			try {
 				const { data } = msg;
+				const adventureService = new AdventureService();
 				const createResult = await adventureService.create(data);
 				data.id = createResult.data;
 
@@ -20,6 +19,7 @@ export function* homeSaga(dispatch) {
 		}),
 		takeLatest(actions.GET_ALL_ADVENTURES, async () => {
 			try {
+				const adventureService = new AdventureService();
 				const getResult = await adventureService.getAll();
 
 				dispatch({ type: homeActions.GET_ALL_ADVENTURES_SUCCESS, data: getResult });
@@ -30,7 +30,8 @@ export function* homeSaga(dispatch) {
 		takeLatest(actions.UPDATE_ADVENTURE, async (msg) => {
 			try {
 				const { data } = msg;
-				const updateResult = await adventureService.update(data);
+				const adventureService = new AdventureService();
+				await adventureService.update(data);
 
 				dispatch({ type: homeActions.UPDATE_ADVENTURE_SUCCESS, data: data });
 			} catch (error) {
@@ -40,7 +41,8 @@ export function* homeSaga(dispatch) {
 		takeLatest(actions.DELETE_ADVENTURE, async (msg) => {
 			try {
 				const { data } = msg;
-				const removeResult = await adventureService.remove(data);
+				const adventureService = new AdventureService();
+				await adventureService.remove(data);
 
 				dispatch({ type: homeActions.DELETE_ADVENTURE_SUCCESS, data: data });
 			} catch (error) {

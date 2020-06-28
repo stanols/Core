@@ -1,5 +1,5 @@
 ﻿import axios from 'axios';
-import authorizationHelper from 'app/helpers/authorizationHelper';
+import AuthorizationHelper from 'app/helpers/authorizationHelper';
 
 class BaseService {
 	constructor(path) {
@@ -11,7 +11,7 @@ class BaseService {
 			}
 		});
 
-		const authorizationData = authorizationHelper.getAuthorizationData();
+		const authorizationData = AuthorizationHelper.getAuthorizationData();
 		if (authorizationData && authorizationData.token) {
 			this.api.defaults.headers.common['Authorization'] = `Bearer ${authorizationData.token}`;
 		}

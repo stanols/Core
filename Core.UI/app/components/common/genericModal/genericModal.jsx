@@ -19,12 +19,15 @@ class GenericModal extends React.Component {
 		this.onModelChanged = this.onModelChanged.bind(this);
 	}
 
-	UNSAFE_componentWillReceiveProps = nextProps => {
-		const { isVisible } = nextProps;
-		this.setState({
-			isVisible: isVisible
-		});
-	};
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		const { isVisible } = this.props;
+		
+		if (isVisible !== prevProps.isVisible) {
+			this.setState({
+				isVisible: isVisible
+			});
+		}
+	}
 
 	onSave = event => {
 		event.preventDefault();

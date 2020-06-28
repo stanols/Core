@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import Experience from './experience/experience';
+import Experience from 'app/components/experience/experience';
 import './experiences.less';
 
 class Experiences extends React.Component {

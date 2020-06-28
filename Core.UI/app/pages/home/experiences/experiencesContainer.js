@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import { connect } from 'react-redux';
-import Home from './home';
+import actions from '../../../actions/actions';
+import Experiences from './experiences';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
@@ -14,4 +15,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Experiences);

@@ -1,6 +1,7 @@
 ﻿import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Alert } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import DateTimePicker from 'react-datetime-picker';
+//import MultiSelect from "react-multi-select-component";
 import _ from 'lodash';
 import './adventure.less';
 
@@ -15,7 +16,7 @@ class Adventure extends React.Component {
 			createBy,
 			startsOn,
 			endsOn,
-			events,
+			experiences,
 			participants
 		} = this.props;
 
@@ -26,7 +27,7 @@ class Adventure extends React.Component {
 			createdBy: createBy || null,
 			startsOn: startsOn || new Date(),
 			endsOn: endsOn || new Date(),
-			events: events || [],
+			experiences: experiences || [],
 			participants: participants || []
 		};
 
@@ -49,7 +50,9 @@ class Adventure extends React.Component {
 	}
 
 	render() {
-		const { name, description, startsOn, endsOn } = this.state;
+		//const { experienceOptions } = this.props;
+		const { name, description, startsOn, endsOn, experiences } = this.state;
+		//const experienceOptions = experiences.map(x => { label: '', value: '' })
 
 		return (
 			<div>
@@ -95,6 +98,10 @@ class Adventure extends React.Component {
 						}
 						className={"form-control"}
 					/>
+				</FormGroup>
+				<FormGroup>
+					<ControlLabel>Experiences</ControlLabel>
+
 				</FormGroup>
 			</div>
 		);
