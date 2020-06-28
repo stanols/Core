@@ -19,8 +19,8 @@ class Registration extends React.Component {
 		this.onSignUp = this.onSignUp.bind(this);
 	}
 
-	UNSAFE_componentWillReceiveProps(nextProps) {
-		const { history, isUserCreated } = nextProps;
+	componentDidUpdate() {
+		const { history, isUserCreated } = this.props;
 		if (isUserCreated) {
 			history.push("/login");
 		}
@@ -41,7 +41,7 @@ class Registration extends React.Component {
 
 	onSignUp(event) {
 		event.preventDefault();
-		const { onSignUp, history } = this.props;
+		const { onSignUp } = this.props;
 		onSignUp(this.state);
 	}
 
