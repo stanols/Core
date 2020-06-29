@@ -5,11 +5,12 @@ import Adventures from './adventures';
 
 const mapStateToProps = (state, ownProps) => {
 	const { homeReducer, loginReducer } = state;
-	const { adventures } = homeReducer;
+	const { adventures, experienceOptions } = homeReducer;
 	const { authorizationData } = loginReducer;
 
 	return {
 		adventures: adventures || [],
+		experienceOptions: experienceOptions || [],
 		authorizationData: authorizationData || null
 	};
 };
@@ -22,7 +23,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 				data
 			});
 		},
-		onGetAll: () => {
+		onGetAllAdventures: () => {
 			dispatch({
 				type: actions.GET_ALL_ADVENTURES
 			});
@@ -37,6 +38,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 			dispatch({
 				type: actions.DELETE_ADVENTURE,
 				data
+			});
+		},
+		onGetAllExperiences: () => {
+			dispatch({
+				type: actions.GET_ALL_EXPERIENCES
 			});
 		}
 	};

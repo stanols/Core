@@ -2,6 +2,7 @@
 import actions from '../../actions/actions';
 import homeActions from '../../actions/reducerActions/homeActions';
 import AdventureService from "../../services/adventureService";
+import ExperienceService from "../../services/experienceService";
 
 export function* homeSaga(dispatch) {
 	yield all([
@@ -47,6 +48,16 @@ export function* homeSaga(dispatch) {
 				dispatch({ type: homeActions.DELETE_ADVENTURE_SUCCESS, data: data });
 			} catch (error) {
 				dispatch({ type: homeActions.DELETE_ADVENTURE_FAILURE, error });
+			}
+		}),
+		takeLatest(actions.GET_ALL_EXPERIENCES, async () => {
+			try {
+				const experienceService = new ExperienceService();
+				const getResult = await experienceService.getAll();
+
+				dispatch({ type: homeActions.GET_ALL_EXPERIENCES_SUCCESS, data: getResult });
+			} catch (error) {
+				dispatch({ type: homeActions.GET_ALL_EXPERIENCES_FAILURE, error });
 			}
 		})
 	]);

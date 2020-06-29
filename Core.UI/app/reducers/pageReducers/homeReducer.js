@@ -53,6 +53,18 @@ export function homeReducer(state = {}, action) {
 					adventures: state.adventures,
 					error: action.error
 				});
+		case homeActions.GET_ALL_EXPERIENCES_SUCCESS:
+			return Object.assign({}, state,
+				{
+					experienceOptions: action.data,
+					error: null
+				});
+		case homeActions.GET_ALL_EXPERIENCES_FAILURE:
+			return Object.assign({}, state,
+				{
+					experiences: [],
+					error: action.error
+				});
 		default:
 			return state;
 	}

@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import DateTimePicker from 'react-datetime-picker';
-//import MultiSelect from "react-multi-select-component";
+import Select from "react-select";
 import _ from 'lodash';
 import './adventure.less';
 
@@ -50,9 +50,8 @@ class Adventure extends React.Component {
 	}
 
 	render() {
-		//const { experienceOptions } = this.props;
+		const { experienceOptions } = this.props;
 		const { name, description, startsOn, endsOn, experiences } = this.state;
-		//const experienceOptions = experiences.map(x => { label: '', value: '' })
 
 		return (
 			<div>
@@ -101,7 +100,26 @@ class Adventure extends React.Component {
 				</FormGroup>
 				<FormGroup>
 					<ControlLabel>Experiences</ControlLabel>
-
+					<Select
+						isMulti={true}
+						closeMenuOnSelect={false}
+						options={experienceOptions.map(function(x) {
+							return {
+								label: x.name,
+								value: x.id
+							};
+						})}
+						value={experiences}
+						onChange={selectedOptions => {
+							this.onChange({
+								target: {
+									type: "multiSelect",
+									name: "experiences",
+									value: selectedOptions
+								}
+							});
+						}}
+					/>
 				</FormGroup>
 			</div>
 		);

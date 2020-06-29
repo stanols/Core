@@ -8,7 +8,7 @@ import './adventures.less';
 class Adventures extends React.Component {
 	constructor(props) {
 		super(props);
-		const { authorizationData } = props;
+		const { authorizationData, experiences } = props;
 
 		this.state = {
 			authorizationData: authorizationData || null,
@@ -30,7 +30,8 @@ class Adventures extends React.Component {
 		this.onEdit = this.onEdit.bind(this);
 		this.renderAdventures = this.renderAdventures.bind(this);
 
-		this.props.onGetAll();
+		this.props.onGetAllAdventures();
+		this.props.onGetAllExperiences();
 	}
 
 	onSave = data => {
@@ -43,6 +44,13 @@ class Adventures extends React.Component {
 			lastName,
 			email
 		} = authorizationData;
+
+		data.experiences = data.experiences.map(function(x) {
+			return {
+				name: x.label,
+				id: x.value
+			}
+		});
 
 		data.createdBy = {
 			id: id,
@@ -59,7 +67,7 @@ class Adventures extends React.Component {
 		}
 
 		this.setState({ isPopupVisible: false });
-		this.props.onGetAll();
+		this.props.onGetAllAdventures();
 	};
 
 	onRemove = model => {
@@ -67,7 +75,7 @@ class Adventures extends React.Component {
 			return;
 		}
 		this.props.onRemove(model);
-		this.props.onGetAll();
+		this.props.onGetAllAdventures();
 	};
 
 	onEdit = model => {
@@ -97,8 +105,9 @@ class Adventures extends React.Component {
 	};
 
 	render() {
-		const { adventures } = this.props;
+		const { adventures, experienceOptions } = this.props;
 		const { model, isPopupVisible } = this.state;
+		model.experienceOptions = experienceOptions || [];
 		const adventuresList = this.renderAdventures(adventures);
 		
 		return (
