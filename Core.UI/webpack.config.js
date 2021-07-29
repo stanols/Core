@@ -20,7 +20,7 @@ const conf = {
 		'react-d3-basic/lib/index': 'react-d3-basic'
 	},
 	output: {
-		path: path.join(__dirname, '/../Core.Server/bin/Debug/netcoreapp2.1/client'),
+		path: path.join(__dirname, '/../Core.Server/bin/Debug/net5.0/client'),
 		filename: 'bundle.js',
 		publicPath: '/'
 	},

@@ -11,7 +11,7 @@ namespace Core.DAL.Entities
 		public DateTime StartsOn { get; set; }
 		public DateTime EndsOn { get; set; }
 
-		[ForeignKey("CreatedBy")]
+		[ForeignKey("User")]
 		public int CreatedById { get; set; }
 		public User CreatedBy { get; set; }
 

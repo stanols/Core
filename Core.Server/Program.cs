@@ -13,7 +13,7 @@ namespace Core.Server
 			try
 			{
 				var config = new ConfigurationBuilder()
-					.SetBasePath(Directory.GetCurrentDirectory())
+					//.SetBasePath(Directory.GetCurrentDirectory())
 					.AddJsonFile(AppSettingsFileName)
 					.Build();
 

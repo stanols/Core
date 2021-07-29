@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
@@ -14,13 +13,14 @@ namespace Core.DAL
 		public CoreDbContext CreateDbContext(string[] args)
 		{
 			var config = new ConfigurationBuilder()
-				.SetBasePath(Directory.GetCurrentDirectory())
 				.AddJsonFile(AppSettingsFileName)
 				.Build();
 
 			var builder = new DbContextOptionsBuilder<CoreDbContext>();
 			var connectionString = config[ConnectionStringKey];
+
 			builder.UseNpgsql(connectionString, b => b.MigrationsAssembly(MigrationsAssembly));
+			builder.EnableSensitiveDataLogging();
 
 			return new CoreDbContext(builder.Options);
 		}

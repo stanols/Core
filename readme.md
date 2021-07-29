@@ -43,7 +43,7 @@ dotnet ef database update
 
 1. Set {basePath}/Core/Core.Server as startup project in Visual Studio
 
-2. Run (F5). Check if server is available on http://localhost:3000/
+2. Run (F5). Check if server is available on http://localhost:5000/
 
 <h4>UI...</h4>
 

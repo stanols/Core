@@ -1,9 +1,11 @@
-﻿DELETE FROM "Locations";
+﻿DELETE FROM public."AdventureUsers";
+DELETE FROM public."Experiences";
+DELETE FROM public."Adventures";
+DELETE FROM public."Users";
+DELETE FROM public."Locations";
 
-DELETE FROM "Users";
-
-DELETE FROM "Experiences";
-
-DELETE FROM "Adventures";
-
-DELETE FROM "AdventureUsers";
+DROP TABLE public."AdventureUsers";
+DROP TABLE public."Experiences";
+DROP TABLE public."Adventures";
+DROP TABLE public."Users";
+DROP TABLE public."Locations";

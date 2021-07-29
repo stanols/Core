@@ -21,7 +21,7 @@ namespace Core.BLL.Services
 			Mapper = mapper;
 		}
 
-		public int Create(TViewModel viewModel)
+		public virtual int Create(TViewModel viewModel)
 		{
 			var entity = Mapper.Map<TEntity>(viewModel);
 			var id = Repository.Create(entity);
@@ -29,42 +29,42 @@ namespace Core.BLL.Services
 			return id;
 		}
 
-		public TViewModel Get(int id)
+		public virtual TViewModel Get(int id)
 		{
 			var entity = Repository.Get(id);
 			return Mapper.Map<TViewModel>(entity);
 		}
 
-		public TViewModel GetBy(Func<TViewModel, bool> predicate)
+		public virtual TViewModel GetBy(Func<TViewModel, bool> predicate)
 		{
 			var entity = Repository.GetBy(x => predicate(Mapper.Map<TViewModel>(x)));
 			return Mapper.Map<TViewModel>(entity);
 		}
 
-		public List<TViewModel> GetAll()
+		public virtual List<TViewModel> GetAll()
 		{
 			var entities = Repository.GetAll();
 			return MapCollection(entities);
 		}
 
-		public List<TViewModel> GetAllBy(Func<TViewModel, bool> predicate)
+		public virtual List<TViewModel> GetAllBy(Func<TViewModel, bool> predicate)
 		{
 			var entities = Repository.GetAllBy(x => predicate(Mapper.Map<TViewModel>(x)));
 			return MapCollection(entities);
 		}
 
-		public void Update(TViewModel viewModel)
+		public virtual void Update(TViewModel viewModel)
 		{
 			var entity = Mapper.Map<TEntity>(viewModel);
 			Repository.Update(entity);
 		}
 
-		public void Remove(int id)
+		public virtual void Remove(int id)
 		{
 			Repository.Remove(id);
 		}
 
-		public void Remove(TViewModel viewModel)
+		public virtual void Remove(TViewModel viewModel)
 		{
 			var entity = Mapper.Map<TEntity>(viewModel);
 			Repository.Remove(entity);

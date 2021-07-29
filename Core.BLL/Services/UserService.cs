@@ -110,7 +110,7 @@ namespace Core.BLL.Services
 			return MapToUserViewModel(user);
 		}
 
-		private UserViewModel MapToUserViewModel(User user, bool includeSecretData = false)
+		private static UserViewModel MapToUserViewModel(User user, bool includeSecretData = false)
 		{
 			var userViewModel = new UserViewModel
 			{

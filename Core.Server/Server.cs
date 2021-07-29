@@ -4,7 +4,7 @@ using Microsoft.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
-
+using Microsoft.Extensions.Hosting;
 
 namespace Core.Server
 {
@@ -35,7 +35,7 @@ namespace Core.Server
 			var urls = new[] { _config[urlKey] };
 			var webHostBuilder = builder.UseConfiguration(_config)
 				.UseUrls(urls)
-				.UseWebRoot(webRoot)
+				.UseWebRoot(_config[webRootKey])
 				.UseKestrel()
 				.UseIISIntegration()
 				.ConfigureLogging((hostingContext, logging) =>

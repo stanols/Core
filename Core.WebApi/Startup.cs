@@ -76,21 +76,23 @@ namespace Core.WebApi
 			services.AddSignalR();
 		}
 
-		public void Configure(IApplicationBuilder app, IHostingEnvironment evn)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment evn)//IHostingEnvironment
 		{
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
 			app.UseCors(x => x
 				.AllowAnyOrigin()
 				.AllowAnyMethod()
-				.AllowAnyHeader()
-				.AllowCredentials());
+				.AllowAnyHeader());//.AllowCredentials()
+
+			app.UseRouting();
 			app.UseAuthentication();
-			app.UseSignalR(routes =>
+			app.UseAuthorization();
+			app.UseEndpoints(routes =>
 			{
-				routes.MapHub<ChatHub>($"/{nameof(ChatHub)}");
+				routes.MapControllers();
+				//routes.MapHub<ChatHub>($"/{nameof(ChatHub)}");
 			});
-			app.UseMvc();
 			app.Build();
 		}
 	}
