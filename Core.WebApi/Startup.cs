@@ -33,7 +33,6 @@ namespace Core.WebApi
 			services.AddRepositories();
 			services.AddServices();
 			services.AddCors();
-			services.AddAutoMapper();
 			services.AddMvc();
 
 			var secretKey = _config[secret];

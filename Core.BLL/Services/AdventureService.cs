@@ -5,6 +5,7 @@ using Core.BLL.ViewModels;
 using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace Core.BLL.Services
 {

@@ -1,0 +1,13 @@
+{
+    "eslint.enable": false,
+    "eslint.format.enable": false,
+    "eslint.validate": ["javascript", "hrml"],
+    "eslint.options": { "extensions":[".js", ".jsx", "hrml"] },
+    "editor.codeActionsOnSave":{
+        "source.fixAll.eslint":true
+    },
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": true,
+    "editor.autoIndent": "full"
+}
