@@ -6,173 +6,227 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
+#nullable disable
+
 namespace Core.DAL.Migrations
 {
-	[DbContext(typeof(CoreDbContext))]
-	partial class CoreDbContextModelSnapshot : ModelSnapshot
-	{
-		protected override void BuildModel(ModelBuilder modelBuilder)
-		{
+    [DbContext(typeof(CoreDbContext))]
+    partial class CoreDbContextModelSnapshot : ModelSnapshot
+    {
+        protected override void BuildModel(ModelBuilder modelBuilder)
+        {
 #pragma warning disable 612, 618
-			modelBuilder
-				.HasAnnotation("Npgsql:HiLoSequenceName", "EntityFrameworkHiLoSequence")
-				.HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SequenceHiLo)
-				.HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
-				.HasAnnotation("Relational:MaxIdentifierLength", 63)
-				.HasAnnotation("Relational:Sequence:.EntityFrameworkHiLoSequence", "'EntityFrameworkHiLoSequence', '', '1', '10', '', '', 'Int64', 'False'");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("Relational:Sequence:.EntityFrameworkHiLoSequence", "'EntityFrameworkHiLoSequence', '', '1', '10', '', '', 'Int64', 'False'");
 
-			modelBuilder.Entity("Core.DAL.Entities.Adventure", b =>
-				{
-					b.Property<int>("Id")
-						.ValueGeneratedOnAdd()
-						.HasColumnName("Id")
-						.HasColumnType("integer");
+            NpgsqlModelBuilderExtensions.UseHiLo(modelBuilder, "EntityFrameworkHiLoSequence");
 
-					b.Property<int>("CreatedById");
+            modelBuilder.HasSequence("EntityFrameworkHiLoSequence")
+                .IncrementsBy(10);
 
-					b.Property<string>("Description");
+            modelBuilder.Entity("Core.DAL.Entities.Adventure", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
-					b.Property<DateTime>("EndsOn");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("integer");
 
-					b.Property<string>("Name");
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
 
-					b.Property<DateTime>("StartsOn");
+                    b.Property<DateTime>("EndsOn")
+                        .HasColumnType("timestamp with time zone");
 
-					b.HasKey("Id");
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
-					b.HasIndex("CreatedById");
+                    b.Property<DateTime>("StartsOn")
+                        .HasColumnType("timestamp with time zone");
 
-					b.ToTable("Adventures");
-				});
+                    b.HasKey("Id");
 
-			modelBuilder.Entity("Core.DAL.Entities.AdventureUser", b =>
-				{
-					b.Property<int>("Id")
-						.ValueGeneratedOnAdd()
-						.HasColumnName("Id")
-						.HasColumnType("integer");
+                    b.HasIndex("CreatedById");
 
-					b.Property<int>("AdventureId");
+                    b.ToTable("Adventures", (string)null);
+                });
 
-					b.Property<int>("UserId");
+            modelBuilder.Entity("Core.DAL.Entities.AdventureUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
-					b.HasKey("Id");
+                    b.Property<int>("AdventureId")
+                        .HasColumnType("integer");
 
-					b.HasIndex("AdventureId");
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
-					b.HasIndex("UserId");
+                    b.HasKey("Id");
 
-					b.ToTable("AdventureUsers");
-				});
+                    b.HasIndex("AdventureId");
 
-			modelBuilder.Entity("Core.DAL.Entities.Experience", b =>
-				{
-					b.Property<int>("Id")
-						.ValueGeneratedOnAdd()
-						.HasColumnName("Id")
-						.HasColumnType("integer");
+                    b.HasIndex("UserId");
 
-					b.Property<int>("AdventureId");
+                    b.ToTable("AdventureUsers", (string)null);
+                });
 
-					b.Property<string>("Description");
+            modelBuilder.Entity("Core.DAL.Entities.Experience", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
-					b.Property<DateTime>("EndsOn");
+                    b.Property<int>("AdventureId")
+                        .HasColumnType("integer");
 
-					b.Property<int>("LocationId");
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
 
-					b.Property<string>("Name");
+                    b.Property<DateTime>("EndsOn")
+                        .HasColumnType("timestamp with time zone");
 
-					b.Property<DateTime>("StartsOn");
+                    b.Property<int>("LocationId")
+                        .HasColumnType("integer");
 
-					b.HasKey("Id");
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
-					b.HasIndex("AdventureId");
+                    b.Property<DateTime>("StartsOn")
+                        .HasColumnType("timestamp with time zone");
 
-					b.HasIndex("LocationId");
+                    b.HasKey("Id");
 
-					b.ToTable("Experiences");
-				});
+                    b.HasIndex("AdventureId");
 
-			modelBuilder.Entity("Core.DAL.Entities.Location", b =>
-				{
-					b.Property<int>("Id")
-						.ValueGeneratedOnAdd()
-						.HasColumnName("Id")
-						.HasColumnType("integer");
+                    b.HasIndex("LocationId");
 
-					b.Property<double>("Latitude");
+                    b.ToTable("Experiences", (string)null);
+                });
 
-					b.Property<double>("Longitude");
+            modelBuilder.Entity("Core.DAL.Entities.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
-					b.Property<string>("Name");
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision");
 
-					b.HasKey("Id");
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision");
 
-					b.ToTable("Locations");
-				});
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
-			modelBuilder.Entity("Core.DAL.Entities.User", b =>
-				{
-					b.Property<int>("Id")
-						.ValueGeneratedOnAdd()
-						.HasColumnName("Id")
-						.HasColumnType("integer");
+                    b.HasKey("Id");
 
-					b.Property<string>("Email");
+                    b.ToTable("Locations", (string)null);
+                });
 
-					b.Property<string>("FirstName");
+            modelBuilder.Entity("Core.DAL.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id");
 
-					b.Property<string>("LastName");
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
 
-					b.Property<string>("Name")
-						.HasMaxLength(450);
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
 
-					b.Property<byte[]>("PasswordHash");
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
 
-					b.Property<byte[]>("PasswordSalt");
+                    b.Property<string>("Name")
+                        .HasMaxLength(450)
+                        .HasColumnType("character varying(450)");
 
-					b.HasKey("Id");
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("bytea");
 
-					b.HasIndex("Name")
-						.IsUnique();
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("bytea");
 
-					b.ToTable("Users");
-				});
+                    b.HasKey("Id");
 
-			modelBuilder.Entity("Core.DAL.Entities.Adventure", b =>
-				{
-					b.HasOne("Core.DAL.Entities.User", "CreatedBy")
-						.WithMany()
-						.HasForeignKey("CreatedById")
-						.OnDelete(DeleteBehavior.Cascade);
-				});
+                    b.HasIndex("Name")
+                        .IsUnique();
 
-			modelBuilder.Entity("Core.DAL.Entities.AdventureUser", b =>
-				{
-					b.HasOne("Core.DAL.Entities.Adventure", "Adventure")
-						.WithMany("AdventureUsers")
-						.HasForeignKey("AdventureId")
-						.OnDelete(DeleteBehavior.Cascade);
+                    b.ToTable("Users", (string)null);
+                });
 
-					b.HasOne("Core.DAL.Entities.User", "User")
-						.WithMany("AdventureUsers")
-						.HasForeignKey("UserId")
-						.OnDelete(DeleteBehavior.Cascade);
-				});
+            modelBuilder.Entity("Core.DAL.Entities.Adventure", b =>
+                {
+                    b.HasOne("Core.DAL.Entities.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-			modelBuilder.Entity("Core.DAL.Entities.Experience", b =>
-				{
-					b.HasOne("Core.DAL.Entities.Adventure", "Adventure")
-						.WithMany("Experiences")
-						.HasForeignKey("AdventureId")
-						.OnDelete(DeleteBehavior.Cascade);
+                    b.Navigation("CreatedBy");
+                });
 
-					b.HasOne("Core.DAL.Entities.Location", "Location")
-						.WithMany()
-						.HasForeignKey("LocationId")
-						.OnDelete(DeleteBehavior.Cascade);
-				});
+            modelBuilder.Entity("Core.DAL.Entities.AdventureUser", b =>
+                {
+                    b.HasOne("Core.DAL.Entities.Adventure", "Adventure")
+                        .WithMany("AdventureUsers")
+                        .HasForeignKey("AdventureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.DAL.Entities.User", "User")
+                        .WithMany("AdventureUsers")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Adventure");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.DAL.Entities.Experience", b =>
+                {
+                    b.HasOne("Core.DAL.Entities.Adventure", "Adventure")
+                        .WithMany("Experiences")
+                        .HasForeignKey("AdventureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.DAL.Entities.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Adventure");
+
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("Core.DAL.Entities.Adventure", b =>
+                {
+                    b.Navigation("AdventureUsers");
+
+                    b.Navigation("Experiences");
+                });
+
+            modelBuilder.Entity("Core.DAL.Entities.User", b =>
+                {
+                    b.Navigation("AdventureUsers");
+                });
 #pragma warning restore 612, 618
-		}
-	}
+        }
+    }
 }

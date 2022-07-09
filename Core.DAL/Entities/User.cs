@@ -14,5 +14,6 @@ namespace Core.DAL.Entities
 		public byte[] PasswordHash { get; set; }
 
 		public ICollection<AdventureUser> AdventureUsers { get; set; }
+		public ICollection<Adventure> Adventures { get; set; }
 	}
 }

@@ -1,5 +1,5 @@
 # Environment
-FROM microsoft/dotnet:2.1-sdk AS build-env
+FROM microsoft/dotnet:6.0-sdk AS build-env
 
 # Installation
 RUN apt-get update && \
@@ -26,10 +26,10 @@ RUN npm install webpack -g
 RUN cd /app/Core.UI && npm install && webpack --mode=none
 
 # Publish
-RUN cd /app/Core.Server && dotnet publish -v q -c Debug -o out -f netcoreapp2.1
+RUN cd /app/Core.Server && dotnet publish -v q -c Debug -o out -f netcoreapp6.0
 
 # Build runtime image
-FROM microsoft/dotnet:2.1-aspnetcore-runtime
+FROM microsoft/dotnet:6.0-aspnetcore-runtime
 WORKDIR /app
 COPY --from=build-env /app/Core.Server/out/ .
 ENTRYPOINT ["dotnet", "Core.Server.dll"]

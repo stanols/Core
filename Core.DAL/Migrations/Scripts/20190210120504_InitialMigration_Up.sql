@@ -7,6 +7,9 @@ VALUES
 (4, N'Big Ben', 51.500843, -0.124647),
 (5, N'National Gallery', 51.509388, -0.128731);
 
+ALTER SEQUENCE "AdventureUsers_Id_seq"
+RESTART WITH 6;
+
 CREATE EXTENSION IF NOT EXISTS "pgcrypto" SCHEMA public;
 
 INSERT INTO "Users"
@@ -19,11 +22,17 @@ VALUES
 	decode('JRJS8H7aGCzd_Q-Ht$*F!s8MmJ4y22wSq#SfMw85@rCMFtYrF%JK=?d^un+MqvSsg3YqQdWuydE54G+z4MkgQQZHEUfz$vuQsK%$P?B=g993E-arbnxs!@^b2Rs_Ua2@', 'escape'), 
 	hmac('montenegro44', 'JRJS8H7aGCzd_Q-Ht$*F!s8MmJ4y22wSq#SfMw85@rCMFtYrF%JK=?d^un+MqvSsg3YqQdWuydE54G+z4MkgQQZHEUfz$vuQsK%$P?B=g993E-arbnxs!@^b2Rs_Ua2@', 'sha512'));
 
+ALTER SEQUENCE "Users_Id_seq"
+RESTART WITH 3;
+
 INSERT INTO "Adventures"
 ("Id", "Name", "Description", "StartsOn", "EndsOn", "CreatedById")
 VALUES
 (1, N'Trip to Minsk', N'Would like to visit Belarus', timezone('UTC', now()), timezone('UTC', now()), 1),
 (2, N'Trip to London', N'Nice to have BigBen toy', timezone('UTC', now()), timezone('UTC', now()), 2);
+
+ALTER SEQUENCE "Adventures_Id_seq"
+RESTART WITH 3;
 
 INSERT INTO "Experiences"
 ("Id", "Name", "Description", "LocationId", "AdventureId", "StartsOn", "EndsOn")
@@ -34,9 +43,15 @@ VALUES
 (4, N'Big Ben Building', N'Learn national culture', 4, 2, timezone('UTC', now()), timezone('UTC', now())),
 (5, N'National Gallery', N'Gallery', 5, 2, timezone('UTC', now()), timezone('UTC', now()));
 
+ALTER SEQUENCE "Adventures_Id_seq"
+RESTART WITH 6;
+
 INSERT INTO "AdventureUsers"
 ("Id", "AdventureId", "UserId")
 VALUES
 (1, 1, 1),
 (2, 1, 2),
 (3, 2, 1);
+
+ALTER SEQUENCE "AdventureUsers_Id_seq"
+RESTART WITH 4;

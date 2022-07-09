@@ -12,5 +12,14 @@ namespace Core.BLL.Services
 			: base(adventureRepository, mapper)
 		{
 		}
+
+		public override int Create(AdventureViewModel viewModel)
+		{
+			var entity = Mapper.Map<Adventure>(viewModel);
+
+			var id = Repository.Create(entity);
+
+			return id;
+		}
 	}
 }

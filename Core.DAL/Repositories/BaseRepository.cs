@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Core.DAL.Entities;
 using Core.DAL.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Core.DAL.Repositories
 {
@@ -49,12 +49,7 @@ namespace Core.DAL.Repositories
 			_entities.Add(entity);
 			_context.SaveChanges();
 
-			if (!entity.Id.HasValue)
-			{
-				throw new InvalidOperationException($"Unable to create entity of type {entity.GetType().FullName}");
-			}
-
-			return entity.Id.Value;
+			return entity.Id;
 		}
 
 		public void Update(T entity)

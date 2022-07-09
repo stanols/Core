@@ -16,7 +16,7 @@ namespace Core.BLL.Services
 		{
 		}
 
-		public new void Create(UserViewModel userViewModel)
+		public new int Create(UserViewModel userViewModel)
 		{
 			var name = userViewModel.Name;
 			var existingUser = Repository.GetBy(x => x.Name == name);
@@ -39,7 +39,9 @@ namespace Core.BLL.Services
 				PasswordHash = passwordHash.Item2
 			};
 
-			Repository.Create(newUser);
+			var id = Repository.Create(newUser);
+
+			return id;
 		}
 
 		public new UserViewModel Get(int id)
@@ -108,7 +110,7 @@ namespace Core.BLL.Services
 			return MapToUserViewModel(user);
 		}
 
-		private UserViewModel MapToUserViewModel(User user, bool includeSecretData = false)
+		private static UserViewModel MapToUserViewModel(User user, bool includeSecretData = false)
 		{
 			var userViewModel = new UserViewModel
 			{

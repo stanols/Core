@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.9'
 
 services:
   core.server:
@@ -6,3 +6,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+  core.database:
+    image: postgres
+    build:
+      context: .
+
