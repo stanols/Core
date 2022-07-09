@@ -1,16 +1,13 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
-using Core.BLL;
-using Core.BLL.Interfaces;
-using Core.DAL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using AutoMapper;
-using Core.WebApi.Hubs;
+using Core.BLL;
+using Core.BLL.Interfaces;
+using Core.DAL;
 
 
 namespace Core.WebApi
@@ -75,7 +72,7 @@ namespace Core.WebApi
 			services.AddSignalR();
 		}
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment evn)//IHostingEnvironment
+		public void Configure(IApplicationBuilder app)
 		{
 			app.UseDefaultFiles();
 			app.UseStaticFiles();

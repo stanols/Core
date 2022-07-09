@@ -9,7 +9,7 @@ const AdventuresContainer = () => {
 	const loginReducer = useSelector(state => state.loginReducer);
 	const adventures = homeReducer.adventures || [];
 	const experienceOptions = homeReducer.experienceOptions || [];
-	const authorizationData = loginReducer.loginReducer || null;
+	const authorizationData = loginReducer.authorizationData || null;
 
 	return (
 		<Adventures

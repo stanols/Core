@@ -1,31 +1,28 @@
 ﻿using System.IO;
-using Core.WebApi;
 using Microsoft.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
+using Core.WebApi;
 
 namespace Core.Server
 {
 	public class Server
 	{
 		private readonly IConfiguration _config;
-		private readonly IWebHost _webHost;
 
-		public Server(IConfiguration config, string[] arguments)
+		public Server(IConfiguration config)
 		{
 			_config = config;
-			var builder = CreateBuilder(arguments);
-			_webHost = Build(builder);
 		}
 
-		public void Run()
+		public void Run(IWebHost webHost)
 		{
-			_webHost.Run();
+			webHost.Run();
 		}
 
-		private IWebHostBuilder CreateBuilder(string[] arguments)
+		public IWebHostBuilder CreateWebHostBuilder(string[] arguments)
 		{
 			const string webRootKey = "webRoot";
 			const string urlKey = "url";
@@ -33,7 +30,8 @@ namespace Core.Server
 			var builder = WebHost.CreateDefaultBuilder(arguments);
 			var webRoot = Path.Combine(Directory.GetCurrentDirectory(), _config[webRootKey]);
 			var urls = new[] { _config[urlKey] };
-			var webHostBuilder = builder.UseConfiguration(_config)
+			var webHostBuilder = builder
+				.UseConfiguration(_config)
 				.UseUrls(urls)
 				.UseWebRoot(_config[webRootKey])
 				.UseKestrel()
@@ -50,12 +48,6 @@ namespace Core.Server
 				});
 
 			return webHostBuilder;
-		}
-
-		private static IWebHost Build(IWebHostBuilder webHostBuilder)
-		{
-			var webHost = webHostBuilder.Build();
-			return webHost;
 		}
 	}
 }

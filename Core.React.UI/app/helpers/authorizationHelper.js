@@ -1,8 +1,8 @@
 ﻿export default class AuthorizationHelper {
 	static isAuthorized() {
-		let data = null;
 		const authorizationDataKey = "authorizationData";
 		const authorizationData = sessionStorage.getItem(authorizationDataKey);
+		let data = null;
 
 		if (authorizationData) {
 			data = JSON.parse(authorizationData);
@@ -23,9 +23,11 @@
 	static getAuthorizationData() {
 		const authorizationDataKey = "authorizationData";
 		const authorizationData = sessionStorage.getItem(authorizationDataKey);
+
 		if (authorizationData) {
 			return JSON.parse(authorizationData);
 		}
+
 		return null;
 	}
 

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Linq;
-using Core.BLL.Interfaces;
+﻿using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
 using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 using AutoMapper;
-using System.Collections.Generic;
 
 namespace Core.BLL.Services
 {
@@ -18,17 +15,9 @@ namespace Core.BLL.Services
 
 		public override int Create(AdventureViewModel viewModel)
 		{
-            var entity = Mapper.Map<Adventure>(viewModel);
+			var entity = Mapper.Map<Adventure>(viewModel);
 
-            entity.Experiences = viewModel.Experiences
-                .Select(x => Mapper.Map<Experience>(x))
-                .ToList();
-            entity.AdventureUsers = viewModel.Participants
-                .Select(x => Mapper.Map<AdventureUser>(x))
-                .ToList();
-            entity.CreatedBy = Mapper.Map<User>(viewModel.CreatedBy);
-
-            var id = Repository.Create(entity);
+			var id = Repository.Create(entity);
 
 			return id;
 		}

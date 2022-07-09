@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Core.BLL.ViewModels;
+﻿using Core.BLL.ViewModels;
 using Core.DAL.Entities;
 using AutoMapper;
 

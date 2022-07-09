@@ -1,5 +1,5 @@
-﻿using Core.DAL.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Core.DAL.Entities;
 
 namespace Core.DAL
 {
@@ -17,7 +17,6 @@ namespace Core.DAL
 		public DbSet<Location> Locations { get; set; }
 		public DbSet<Experience> Experiences { get; set; }
 		public DbSet<Adventure> Adventures { get; set; }
-
 		public DbSet<AdventureUser> AdventureUsers { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,8 +33,8 @@ namespace Core.DAL
 			modelBuilder.Entity<AdventureUser>().Property(b => b.Id).HasIdentityOptions(startValue: defaultStartValue);
 
 			modelBuilder.Entity<User>()
-                .HasIndex(b => b.Name)
-                .IsUnique();
+				.HasIndex(b => b.Name)
+				.IsUnique();
 
 			modelBuilder.Entity<Location>()
 				.HasIndex(x => x.Name)
@@ -49,7 +48,7 @@ namespace Core.DAL
 				.HasIndex(x => x.Name)
 				.IsUnique();
 
-            base.OnModelCreating(modelBuilder);
+			base.OnModelCreating(modelBuilder);
 		}
 
 		public override int SaveChanges()

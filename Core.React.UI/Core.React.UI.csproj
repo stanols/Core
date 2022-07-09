@@ -9,8 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="app\components\common\list\" />
-    <Folder Include="app\components\common\dashboard\" />
+    <Compile Remove="app\components\common\dashboard\**" />
+    <Compile Remove="app\components\common\list\**" />
+    <Content Remove="app\components\common\dashboard\**" />
+    <Content Remove="app\components\common\list\**" />
+    <EmbeddedResource Remove="app\components\common\dashboard\**" />
+    <EmbeddedResource Remove="app\components\common\list\**" />
+    <None Remove="app\components\common\dashboard\**" />
+    <None Remove="app\components\common\list\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="img\" />
     <Folder Include="Properties\" />
   </ItemGroup>

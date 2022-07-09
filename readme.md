@@ -25,18 +25,14 @@ https://www.postgresql.org/download/
 
 2. Create database according to connection string specified in {basePath}/Core/Core.DAL/appsettings.json
 
-3. Apply migrations. Open Package Manager Console in Visual Studio or (Command Prompt, Powershell etc.) and change directory (optional)
+3. Apply migrations. Open Package Manager Console in Visual Studio or (Command Prompt, Powershell etc.) and change directory to the Server.Server folder (optional)
 ```
-cd {basePath}/Core/Core.DAL
+cd {basePath}/Core/Core.Server
 ```
 
 4. Apply migrations running command
 ```
-Update-Database
-```
-or
-```
-dotnet ef database update
+dotnet ef database update --context CoreDbContext --project ../Core.DAL/Core.DAL.csproj --startup-project ./Core.Server.csproj --verbose
 ```
 
 <h4>Run Server...</h4>
@@ -60,11 +56,11 @@ npm run build
 ```
 for development environment in watch mode
 ```
-npm run build-watch
+npm run build:watch
 ```
 for production environment
 ```
-npm run build-prod
+npm run build:prod
 ```
 
 3. Use the following credentials to log in

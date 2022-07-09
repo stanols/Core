@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import _ from 'lodash';
 import './genericModal.less';
 
-class GenericModal extends React.Component {
+export default class GenericModal extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -70,5 +70,3 @@ class GenericModal extends React.Component {
 		);
 	}
 }
-
-export default GenericModal;
