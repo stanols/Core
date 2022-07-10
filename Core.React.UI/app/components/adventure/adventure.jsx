@@ -27,7 +27,12 @@ export default class Adventure extends React.Component {
 			createdBy: createBy || null,
 			startsOn: startsOn || new Date(),
 			endsOn: endsOn || new Date(),
-			experiences: experiences || [],
+			experiences: experiences.map(function (x) {
+				return {
+					label: x.name,
+					value: x.id
+				};
+			}) || [],
 			participants: participants || []
 		};
 

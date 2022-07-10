@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +27,7 @@ namespace Core.WebApi.Controllers
 		public AdventureViewModel Get([FromQuery] int id)
 		{
 			var adventure = _adventureService.Get(id);
+
 			return adventure;
 		}
 
@@ -33,6 +35,15 @@ namespace Core.WebApi.Controllers
 		public List<AdventureViewModel> GetAll()
 		{
 			var adventures = _adventureService.GetAll();
+
+			return adventures;
+		}
+
+		[HttpGet]
+		public async Task<List<AdventureViewModel>> GetAdventuresList()
+		{
+			var adventures = await _adventureService.GetAdventuresList();
+
 			return adventures;
 		}
 

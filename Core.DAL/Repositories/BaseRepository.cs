@@ -12,6 +12,7 @@ namespace Core.DAL.Repositories
 	{
 		private readonly CoreDbContext _context;
 		private readonly DbSet<T> _entities;
+		protected DbSet<T> Entities { get { return _entities; } }
 
 		public BaseRepository(CoreDbContext context)
 		{

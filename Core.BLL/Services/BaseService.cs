@@ -70,7 +70,7 @@ namespace Core.BLL.Services
 			Repository.Remove(entity);
 		}
 
-		private List<TViewModel> MapCollection(IEnumerable<TEntity> entities)
+		protected List<TViewModel> MapCollection(IEnumerable<TEntity> entities)
 		{
 			var result = new List<TViewModel>();
 

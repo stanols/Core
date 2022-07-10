@@ -24,26 +24,6 @@ namespace Core.BLL.Mappers
 				.ForMember(user => user.LastName, viewModel => viewModel.MapFrom(y => y.LastName))
 				.ForMember(user => user.Email, viewModel => viewModel.MapFrom(y => y.Email));
 
-			CreateMap<Adventure, AdventureViewModel>()
-				.ForMember(viewModel => viewModel.Id, adventure => adventure.MapFrom(y => y.Id))
-				.ForMember(viewModel => viewModel.Name, adventure => adventure.MapFrom(y => y.Name))
-				.ForMember(viewModel => viewModel.Description, adventure => adventure.MapFrom(y => y.Description))
-				.ForMember(viewModel => viewModel.CreatedBy, adventure => adventure.MapFrom(y => y.CreatedBy))
-				.ForMember(viewModel => viewModel.StartsOn, adventure => adventure.MapFrom(y => y.StartsOn))
-				.ForMember(viewModel => viewModel.EndsOn, adventure => adventure.MapFrom(y => y.EndsOn))
-				.ForMember(viewModel => viewModel.Experiences, adventure => adventure.Ignore())
-				.ForMember(viewModel => viewModel.Participants, adventure => adventure.Ignore());
-			CreateMap<AdventureViewModel, Adventure>()
-				.ForMember(adventure => adventure.Id, viewModel => viewModel.MapFrom(y => y.Id))
-				.ForMember(adventure => adventure.Name, viewModel => viewModel.MapFrom(y => y.Name))
-				.ForMember(adventure => adventure.Description, viewModel => viewModel.MapFrom(y => y.Description))
-				.ForMember(adventure => adventure.CreatedBy, viewModel => viewModel.Ignore())
-				.ForMember(adventure => adventure.CreatedById, viewModel => viewModel.Ignore())
-				.ForMember(adventure => adventure.StartsOn, viewModel => viewModel.MapFrom(y => y.StartsOn))
-				.ForMember(adventure => adventure.EndsOn, viewModel => viewModel.MapFrom(y => y.EndsOn))
-				.ForMember(adventure => adventure.Experiences, viewModel => viewModel.Ignore())
-				.ForMember(adventure => adventure.AdventureUsers, viewModel => viewModel.Ignore());
-
 			CreateMap<Experience, ExperienceViewModel>()
 				.ForMember(viewModel => viewModel.Id, experience => experience.MapFrom(y => y.Id))
 				.ForMember(viewModel => viewModel.Name, experience => experience.MapFrom(y => y.Name))
@@ -57,6 +37,26 @@ namespace Core.BLL.Mappers
 				.ForMember(experience => experience.StartsOn, viewModel => viewModel.MapFrom(y => y.StartsOn))
 				.ForMember(experience => experience.EndsOn, viewModel => viewModel.MapFrom(y => y.EndsOn))
 				.ForMember(experience => experience.Location, viewModel => viewModel.MapFrom(y => y.Location));
+
+			CreateMap<Adventure, AdventureViewModel>()
+				.ForMember(viewModel => viewModel.Id, adventure => adventure.MapFrom(y => y.Id))
+				.ForMember(viewModel => viewModel.Name, adventure => adventure.MapFrom(y => y.Name))
+				.ForMember(viewModel => viewModel.Description, adventure => adventure.MapFrom(y => y.Description))
+				.ForMember(viewModel => viewModel.CreatedBy, adventure => adventure.MapFrom(y => y.CreatedBy))
+				.ForMember(viewModel => viewModel.StartsOn, adventure => adventure.MapFrom(y => y.StartsOn))
+				.ForMember(viewModel => viewModel.EndsOn, adventure => adventure.MapFrom(y => y.EndsOn))
+				.ForMember(viewModel => viewModel.Experiences, adventure => adventure.MapFrom(y => y.Experiences))
+				.ForMember(viewModel => viewModel.Participants, adventure => adventure.Ignore());
+			CreateMap<AdventureViewModel, Adventure>()
+				.ForMember(adventure => adventure.Id, viewModel => viewModel.MapFrom(y => y.Id))
+				.ForMember(adventure => adventure.Name, viewModel => viewModel.MapFrom(y => y.Name))
+				.ForMember(adventure => adventure.Description, viewModel => viewModel.MapFrom(y => y.Description))
+				.ForMember(adventure => adventure.CreatedBy, viewModel => viewModel.Ignore())
+				.ForMember(adventure => adventure.CreatedById, viewModel => viewModel.Ignore())
+				.ForMember(adventure => adventure.StartsOn, viewModel => viewModel.MapFrom(y => y.StartsOn))
+				.ForMember(adventure => adventure.EndsOn, viewModel => viewModel.MapFrom(y => y.EndsOn))
+				.ForMember(adventure => adventure.Experiences, viewModel => viewModel.Ignore())
+				.ForMember(adventure => adventure.AdventureUsers, viewModel => viewModel.Ignore());
 
 			CreateMap<Location, LocationViewModel>()
 				.ForMember(viewModel => viewModel.Id, location => location.MapFrom(y => y.Id))
