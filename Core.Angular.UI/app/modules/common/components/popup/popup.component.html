@@ -1,0 +1,33 @@
+<div class="popup">
+	<div class="popup-header">
+		<h4 class="popup-title">
+			{{ title }}
+		</h4>
+	</div>
+	<div class="popup-body">
+		<p
+			*ngFor="let line of text"
+			class="popup-body-line"
+		>
+			{{line}}
+		</p>
+	</div>
+	<div class="popup-footer">
+		<button
+			id="cancellButton"
+			type="button"
+			class="btn btn-default"
+			(click)="cancel()"
+		>
+			{{cancelButton}}
+		</button>
+		<button
+			id="okButton"
+			type="button"
+			class="btn btn-success"
+			(click)="ok()"
+		>
+			{{okButton}}
+		</button>
+	</div>
+</div>

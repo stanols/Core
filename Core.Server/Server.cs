@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Builder;
 using Core.WebApi;
 
 namespace Core.Server
@@ -28,7 +29,7 @@ namespace Core.Server
 			const string urlKey = "url";
 
 			var builder = WebHost.CreateDefaultBuilder(arguments);
-			var webRoot = Path.Combine(Directory.GetCurrentDirectory(), _config[webRootKey]);
+			//var webRoot = Path.Combine(Directory.GetCurrentDirectory(), _config[webRootKey]);
 			var urls = new[] { _config[urlKey] };
 			var webHostBuilder = builder
 				.UseConfiguration(_config)

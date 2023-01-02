@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import HeaderContainer from './pages/layout/header/headerContainer';
 import FooterContainer from './pages/layout/footer/footerContainer';
 import LoginContainer from './pages/login/loginContainer';
@@ -9,6 +9,7 @@ import SummaryContainer from './pages/summary/summaryContainer';
 import { Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.less';
+import { createBrowserHistory } from 'history';
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -53,6 +54,7 @@ export default class App extends React.Component {
 	}
 
 	render() {
+		const history = createBrowserHistory();
 		const routes = this.getRoutes();
 		const routeComponents = routes.map((item, index) => {
 			if (item.private) {
@@ -76,11 +78,11 @@ export default class App extends React.Component {
 
 		return (
 			<Container>
-				<Router>
+				<HashRouter history={history}>
 					<Routes>
 						{routeComponents}
 					</Routes>
-				</Router>
+				</HashRouter>
 			</Container>
 		);
 	}

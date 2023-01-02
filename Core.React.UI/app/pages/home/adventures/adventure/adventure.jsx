@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { FormGroup, FormLabel, FormControl } from 'react-bootstrap';
+import { Form, FormGroup, FormLabel, FormControl } from 'react-bootstrap';
 import DateTimePicker from 'react-datetime-picker';
 import Select from "react-select";
 import _ from 'lodash';
@@ -16,6 +16,7 @@ export default class Adventure extends React.Component {
 			createBy,
 			startsOn,
 			endsOn,
+			experienceOptions,
 			experiences,
 			participants
 		} = this.props;
@@ -27,6 +28,7 @@ export default class Adventure extends React.Component {
 			createdBy: createBy || null,
 			startsOn: startsOn || new Date(),
 			endsOn: endsOn || new Date(),
+			experienceOptions: experienceOptions,
 			experiences: experiences.map(function (x) {
 				return {
 					label: x.name,
@@ -49,24 +51,36 @@ export default class Adventure extends React.Component {
 
 		this.setState({
 			[name]: value
-		}, () => {
-			this.props.onModelChanged(this.state);
 		});
+
+		this.props.onModelChanged(this.state);
 	}
 
 	render() {
-		const { experienceOptions } = this.props;
-		const { name, description, startsOn, endsOn, experiences } = this.state;
+		const { name, description, startsOn, endsOn, experiences, experienceOptions } = this.state;
 
 		return (
-			<div>
+			<Form id="adventureForm">
 				<FormGroup>
 					<FormLabel>Name</FormLabel>
-					<FormControl name="name" value={name} onChange={this.onChange} type={"text"} placeholder={"Name"} />
+					<FormControl
+						name="name"
+						value={name}
+						onChange={this.onChange}
+						type={"text"}
+						placeholder={"Name"}
+					/>
 				</FormGroup>
 				<FormGroup>
 					<FormLabel>Description</FormLabel>
-					<textarea rows="3" name="description" value={description} onChange={this.onChange} placeholder={"Description"} className={"form-control"}>
+					<textarea
+						rows="3"
+						name="description"
+						value={description}
+						onChange={this.onChange}
+						placeholder={"Description"}
+						className={"form-control"}
+					>
 					</textarea>
 				</FormGroup>
 				<FormGroup>
@@ -106,6 +120,7 @@ export default class Adventure extends React.Component {
 				<FormGroup>
 					<FormLabel>Experiences</FormLabel>
 					<Select
+						name="experiences"
 						isMulti={true}
 						closeMenuOnSelect={false}
 						options={experienceOptions.map(function(x) {
@@ -126,7 +141,7 @@ export default class Adventure extends React.Component {
 						}}
 					/>
 				</FormGroup>
-			</div>
+			</Form>
 		);
 	}
 }

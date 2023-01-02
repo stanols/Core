@@ -2,7 +2,7 @@
 	"name": "core",
 	"version": "1.0.0",
 	"private": true,
-	"description": "DotNetCore Application",
+	"description": "DotNetCore React Application",
 	"main": "./index.html",
 	"scripts": {
 		"build": "webpack --mode development --progress",
@@ -63,7 +63,7 @@
 		"react-dom": "~17.0.2",
 		"react-addons-pure-render-mixin": "~15.6.3",
 		"react-autosuggest": "~10.1.0",
-		"react-bootstrap": "~2.0.4",
+		"react-bootstrap": "~2.5.0",
 		"react-datetime-picker": "~3.4.3",
 		"react-dnd": "~14.0.4",
 		"react-dnd-html5-backend": "~14.0.2",
