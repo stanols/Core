@@ -42,11 +42,8 @@ namespace Core.BLL.Mappers
 				.ForMember(viewModel => viewModel.Id, adventure => adventure.MapFrom(y => y.Id))
 				.ForMember(viewModel => viewModel.Name, adventure => adventure.MapFrom(y => y.Name))
 				.ForMember(viewModel => viewModel.Description, adventure => adventure.MapFrom(y => y.Description))
-				.ForMember(viewModel => viewModel.CreatedBy, adventure => adventure.MapFrom(y => y.CreatedBy))
 				.ForMember(viewModel => viewModel.StartsOn, adventure => adventure.MapFrom(y => y.StartsOn))
-				.ForMember(viewModel => viewModel.EndsOn, adventure => adventure.MapFrom(y => y.EndsOn))
-				.ForMember(viewModel => viewModel.Experiences, adventure => adventure.MapFrom(y => y.Experiences))
-				.ForMember(viewModel => viewModel.Participants, adventure => adventure.Ignore());
+				.ForMember(viewModel => viewModel.EndsOn, adventure => adventure.MapFrom(y => y.EndsOn));
 			CreateMap<AdventureViewModel, Adventure>()
 				.ForMember(adventure => adventure.Id, viewModel => viewModel.MapFrom(y => y.Id))
 				.ForMember(adventure => adventure.Name, viewModel => viewModel.MapFrom(y => y.Name))

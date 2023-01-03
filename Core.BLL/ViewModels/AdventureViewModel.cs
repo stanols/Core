@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Core.BLL.ViewModels
 {
@@ -7,10 +6,7 @@ namespace Core.BLL.ViewModels
 	{
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public UserInfoViewModel CreatedBy { get; set; }
 		public DateTime StartsOn { get; set; }
 		public DateTime EndsOn { get; set; }
-		public List<ExperienceViewModel> Experiences { get; set; }
-		public List<UserViewModel> Participants { get; set; }
 	}
 }

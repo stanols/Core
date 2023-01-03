@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { Form, FormGroup, FormLabel, FormControl } from 'react-bootstrap';
 import DateTimePicker from 'react-datetime-picker';
-import Select from "react-select";
+// import Select from "react-select";
 import _ from 'lodash';
 import './adventure.less';
 
@@ -15,10 +15,7 @@ export default class Adventure extends React.Component {
 			description,
 			createBy,
 			startsOn,
-			endsOn,
-			experienceOptions,
-			experiences,
-			participants
+			endsOn
 		} = this.props;
 
 		this.state = {
@@ -27,15 +24,7 @@ export default class Adventure extends React.Component {
 			description: description || "",
 			createdBy: createBy || null,
 			startsOn: startsOn || new Date(),
-			endsOn: endsOn || new Date(),
-			experienceOptions: experienceOptions,
-			experiences: experiences.map(function (x) {
-				return {
-					label: x.name,
-					value: x.id
-				};
-			}) || [],
-			participants: participants || []
+			endsOn: endsOn || new Date()
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -57,7 +46,7 @@ export default class Adventure extends React.Component {
 	}
 
 	render() {
-		const { name, description, startsOn, endsOn, experiences, experienceOptions } = this.state;
+		const { name, description, startsOn, endsOn } = this.state;
 
 		return (
 			<Form id="adventureForm">
@@ -115,30 +104,6 @@ export default class Adventure extends React.Component {
 							})
 						}
 						className={"form-control"}
-					/>
-				</FormGroup>
-				<FormGroup>
-					<FormLabel>Experiences</FormLabel>
-					<Select
-						name="experiences"
-						isMulti={true}
-						closeMenuOnSelect={false}
-						options={experienceOptions.map(function(x) {
-							return {
-								label: x.name,
-								value: x.id
-							};
-						})}
-						value={experiences}
-						onChange={selectedOptions => {
-							this.onChange({
-								target: {
-									type: "multiSelect",
-									name: "experiences",
-									value: selectedOptions
-								}
-							});
-						}}
 					/>
 				</FormGroup>
 			</Form>

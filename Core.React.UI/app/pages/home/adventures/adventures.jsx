@@ -37,6 +37,8 @@ export default class Adventures extends React.Component {
 			email
 		} = authorizationData;
 
+		const data = this.state.model;
+
 		if (_.isNull(data.id || null)) {
 			this.props.onCreate(data);
 		} else {
@@ -108,19 +110,19 @@ export default class Adventures extends React.Component {
 				<Row className={"adventure-title"}>
 					<Col>
 						<h3>Adventures</h3>
-						<Button
+						{/* <Button
 							onClick={() => this.onCreate()}
 							disabled={this.isPopupVisible}
 							className={"btn btn-primary btn-sm"}
 						>
 							Create
-						</Button>
+						</Button> */}
 					</Col>
 				</Row>
 
 				{adventuresList}
 
-				{/* <div className={"generic-modal"}>
+				<div className={"generic-modal"}>
 					<Modal show={isPopupVisible} onHide={() => this.onClose()}>
 						<Modal.Header>
 							<Modal.Title>{title}</Modal.Title>
@@ -135,7 +137,7 @@ export default class Adventures extends React.Component {
 							<Button onClick={() => this.onClose()} className={"btn btn-danger btn-sm"}>Close</Button>
 						</Modal.Footer>
 					</Modal>
-				</div> */}
+				</div>
 			</div>
 		);
 	}

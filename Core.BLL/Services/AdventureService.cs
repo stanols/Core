@@ -54,17 +54,6 @@ namespace Core.BLL.Services
 		{
 			var entity = Mapper.Map<Adventure>(viewModel);
 
-			var createdById = viewModel.CreatedBy.Id;
-			var user = _userRepository.GetBy(x => x.Id == createdById);
-			entity.CreatedBy = user;
-
-			var experienceIds = viewModel.Experiences?
-				.Select(x => x.Id)
-				.ToList();
-
-			var experiences = _experienceRepository.GetAllBy(x => experienceIds.Contains(x.Id));
-			entity.Experiences = experiences.ToList();
-
 			return entity;
 		}
 	}

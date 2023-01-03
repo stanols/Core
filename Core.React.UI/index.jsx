@@ -1,6 +1,6 @@
 ﻿import React from 'react';
-import ReactDom from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createRoot } from 'react-dom/client';
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import appReducer from './app/reducers/appReducer';
@@ -9,14 +9,20 @@ import { AppContainer } from './app/appContainer';
 
 function main() {
 	const sagaMiddleware = createSagaMiddleware();
-	const store = createStore(appReducer, applyMiddleware(sagaMiddleware));
+	const store = configureStore({
+		reducer: appReducer,
+		middleware: () => [ sagaMiddleware ]
+	});
+
 	sagaMiddleware.run(appSaga.bind(this, store.dispatch));
 
-	ReactDom.render(
+	const container = document.getElementById('app');
+	const root = createRoot(container);
+
+	root.render(
 		<Provider store={store}>
 			<AppContainer />
-		</Provider>,
-		document.getElementById('app')
+		</Provider>
 	);
 }
 
