@@ -29,6 +29,9 @@ namespace Core.BLL.Services
 		{
 			var entity = MapAdventureViewModel(viewModel);
 
+			var user = _userRepository.GetBy(x => x.Id == viewModel.CreatedById);
+			entity.CreatedBy = user;
+
 			var id = Repository.Create(entity);
 
 			return id;
@@ -46,6 +49,9 @@ namespace Core.BLL.Services
 		public override void Update(AdventureViewModel viewModel)
 		{
 			var entity = MapAdventureViewModel(viewModel);
+
+			var user = _userRepository.GetBy(x => x.Id == viewModel.CreatedById);
+			entity.CreatedBy = user;
 
 			Repository.Update(entity);
 		}

@@ -29,17 +29,11 @@ export default class Adventures extends React.Component {
 		this.setState({ isPopupVisible: false });
 		const { authorizationData } = this.props;
 
-		const {
-			id,
-			name,
-			firstName,
-			lastName,
-			email
-		} = authorizationData;
-
 		const data = this.state.model;
 
 		if (_.isNull(data.id || null)) {
+			data.createdById = authorizationData.id;
+
 			this.props.onCreate(data);
 		} else {
 			this.props.onUpdate(data);
@@ -68,14 +62,14 @@ export default class Adventures extends React.Component {
 		});
 	};
 
-	onEdit = model => {
+	onEdit = (model) => {
 		this.setState({
 			isPopupVisible: true,
 			model: model
 		});
 	};
 
-	onModelChanged = newModel => {
+	onModelChanged = (newModel) => {
 		this.setState({ model: newModel });
 	};
 
@@ -110,13 +104,13 @@ export default class Adventures extends React.Component {
 				<Row className={"adventure-title"}>
 					<Col>
 						<h3>Adventures</h3>
-						{/* <Button
+						<Button
 							onClick={() => this.onCreate()}
 							disabled={this.isPopupVisible}
 							className={"btn btn-primary btn-sm"}
 						>
 							Create
-						</Button> */}
+						</Button>
 					</Col>
 				</Row>
 
@@ -129,7 +123,7 @@ export default class Adventures extends React.Component {
 						</Modal.Header>
 
 						<Modal.Body>
-							<Adventure {...model} onModelChanged={(newModel) => this.onModelChanged(newModel)} />
+							<Adventure {...model} onChanged={(newModel) => this.onModelChanged(newModel)} />
 						</Modal.Body>
 
 						<Modal.Footer>

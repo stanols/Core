@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import { Form, FormGroup, FormLabel, FormControl } from 'react-bootstrap';
 import DateTimePicker from 'react-datetime-picker';
-// import Select from "react-select";
 import _ from 'lodash';
 import './adventure.less';
 
@@ -14,6 +13,7 @@ export default class Adventure extends React.Component {
 			name,
 			description,
 			createBy,
+			createdById,
 			startsOn,
 			endsOn
 		} = this.props;
@@ -23,6 +23,7 @@ export default class Adventure extends React.Component {
 			name: name || "",
 			description: description || "",
 			createdBy: createBy || null,
+			createdById: createdById || null,
 			startsOn: startsOn || new Date(),
 			endsOn: endsOn || new Date()
 		};
@@ -32,21 +33,40 @@ export default class Adventure extends React.Component {
 
 	onChange(event) {
 		const checkboxTargetType = "checkbox";
+		const dateTargetType = "date";
 		const target = event.target;
-		const value = target.type === checkboxTargetType
-			? target.checked
-			: target.value;
+
+		let value = null;
+
+		switch(target.type)
+		{
+			case checkboxTargetType:
+				value = target.checked;
+				break;
+			case dateTargetType:
+				value = target.value;
+				break;
+			default: 
+				value = target.value;
+		}
+
 		const name = target.name;
 
 		this.setState({
 			[name]: value
 		});
+	}
 
-		this.props.onModelChanged(this.state);
+	componentDidUpdate(prevProps, prevState) {
+		if(!_.isEqual(prevState, this.state)) {
+			this.props.onChanged(this.state);
+		}
 	}
 
 	render() {
 		const { name, description, startsOn, endsOn } = this.state;
+		const startsOnDate = new Date(startsOn.toString());
+		const endsOnDate = new Date(endsOn.toString());
 
 		return (
 			<Form id="adventureForm">
@@ -75,9 +95,10 @@ export default class Adventure extends React.Component {
 				<FormGroup>
 					<FormLabel>Starts On</FormLabel>
 					<DateTimePicker
-						name="startsOn"
-						value={startsOn}
-						onChange={date =>
+						className={"form-control"}
+						name={"startsOn"}
+						value={startsOnDate}
+						onChange={(date) =>
 							this.onChange({
 								target: {
 									type: "date",
@@ -86,15 +107,15 @@ export default class Adventure extends React.Component {
 								}
 							})
 						}
-						className={"form-control"}
-					/>
+					></DateTimePicker>
 				</FormGroup>
 				<FormGroup>
 					<FormLabel>Ends On</FormLabel>
 					<DateTimePicker
+						className={"form-control"}
 						name="endsOn"
-						value={endsOn}
-						onChange={date =>
+						value={endsOnDate}
+						onChange={(date) =>
 							this.onChange({
 								target: {
 									type: "date",
@@ -103,8 +124,7 @@ export default class Adventure extends React.Component {
 								}
 							})
 						}
-						className={"form-control"}
-					/>
+					></DateTimePicker>
 				</FormGroup>
 			</Form>
 		);

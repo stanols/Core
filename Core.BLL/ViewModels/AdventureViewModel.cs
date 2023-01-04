@@ -8,5 +8,6 @@ namespace Core.BLL.ViewModels
 		public string Description { get; set; }
 		public DateTime StartsOn { get; set; }
 		public DateTime EndsOn { get; set; }
+		public int CreatedById { get; set; }
 	}
 }
