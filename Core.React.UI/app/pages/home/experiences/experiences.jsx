@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
-import Experience from 'app/components/experience/experience';
-import GenericModal from 'app/components/common/genericModal/genericModal';
+import Experience from 'app/pages/home/experiences/experience/experience';
 import './experiences.less';
 
 export default class Experiences extends React.Component {
@@ -17,11 +16,16 @@ export default class Experiences extends React.Component {
 		};
 
 		this.onSave = this.onSave.bind(this);
+		this.onClose = this.onClose.bind(this);
 		this.onEdit = this.onEdit.bind(this);
 	}
 
 	onSave = data => {
 		//TODO: add onSave method
+	};
+
+	onClose = () => {
+		this.setState({ isPopupVisible: false });
 	};
 
 	onEdit = model => {
@@ -51,14 +55,6 @@ export default class Experiences extends React.Component {
 						</Button>
 					</Col>
 				</Row>
-
-				<GenericModal
-					title={"Experience"}
-					isVisible={isPopupVisible}
-					onSave={this.onSave}
-					component={Experience}
-					model={model}
-				/>
 			</div>
 		);
 	}

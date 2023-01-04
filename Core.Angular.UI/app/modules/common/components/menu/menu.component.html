@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-expand-md">
+	<ul class="navbar-nav">
+		<li class="header-title">
+			<h1>DotNetCore Angular Application</h1>
+		</li>
+	</ul>
+	<ul class="navbar-nav ml-auto">
+		<li class="nav-item dropdown">
+			<a
+				id="dropdown"
+				class="nav-link dropdown-toggle position-relative"
+				href="#"
+				data-toggle="dropdown"
+			></a>
+			<div
+				class="dropdown-menu"
+				aria-labelledby="dropdown"
+			>
+				<a
+					id="signout"
+					class="sign-out"
+					(click)="signOut()"
+				>
+					<em class="fas fa-fw fa-arrow-alt-circle-right"></em>
+					Sign Out
+				</a>
+			</div>
+		</li>
+	</ul>
+</nav>

@@ -21,7 +21,7 @@ export function* homeSaga(dispatch) {
 		takeLatest(actions.GET_ALL_ADVENTURES, async () => {
 			try {
 				const adventureService = new AdventureService();
-				const getResult = await adventureService.getAll();
+				const getResult = await adventureService.getAdventuresList();
 
 				dispatch({ type: homeActions.GET_ALL_ADVENTURES_SUCCESS, data: getResult });
 			} catch (error) {

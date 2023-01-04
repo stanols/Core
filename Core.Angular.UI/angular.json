@@ -1,0 +1,96 @@
+{
+	"$schema": "node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"DotnetCoreAngularApplication": {
+			"projectType": "application",
+			"schematics": {},
+			"root": "./",
+			"sourceRoot": "./",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"options": {
+						"outputPath": "dist/DotNetCoreAngularApplication/browser",
+						"index": "./index.html",
+						"main": "./main.ts",
+						"polyfills": "./polyfills.ts",
+						"tsConfig": "./tsconfig.app.json",
+						"aot": true,
+						"assets": [
+							"./img/favicon.ico"
+						],
+						"styles": [
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							"./styles/styles.scss"
+						],
+						"scripts": [
+							"node_modules/jquery/dist/jquery.min.js",
+							"node_modules/bootstrap/dist/js/bootstrap.min.js"
+						],
+						"allowedCommonJsDependencies": [
+							"file-saver",
+							"jquery"
+						],
+						"optimization": {
+							"scripts": true,
+							"styles": {
+								"minify": true,
+								"inlineCritical": false
+							}
+						},
+						"sourceMap": {
+							"scripts": true,
+							"styles": false,
+							"hidden": false,
+							"vendor": true
+						}
+					},
+					"configurations": {
+						"dev": {
+							"optimization": false,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"namedChunks": false,
+							"aot": false,
+							"extractLicenses": false,
+							"vendorChunk": false,
+							"buildOptimizer": false,
+							"fileReplacements": [
+								{
+									"replace": "environments/environment.ts",
+									"with": "environments/environment.dev.ts"
+								}
+							]
+						},
+						"prod": {
+							"optimization": true,
+							"outputHashing": "all",
+							"sourceMap": false,
+							"namedChunks": false,
+							"aot": true,
+							"extractLicenses": true,
+							"vendorChunk": false,
+							"buildOptimizer": true,
+							"fileReplacements": [
+								{
+									"replace": "environments/environment.ts",
+									"with": "environments/environment.prod.ts"
+								}
+							]
+						}
+					}
+				}
+			}
+		}
+	},
+	"cli": {
+		"analytics": false,
+		"cache": {
+			"enabled": false
+		},
+		"packageManager": "npm"
+	}
+}

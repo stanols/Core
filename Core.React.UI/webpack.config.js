@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require('compression-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = (mode) => {
 	const config = {
@@ -13,7 +12,7 @@ module.exports = (mode) => {
 			'./index.jsx'
 		],
 		output: {
-			path: path.join(__dirname, '/../Core.Server/bin/Debug/net6.0/client'),
+			path: path.join(__dirname, '/../Core.Server/bin/Debug/net7.0/client/react'),
 			filename: 'bundle.js',
 			clean: true
 		},
@@ -80,6 +79,12 @@ module.exports = (mode) => {
 				{
 					test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 					use: 'file-loader'
+				},
+				{
+					test: /\.ico$/,
+					use: {
+						loader: 'file-loader'
+					}
 				}
 			]
 		},
@@ -99,7 +104,7 @@ module.exports = (mode) => {
 				inject: false,
 				template: 'index.html',
 				filename: 'index.html',
-				favicon: 'img/favicon.ico'
+				favicon: 'img/favicon.ico',
 			})
 		],
 		resolve: {
@@ -117,12 +122,7 @@ module.exports = (mode) => {
 
 	if (mode === 'production') {
 		config.optimization = {
-			minimizer: [
-				new UglifyJsPlugin({
-					minimize: true,
-					compress: false
-				})
-			]
+			minimizer: []
 		};
 	}
 

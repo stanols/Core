@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31727.386
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.DAL", "Core.DAL\Core.DAL.csproj", "{1584B464-5D47-4629-9034-DA150522C50C}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Server", "Core.Server\Core.Server.csproj", "{F3C9E709-B384-4B97-B72B-931A47E383BA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.React.UI", "Core.React.UI\Core.React.UI.csproj", "{E4DF7705-223F-4B88-A080-FE1CE5600FF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Angular.UI", "Core.Angular.UI\Core.Angular.UI.csproj", "{67ED71F7-2F1A-4805-885B-73D856BAB225}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{E4DF7705-223F-4B88-A080-FE1CE5600FF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4DF7705-223F-4B88-A080-FE1CE5600FF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4DF7705-223F-4B88-A080-FE1CE5600FF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67ED71F7-2F1A-4805-885B-73D856BAB225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67ED71F7-2F1A-4805-885B-73D856BAB225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67ED71F7-2F1A-4805-885B-73D856BAB225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67ED71F7-2F1A-4805-885B-73D856BAB225}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

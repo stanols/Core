@@ -11,4 +11,11 @@ export default class AdventureService extends BaseService {
 
 		return data;
 	}
+
+	async getAdventuresList() {
+		const response = await this.api.get(`${this.basePath}/GetAdventuresList`);
+		const { data } = response;
+
+		return data;
+	}
 }

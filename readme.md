@@ -39,11 +39,11 @@ dotnet ef database update --context CoreDbContext --project ../Core.DAL/Core.DAL
 
 1. Set {basePath}/Core/Core.Server as startup project in Visual Studio
 
-2. Run (F5). Check if server is available on http://localhost:5000/
+2. Run (F5). Check if server is available on http://localhost:3000/
 
-<h4>UI...</h4>
+<h4>React UI...</h4>
 
-1. Install npm packages specified in devDependencies and dependencies sections in {basePatch}/Core/Core.UI/package.json
+1. Install npm packages specified in {basePath}/Core/Core.React.UI/package.json
 ```
 npm install --only=dev
 npm install
@@ -63,7 +63,26 @@ for production environment
 npm run build:prod
 ```
 
-3. Use the following credentials to log in
+<h4>Angular UI...</h4>
+
+1. Install npm packages specified in dev {basePath}/Core/Core.Angular.UI/package.json
+
+2. Build UI
+for dev environment
+```
+npm run build
+```
+for development environment in watch mode
+```
+npm run build:watch
+```
+for production environment
+```
+npm run build:prod
+```
+
+<h4>Credentials...</h4>
+Use the following credentials to log in
 ```
 username: nmatch
 password: montenegro44

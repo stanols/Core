@@ -1,65 +1,39 @@
 ﻿import React from 'react';
 import _ from 'lodash';
-import Adventure from 'app/components/adventure/adventure';
-import { Row, Col, Button } from 'react-bootstrap';
-import GenericModal from 'app/components/common/genericModal/genericModal';
+import Adventure from 'app/pages/home/adventures/adventure/adventure';
+import { Row, Col, Button, Modal } from 'react-bootstrap';
 import './adventures.less';
 
 export default class Adventures extends React.Component {
 	constructor(props) {
 		super(props);
-		const { authorizationData, experiences } = props;
+		const { authorizationData } = props;
 
 		this.state = {
 			authorizationData: authorizationData || null,
-			isPopupVisible: false,
-			model: {
-				id: null,
-				name: "",
-				description: "",
-				createdBy: null,
-				startsOn: new Date(),
-				endsOn: new Date(),
-				experiences: [],
-				participants: []
-			}
+			isPopupVisible: false
 		};
 
 		this.onSave = this.onSave.bind(this);
+		this.onClose = this.onClose.bind(this);
 		this.onRemove = this.onRemove.bind(this);
 		this.onEdit = this.onEdit.bind(this);
+		this.onModelChanged = this.onModelChanged.bind(this);
 
 		this.props.onGetAllAdventures();
 		this.props.onGetAllExperiences();
 	}
 
-	onSave = data => {
+	onSave = event => {
+		event.preventDefault();
+		this.setState({ isPopupVisible: false });
 		const { authorizationData } = this.props;
 
-		const {
-			id,
-			name,
-			firstName,
-			lastName,
-			email
-		} = authorizationData;
-
-		data.experiences = data.experiences.map(function(x) {
-			return {
-				name: x.label,
-				id: x.value
-			}
-		});
-
-		data.createdBy = {
-			id: id,
-			name: name,
-			firstName: firstName,
-			lastName: lastName,
-			email: email
-		};
+		const data = this.state.model;
 
 		if (_.isNull(data.id || null)) {
+			data.createdById = authorizationData.id;
+
 			this.props.onCreate(data);
 		} else {
 			this.props.onUpdate(data);
@@ -67,6 +41,10 @@ export default class Adventures extends React.Component {
 
 		this.setState({ isPopupVisible: false });
 		this.props.onGetAllAdventures();
+	};
+
+	onClose = () => {
+		this.setState({ isPopupVisible: false });
 	};
 
 	onRemove = model => {
@@ -77,18 +55,28 @@ export default class Adventures extends React.Component {
 		this.props.onGetAllAdventures();
 	};
 
-	onEdit = model => {
+	onCreate = () => {
+		this.setState({
+			isPopupVisible: true,
+			model: {}
+		});
+	};
+
+	onEdit = (model) => {
 		this.setState({
 			isPopupVisible: true,
 			model: model
 		});
 	};
 
-	render() {
-		const { adventures, experienceOptions } = this.props;
-		const { model, isPopupVisible } = this.state;
+	onModelChanged = (newModel) => {
+		this.setState({ model: newModel });
+	};
 
-		model.experienceOptions = experienceOptions || [];
+	render() {
+		const { adventures } = this.props;
+		const { model, isPopupVisible } = this.state;
+		const title = "Adventure";
 
 		const adventuresList = adventures.map((adventure, index) => {
 			return (
@@ -117,16 +105,7 @@ export default class Adventures extends React.Component {
 					<Col>
 						<h3>Adventures</h3>
 						<Button
-							onClick={() => this.onEdit({
-								id: null,
-								name: "",
-								description: "",
-								createdBy: null,
-								startsOn: new Date(),
-								endsOn: new Date(),
-								experiences: [],
-								participants: []
-							})}
+							onClick={() => this.onCreate()}
 							disabled={this.isPopupVisible}
 							className={"btn btn-primary btn-sm"}
 						>
@@ -137,13 +116,22 @@ export default class Adventures extends React.Component {
 
 				{adventuresList}
 
-				<GenericModal
-					title={"Adventure"}
-					isVisible={isPopupVisible}
-					onSave={this.onSave}
-					component={Adventure}
-					model={model}
-				/>
+				<div className={"generic-modal"}>
+					<Modal show={isPopupVisible} onHide={() => this.onClose()}>
+						<Modal.Header>
+							<Modal.Title>{title}</Modal.Title>
+						</Modal.Header>
+
+						<Modal.Body>
+							<Adventure {...model} onChanged={(newModel) => this.onModelChanged(newModel)} />
+						</Modal.Body>
+
+						<Modal.Footer>
+							<Button onClick={event => this.onSave(event)} className={"btn btn-primary btn-sm"}>Save changes</Button>
+							<Button onClick={() => this.onClose()} className={"btn btn-danger btn-sm"}>Close</Button>
+						</Modal.Footer>
+					</Modal>
+				</div>
 			</div>
 		);
 	}

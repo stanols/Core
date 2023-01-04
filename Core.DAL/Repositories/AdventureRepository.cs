@@ -1,4 +1,7 @@
-﻿using Core.DAL.Entities;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 
 namespace Core.DAL.Repositories
@@ -8,6 +11,15 @@ namespace Core.DAL.Repositories
 		public AdventureRepository(CoreDbContext context)
 			: base(context)
 		{
+		}
+
+		public async Task<List<Adventure>> GetAdventuresList()
+		{
+			var entities = await Entities
+				.Include("Experiences")
+				.ToListAsync();
+
+			return entities;
 		}
 	}
 }
