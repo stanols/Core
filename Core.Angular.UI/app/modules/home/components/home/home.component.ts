@@ -3,16 +3,16 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 
 @Component({
-    selector: "app-home",
-    templateUrl: "./home.component.html",
-    styleUrls: ["./home.component.scss"]
+	selector: "app-home",
+	templateUrl: "./home.component.html",
+	styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-    constructor(
-        private readonly router: Router,
-        private readonly route: ActivatedRoute
-    ) {
-    }
+	constructor(
+		private readonly router: Router,
+		private readonly route: ActivatedRoute
+	) {
+	}
 
-    ngOnInit(): void {}
+	ngOnInit(): void { }
 }

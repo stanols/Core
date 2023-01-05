@@ -1,6 +1,9 @@
 {
     "editor.insertSpaces": false,
     "editor.tabSize": 4,
-    "editor.detectIndentation": true,
-    "editor.autoIndent": "full"
+    "editor.detectIndentation": false,
+    "editor.autoIndent": "full",
+    "editor.codeActionsOnSave":{
+        "source.fixAll.eslint":true
+    }
 }
