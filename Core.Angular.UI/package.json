@@ -36,8 +36,12 @@
 		"bootstrap": "~5.2.3",
 		"ngx-mask": "~15.0.0",
 		"zone.js": "~0.12.0",
-		"devexpress": "~22.2.3",
-		"devextreme": "~22.2.3"
+		"devextreme": "~22.2.3",
+		"@fortawesome/fontawesome-svg-core": "~6.2.1",
+		"@fortawesome/free-solid-svg-icons": "~6.2.1",
+		"@fortawesome/free-brands-svg-icons": "^6.2.1",
+		"@fortawesome/free-regular-svg-icons": "^6.2.1",
+		"@fortawesome/angular-fontawesome": "~0.12.1"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "~15.0.4",

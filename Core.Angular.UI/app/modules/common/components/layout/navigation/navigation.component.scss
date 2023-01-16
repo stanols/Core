@@ -1,0 +1,19 @@
+.nav-pills {
+	.nav-item {
+		a.nav-link {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			cursor: pointer;
+			outline: none;
+			border-radius: 0px;
+			color: #565e64;
+		}
+
+		a.nav-link.active {
+			background-color: #565e64;
+			color: #ffffff;
+		}
+	}
+}

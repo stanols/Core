@@ -3,7 +3,7 @@ import _ from 'lodash';
 import Navigation from '../../pages/layout/navigation/navigation';
 import AdventuresContainer from './adventures/adventuresContainer';
 import ExperiencesContainer from './experiences/experiencesContainer';
-import { faThList, faTasks } from '@fortawesome/free-solid-svg-icons'
+import { faThList, faTasks } from '@fortawesome/free-solid-svg-icons';
 import './home.less';
 
 export default class Home extends React.Component {

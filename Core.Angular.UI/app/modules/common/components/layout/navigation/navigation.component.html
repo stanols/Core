@@ -1,0 +1,25 @@
+<div class="navigation">
+	<ul
+		class="nav nav-pills flex-column me-3"
+		stacked="true"
+		role="tabList"
+	>
+		<li
+			*ngFor="let item of items"
+			class="nav-item"
+			role="tab"
+			[id]="item.id"
+			(onClick)="onItemClick($event, item)"
+		>
+			<a
+				class="nav-link navigation-link"
+				[ngClass]="{'active': active.id === item.id}"
+				[id]="item.id"
+				[routerLink]="item.link"
+			>
+				<fa-icon class="allign-middle" [icon]="item.icon"></fa-icon>
+				<span class="allign-middle">{{item.title}}</span>
+			</a>
+		</li>
+	</ul>
+</div>
