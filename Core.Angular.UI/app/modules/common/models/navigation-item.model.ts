@@ -6,4 +6,5 @@ export interface NavigationItemModel {
 	title: string;
 	icon: IconDefinition;
 	link: string;
+	component: any;
 }

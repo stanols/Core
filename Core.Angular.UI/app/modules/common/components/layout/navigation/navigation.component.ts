@@ -1,6 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { NavigationItemModel } from "app/modules/common/models/navigation-item.model";
 import { faThList, faTasks } from '@fortawesome/free-solid-svg-icons';
+import { AdventuresComponent } from "app/modules/home/components/home/adventures/adventures.component";
+import { ExperiencesComponent } from "app/modules/home/components/home/experiences/experiences.component";
 
 @Component({
 	selector: "app-navigation",
@@ -9,14 +11,11 @@ import { faThList, faTasks } from '@fortawesome/free-solid-svg-icons';
 })
 export class NavigationComponent {
 	items: NavigationItemModel[];
-	active: NavigationItemModel;
+	activeId: number;
 
 	constructor() {
 		this.items = this.getNavigationItems();
-	}
-
-	onItemClick($event, item): void {
-		this.active = item;
+		this.activeId = this.items[0].id;
 	}
 
 	getNavigationItems(): NavigationItemModel[] {
@@ -25,17 +24,17 @@ export class NavigationComponent {
 				id: 1,
 				name: "adventures",
 				title: "Adventures",
-				icon: faThList
+				icon: faThList,
+				component: AdventuresComponent
 			},
 			{
 				id: 2,
 				name: "experiences",
 				title: "Experiences",
-				icon: faTasks
+				icon: faTasks,
+				component: ExperiencesComponent
 			}
 		] as NavigationItemModel[];
-
-		this.active = items[0];
 
 		return items;
 	}
