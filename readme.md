@@ -64,12 +64,12 @@ docker run --rm --name postgres -e POSTGRES_PASSWORD=password1 -p 5432:5432 -e P
 
 3. Apply migrations. Open Package Manager Console in Visual Studio or (Command Prompt, Powershell etc.) and change directory to the Server.Server folder (optional)
 ```
-cd {basePath}/Core/Core.Server
+cd {basePath}/Core/
 ```
 
 4. Apply migrations running command
 ```
-dotnet ef database update --context CoreDbContext --project ../Core.DAL/Core.DAL.csproj --startup-project ./Core.Server.csproj --verbose
+dotnet ef database update --context CoreDbContext --project ./Core.DAL/Core.DAL.csproj --startup-project ./Core.Server/Core.Server.csproj --verbose
 ```
 
 <h2>Run app and login</h2>
