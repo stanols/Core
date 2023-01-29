@@ -1,47 +1,15 @@
-# Core (Adventures app)
-<h4>Welcome to an exciting Adventure!</h4>
+# Core
+<h4>Welcome to Core app!</h4>
 
-<h4>According to Wikipedia...</h4>
-<p>...an adventure is an exciting experience that is typically a bold, sometimes risky, undertaking. 
-Adventures may be activities with some potential for physical danger such as traveling, exploring, skydiving, mountain climbing,
-scuba diving, river rafting or participating in extreme sports.</p>
-
-<h4>The app is designed for...</h4>
-<p>...people who want to organize an adventure together, to combine all the information in one place 
-and share their ideas and thoughts with each other.</p>
-
-<p>Hope this app will help you to prepare a plan for upcomming adventure faster and provide a plan B if something goes wrong.</p>
+<p>The application is designed to compare web frameworks. 
+</p>
+<p>Software engineers who want to play with both frameworks, test components and try differend architecture tricks, share their ideas and thoughts with other engineers, welcome to my sandbox.</p>
 
 <p>Enjoy</p>
 
 # StartUp
 
-<h4>DataBase...</h4>
-
-1. To get started you will need to install postgres sql server v10 or higher with default settings (port=5432, user=postgres password=password1)
-```
-https://www.postgresql.org/download/
-```
-
-2. Create database according to connection string specified in {basePath}/Core/Core.DAL/appsettings.json
-
-3. Apply migrations. Open Package Manager Console in Visual Studio or (Command Prompt, Powershell etc.) and change directory to the Server.Server folder (optional)
-```
-cd {basePath}/Core/Core.Server
-```
-
-4. Apply migrations running command
-```
-dotnet ef database update --context CoreDbContext --project ../Core.DAL/Core.DAL.csproj --startup-project ./Core.Server.csproj --verbose
-```
-
-<h4>Run Server...</h4>
-
-1. Set {basePath}/Core/Core.Server as startup project in Visual Studio
-
-2. Run (F5). Check if server is available on http://localhost:3000/
-
-<h4>React UI...</h4>
+<h2>Build react UI</h2>
 
 1. Install npm packages specified in {basePath}/Core/Core.React.UI/package.json
 ```
@@ -63,7 +31,7 @@ for production environment
 npm run build:prod
 ```
 
-<h4>Angular UI...</h4>
+<h2>Build angular UI</h2>
 
 1. Install npm packages specified in dev {basePath}/Core/Core.Angular.UI/package.json
 
@@ -81,7 +49,42 @@ for production environment
 npm run build:prod
 ```
 
-<h4>Credentials...</h4>
+<h2>Create database</h2>
+
+1. To get started you will need to install postgres sql server v10 or higher with default settings (port=5432, user=postgres password=password1) or create database using docker container (step 2)
+```
+https://www.postgresql.org/download/
+```
+
+2. Create database according to connection string specified in {basePath}/Core/Core.DAL/appsettings.json, docker example
+
+```
+docker run --rm --name postgres -e POSTGRES_PASSWORD=password1 -p 5432:5432 -e POSTGRES_DB=coredb -d clkao/postgres-plv8
+```
+
+3. Apply migrations. Open Package Manager Console in Visual Studio or (Command Prompt, Powershell etc.) and change directory to the Server.Server folder (optional)
+```
+cd {basePath}/Core/
+```
+
+4. Apply migrations running command
+```
+dotnet ef database update --context CoreDbContext --project ./Core.DAL/Core.DAL.csproj --startup-project ./Core.Server/Core.Server.csproj --verbose
+```
+
+<h2>Run app and login</h2>
+
+1. Set {basePath}/Core/Core.Server as startup project in Visual Studio
+
+2. Run (F5). Check if server is available on
+
+```
+http://localhost:3000/react/
+http://localhost:3000/angular/
+```
+
+<h2>Credentials</h2>
+
 Use the following credentials to log in
 ```
 username: nmatch

@@ -52,7 +52,7 @@
 						"dev": {
 							"optimization": false,
 							"outputHashing": "all",
-							"sourceMap": false,
+							"sourceMap": true,
 							"namedChunks": false,
 							"aot": false,
 							"extractLicenses": false,

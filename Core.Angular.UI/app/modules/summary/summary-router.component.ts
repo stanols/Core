@@ -3,9 +3,9 @@ import { UntilDestroy } from "@ngneat/until-destroy";
 
 @UntilDestroy()
 @Component({
-	selector: "app-home",
-	templateUrl: "./home-router.component.html"
+	selector: "app-summary",
+	templateUrl: "./summary-router.component.html"
 })
-export class HomeRouterComponent implements AfterViewInit {
+export class SummaryRouterComponent implements AfterViewInit {
 	ngAfterViewInit(): void { }
 }

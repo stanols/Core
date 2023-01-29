@@ -51,6 +51,7 @@ namespace Core.WebApi.Controllers
 		public List<AdventureViewModel> GetAllBy([FromQuery] string name)
 		{
 			var adventures = _adventureService.GetAllBy(x => x.Name == name);
+
 			return adventures;
 		}
 
