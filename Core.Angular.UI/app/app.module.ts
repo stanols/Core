@@ -1,6 +1,7 @@
 ﻿import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { APP_INITIALIZER, NgModule } from "@angular/core";
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from "./app.component";
 import { AppRouterModule } from "./modules/router/app-router.module";
 import { BrowserModule } from "@angular/platform-browser";
@@ -14,6 +15,7 @@ import { environment } from "environments/environment";
 		AppComponent
 	],
 	imports: [
+		FormsModule,
 		BrowserModule,
 		AppRouterModule,
 		RouterModule,
@@ -48,5 +50,4 @@ import { environment } from "environments/environment";
 	]
 })
 export class AppModule {
-	// ngDoBootstrap(app){}
 }

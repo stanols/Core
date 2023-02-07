@@ -17,30 +17,7 @@ export function combineUrl(
 	return `${environment.apiUrl}/${url}${requestData}`;
 }
 
-export function format(
-	value: number,
-	style: string,
-	maximumFractionDigits?: number,
-	notation?: string,
-	compactDisplay?: string
-) {
-	const locale = 'en-US';
-	const formatterConfig = {
-		style,
-		currency: 'USD',
-		currencySign: 'accounting',
-		maximumFractionDigits,
-		notation,
-		compactDisplay
-	} as Intl.NumberFormatOptions;
-
-	const formatter = new Intl.NumberFormat(locale, formatterConfig);
-	const formattedValue = formatter.format(value);
-
-	return formattedValue;
-}
-
-export function getQueryParamsFromObject(queryParams: any): string {
+export function getQueryParams(queryParams: any): string {
 	if(!queryParams) {
 		return "";
 	}

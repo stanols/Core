@@ -5,8 +5,12 @@ import { NotFoundComponent } from "app/modules/common/components/not-found/not-f
 const routes: Routes = [
 	{
 		path: "",
-		redirectTo: "home",
+		redirectTo: "home" ,
 		pathMatch: "full"
+	},
+	{
+		path: "account",
+		loadChildren: () => import("../account/account.module").then((x) => x.AccountModule)
 	},
 	{
 		path: "home",

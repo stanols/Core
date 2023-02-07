@@ -2,10 +2,10 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { combineUrl } from "../utils/url-path.utils";
+import { combineUrl } from "../utils/path.util";
 
 @Injectable()
-export class HttpClientService {
+export class BaseService {
 	constructor(
 		private readonly httpClient: HttpClient
 	) {
