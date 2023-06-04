@@ -1,6 +1,6 @@
 import { environment } from "environments/environment";
 
-export function combineUrl(
+export function buildUrl(
 	url: string,
 	data: any = null
 ): string {

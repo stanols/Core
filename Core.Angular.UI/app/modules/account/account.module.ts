@@ -8,6 +8,7 @@ import { AccountRouterComponent } from "./account-router.component";
 import { AccountRouterModule } from "./account-router.module";
 import { LoginComponent } from "./components/login/login.component";
 import { RegistrationComponent } from "./components/registration/registration.component";
+import { UserService } from "./services/user.service";
 
 @NgModule({
 	imports: [
@@ -22,7 +23,12 @@ import { RegistrationComponent } from "./components/registration/registration.co
 		LoginComponent,
 		RegistrationComponent
 	],
-	providers: []
+	providers: [
+		UserService
+	],
+	exports: [
+		UserService
+	]
 })
 export class AccountModule {
 	constructor(library: FaIconLibrary) {

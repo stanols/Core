@@ -30,6 +30,7 @@
 		"@ngrx/router-store": "~15.1.0",
 		"@ngneat/until-destroy": "~9.2.2",
 		"ngx-cookie-service": "~15.0.0",
+		"ngx-crud": "~13.0.1",
 		"jquery": "~3.6.3",
 		"moment": "~2.29.4",
 		"moment-timezone": "~0.5.40",

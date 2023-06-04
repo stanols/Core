@@ -9,12 +9,14 @@ import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http"
 import { AppInitService } from "app-init.service";
 import { environment } from "environments/environment";
+import { CrudModule } from "ngx-crud";
 
 @NgModule({
 	declarations: [
 		AppComponent
 	],
 	imports: [
+		CrudModule,
 		FormsModule,
 		BrowserModule,
 		AppRouterModule,

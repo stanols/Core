@@ -11,8 +11,9 @@ export class SummaryComponent implements OnInit {
 		private readonly router: Router,
 		private readonly route: ActivatedRoute
 	) {
-
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+
+	}
 }

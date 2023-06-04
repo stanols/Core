@@ -4,6 +4,7 @@ import { RouterModule } from "@angular/router";
 import { SummaryComponent } from "./components/summary/summary.component";
 import { SummaryRouterComponent } from "./summary-router.component";
 import { SummaryRouterModule } from "./summary-router.module";
+import { UserService } from "../account/services/user.service";
 
 @NgModule({
 	imports: [
@@ -15,6 +16,8 @@ import { SummaryRouterModule } from "./summary-router.module";
 		SummaryRouterComponent,
 		SummaryComponent
 	],
-	providers: []
+	providers: [
+		UserService
+	]
 })
 export class SummaryModule {}

@@ -1,88 +1,81 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable, Injector } from "@angular/core";
 import { Observable } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { combineUrl } from "../utils/path.util";
+import { buildUrl } from "../utils/path.util";
 
 @Injectable()
 export class BaseService {
+	private readonly _basePath: string;
+	private readonly _httpClient: HttpClient;
+	private readonly _httpOptions: any;
+
 	constructor(
-		private readonly httpClient: HttpClient
+		basePath: string,
+		httpClient: HttpClient
 	) {
+		this._basePath = basePath;
+		this._httpClient = httpClient;
+		this._httpOptions = {
+			headers: new HttpHeaders({
+				'Content-Type': 'application/json',
+				// Authorization: 'my-auth-token'
+			})
+		};
 	}
 
 	public get<T>(
-		url: string,
 		data?: any,
-		cancellationSubject?: Observable<void>
+		cancellationNotifier?: Observable<void>
 	): Observable<T> {
-		let request = this.httpClient.get<T>(combineUrl(url, data));
+		let request = this._httpClient.get<T>(buildUrl(this._basePath, data));
 
-		if(cancellationSubject) {
-			request = this.applyCancellationSubject(
-				request,
-				cancellationSubject
-			)
+		if(cancellationNotifier) {
+			request.pipe(takeUntil(cancellationNotifier));
 		}
 
 		return request;
 	}
 
 	public post<T>(
-		url: string,
+		path?: string,
 		data?: object,
-		cancellationSubject?: Observable<void>
+		cancellationNotifier?: Observable<void>
 	): Observable<T> {
-		let request = this.httpClient.post<T>(combineUrl(url), data);
+		let request = this._httpClient.post<T>(
+			buildUrl([this._basePath, path].join("/")),
+			data);
 
-		if(cancellationSubject) {
-			request = this.applyCancellationSubject(
-				request,
-				cancellationSubject
-			)
+		if(cancellationNotifier) {
+			request.pipe(takeUntil(cancellationNotifier));
 		}
 
 		return request;
 	}
 
 	public put<T>(
-		url: string,
 		data: object,
-		cancellationSubject?: Observable<void>
+		cancellationNotifier?: Observable<void>
 	): Observable<T> {
-		let request = this.httpClient.put<T>(combineUrl(url), data);
+		let request = this._httpClient.put<T>(buildUrl(this._basePath), data);
 
-		if(cancellationSubject) {
-			request = this.applyCancellationSubject(
-				request,
-				cancellationSubject
-			)
+		if(cancellationNotifier) {
+			request.pipe(takeUntil(cancellationNotifier));
 		}
 
 		return request;
 	}
 
-	public delete<T>(
-		url: string,
-		data: any,
-		cancellationSubject?: Observable<void>
+	public remove<T>(
+		data: object,
+		cancellationNotifier?: Observable<void>
 	): Observable<T> {
-		let request = this.httpClient.delete<T>(combineUrl(url, data));
+		let request = this._httpClient.delete<T>(buildUrl(this._basePath, data));
 
-		if(cancellationSubject) {
-			request = this.applyCancellationSubject(
-				request,
-				cancellationSubject
-			)
+		if(cancellationNotifier) {
+			request.pipe(takeUntil(cancellationNotifier));
 		}
 
 		return request;
-	}
-
-	private applyCancellationSubject<T>(
-		request: Observable<T>,
-		cancellationSubject: Observable<void>
-	): Observable<T> {
-		return request.pipe(takeUntil(cancellationSubject));
 	}
 }

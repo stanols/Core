@@ -4,6 +4,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { HomeRouterComponent } from "./home-router.component";
 import { HomeRouterModule } from "./home-router.module";
 import { AppCommonModule } from "../common/common.module";
+import { UserService } from "../account/services/user.service";
 
 @NgModule({
 	imports: [
@@ -15,6 +16,8 @@ import { AppCommonModule } from "../common/common.module";
 		HomeRouterComponent,
 		HomeComponent
 	],
-	providers: []
+	providers: [
+		UserService
+	]
 })
 export class HomeModule {}
