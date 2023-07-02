@@ -5,10 +5,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 @UntilDestroy()
 @Component({
-	selector: "app-summary",
-	templateUrl: "./summary-router.component.html"
+	selector: "app-account",
+	templateUrl: "./account-router.component.html"
 })
-export class SummaryRouterComponent implements OnInit {
+export class AccountRouterComponent implements OnInit {
 	constructor(
 		private readonly router: Router,
 		private readonly route: ActivatedRoute
@@ -16,8 +16,8 @@ export class SummaryRouterComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		if (!AuthorizationHelper.isAuthorized()) {
-			this.router.navigate(['/account']);
+		if (AuthorizationHelper.isAuthorized()) {
+			this.router.navigate(['/home']);
 		}
 	}
 }

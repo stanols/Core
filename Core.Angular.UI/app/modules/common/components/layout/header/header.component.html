@@ -40,10 +40,10 @@
 							tabindex="0"
 							href="#"
 						>
-							Hello!
+							Hello, {{firstName}}!
 						</a>
 					</div>
-					<div class="nav-item">
+					<div class="nav-item" (click)="onLogout($event)">
 						<a
 							role="button"
 							class="nav-link"

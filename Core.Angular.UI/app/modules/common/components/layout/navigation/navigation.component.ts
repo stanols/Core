@@ -1,41 +1,39 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, Input, Output, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { NavigationItemModel } from "app/modules/common/models/navigation-item.model";
-import { faThList, faTasks } from '@fortawesome/free-solid-svg-icons';
-import { AdventuresComponent } from "app/modules/home/components/home/adventures/adventures.component";
-import { ExperiencesComponent } from "app/modules/home/components/home/experiences/experiences.component";
+import { NavItemDirective } from "app/modules/common/directives/nav-item.directive";
+import { NavigationItem } from "./navigation-item/navigation-item.component";
 
 @Component({
 	selector: "app-navigation",
 	templateUrl: "./navigation.component.html",
 	styleUrls: ["./navigation.component.scss"]
 })
-export class NavigationComponent {
-	items: NavigationItemModel[];
-	activeId: number;
+export class NavigationComponent implements OnInit {
+	@Input()
+	items: NavigationItemModel[] = [];
+	activeId: number = -1;
+	index: number = 0;
 
-	constructor() {
-		this.items = this.getNavigationItems();
-		this.activeId = this.items[0].id;
+	@ViewChild(NavItemDirective, { static: true }) navItem!: NavItemDirective;
+
+	constructor() {}
+
+	ngOnInit(): void {
+		const item = this.items[this.index];
+		this.activeId = item.id;
+
+		this.loadComponent(item);
 	}
 
-	getNavigationItems(): NavigationItemModel[] {
-		const items = [
-			{
-				id: 1,
-				name: "adventures",
-				title: "Adventures",
-				icon: faThList,
-				component: AdventuresComponent
-			},
-			{
-				id: 2,
-				name: "experiences",
-				title: "Experiences",
-				icon: faTasks,
-				component: ExperiencesComponent
-			}
-		] as NavigationItemModel[];
+	onItemClick(item: NavigationItemModel): void {
+		this.loadComponent(item);
+	}
 
-		return items;
+	loadComponent(item: NavigationItemModel): void {
+		const viewContainerReference = this.navItem.viewContainerRef;
+		viewContainerReference.clear();
+
+		const componentReference = viewContainerReference.createComponent<NavigationItem>(item.model.component);
+		componentReference.instance.data = item.model.data;
 	}
 }

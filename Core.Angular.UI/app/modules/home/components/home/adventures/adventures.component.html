@@ -1,3 +1,30 @@
-<div>
-	<h3>Adventures</h3>
+<div class="adventures">
+	<div class="adventure-title row">
+		<div class="col">
+			<h3>Adventures</h3>
+			<button type="button" class="btn btn-primary btn-sm">
+				Create
+			</button>
+		</div>
+	</div>
+	<ng-container *ngIf="true">
+		<ng-container *ngFor="let adventure of adventures">
+			<div class="adventure bg-light row">
+				<div class="col">
+					<div>Name: {{adventure.name}}</div>
+				</div>
+				<div class="col">
+					<div>Description: {{adventure.description}}</div>
+				</div>
+				<div class="col">
+					<button class="btn btn-danger btn-sm">
+						Remove
+					</button>
+					<button class="btn btn-primary btn-sm">
+						Edit
+					</button>
+				</div>
+			</div>
+		</ng-container>
+	</ng-container>
 </div>

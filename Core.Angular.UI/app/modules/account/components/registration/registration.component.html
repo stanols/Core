@@ -1,0 +1,42 @@
+<div class="registration">
+	<div class="title">
+		<h3>Sign Up</h3>
+
+		<a
+			ngbNavLink
+			href="#/account/login"
+		>
+			<fa-icon class="fa-2x" [icon]="FaArrowAltCircleLeft"></fa-icon>
+		</a>
+	</div>
+
+	<form (ngSubmit)="onSignUp()" (keyup.enter)="onSignUp()">
+		<div class="form-group">
+			<label for="name" class="form-label">Name</label>
+			<input id="name" name="name" class="form-control" type="text" [(ngModel)]="model.name" placeholder="Login" />
+		</div>
+		<div class="mt-2">
+			<label for="firstName" class="form-label">First Name</label>
+			<input id="firstName" name="firstName" class="form-control" type="text" [(ngModel)]="model.firstName" placeholder="First Name" />
+		</div>
+		<div class="mt-2">
+			<label for="lastName" class="form-label">Last Name</label>
+			<input id="lastName" name="lastName" class="form-control" type="text" [(ngModel)]="model.lastName" placeholder="Last Name" />
+		</div>
+		<div class="mt-2">
+			<label for="email" class="form-label">Email</label>
+			<input id="email" name="email" class="form-control" type="text" [(ngModel)]="model.email" placeholder="Email" />
+		</div>
+		<div class="mt-2">
+			<label for="password" class="form-label">Password</label>
+			<input id="password" name="password" class="form-control" type="password" [(ngModel)]="model.password" placeholder="Password" />
+		</div>
+		<div class="mt-2">
+			<label for="confirmedPassword" class="form-label">Confirm Password</label>
+			<input id="confirmedPassword" class="form-control" type="password" name="confirmedPassword" [(ngModel)]="model.confirmedPassword" placeholder="Confirm Password" />
+		</div>
+		<div class="mt-4">
+			<button class="form-control btn btn-primary" type="submit">Sign Up</button>
+		</div>
+	</form>
+</div>

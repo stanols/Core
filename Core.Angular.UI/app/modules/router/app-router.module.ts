@@ -1,11 +1,12 @@
 ﻿import { NgModule } from "@angular/core";
 import { Routes, RouterModule, ExtraOptions } from "@angular/router";
 import { NotFoundComponent } from "app/modules/common/components/not-found/not-found.component";
+import { AuthorizationHelper } from "../common/helpers/authorization.helper";
 
 const routes: Routes = [
 	{
 		path: "",
-		redirectTo: "home",
+		redirectTo: AuthorizationHelper.isAuthorized() ? "home" : "account",
 		pathMatch: "full"
 	},
 	{
@@ -16,6 +17,11 @@ const routes: Routes = [
 		path: "summary",
 		loadChildren: () => import("../summary/summary.module").then((x) => x.SummaryModule)
 	},
+	{
+		path: "account",
+		loadChildren: () => import("../account/account.module").then((x) => x.AccountModule)
+	},
+	
 	{
 		path: "**",
 		component: NotFoundComponent
