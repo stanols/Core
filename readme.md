@@ -95,3 +95,6 @@ or
 username: katatinak
 password: montenegro44
 ```
+
+![alt text](https://github.com/Stanols/Core/blob/develop/CoreProjectAngular.png?raw=true)
+![alt text](https://github.com/Stanols/Core/blob/develop/CoreProjectReact.png?raw=true)
