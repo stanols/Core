@@ -13,19 +13,20 @@
 					*ngFor="let item of items"
 					[ngbNavItem]="item.id"
 					[ngSwitch]="item.name"
+					(click)="onItemClick(item)"
 				>
 					<a
 						ngbNavLink
 						class="nav-link navigation-link"
 					>
 						<fa-icon class="icon" [icon]="item.icon"></fa-icon>
-						<span>{{item.title}}</span>
+						<span>{{item.name}}</span>
 					</a>
-					<ng-template ngbNavContent *ngSwitchCase="item.name" {{item.component}}>
-					</ng-template>
 				</div>
 			</div>
 		</div>
-		<div [ngbNavOutlet]="nav" class="col-sm-9"></div>
+		<div class="col-sm-9">
+			<ng-template navItem></ng-template>
+		</div>
 	</div>
 </div>

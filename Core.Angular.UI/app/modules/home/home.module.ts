@@ -5,6 +5,8 @@ import { HomeRouterComponent } from "./home-router.component";
 import { HomeRouterModule } from "./home-router.module";
 import { AppCommonModule } from "../common/common.module";
 import { UserService } from "../account/services/user.service";
+import { AdventuresComponent } from "./components/home/adventures/adventures.component";
+import { ExperiencesComponent } from "./components/home/experiences/experiences.component";
 
 @NgModule({
 	imports: [
@@ -14,7 +16,9 @@ import { UserService } from "../account/services/user.service";
 	],
 	declarations: [
 		HomeRouterComponent,
-		HomeComponent
+		HomeComponent,
+		AdventuresComponent,
+		ExperiencesComponent
 	],
 	providers: [
 		UserService

@@ -1,12 +1,8 @@
-import { Directive, ElementRef, Input, ViewContainerRef } from "@angular/core";
-import { UntilDestroy } from "@ngneat/until-destroy";
+import { Directive, ViewContainerRef } from "@angular/core";
 
-@UntilDestroy()
 @Directive({
 	selector: "[navItem]"
 })
 export class NavItemDirective {
-	constructor(
-		public viewContainerReference: ViewContainerRef
-	) {}
+	constructor(public viewContainerRef: ViewContainerRef) {}
 }

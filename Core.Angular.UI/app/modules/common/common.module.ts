@@ -7,8 +7,8 @@ import { HeaderComponent } from './components/layout/header/header.component';
 import { NavigationComponent } from './components/layout/navigation/navigation.component';
 import { FontAwesomeModule, FaIconLibrary } from "@fortawesome/angular-fontawesome";
 import { fas, faThList, faTasks } from "@fortawesome/free-solid-svg-icons";
-import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
-import { NgbCollapseModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbNavModule, NgbCollapseModule, NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NavItemDirective } from './directives/nav-item.directive';
 
 @NgModule({
 	imports: [
@@ -17,17 +17,20 @@ import { NgbCollapseModule } from "@ng-bootstrap/ng-bootstrap";
 		CommonModule,
 		NgbCollapseModule,
 		NgbNavModule,
-		FontAwesomeModule
+		FontAwesomeModule,
+		NgbModule
 	],
 	declarations: [
 		HeaderComponent,
 		FooterComponent,
-		NavigationComponent
+		NavigationComponent,
+		NavItemDirective
 	],
 	exports: [
 		HeaderComponent,
 		FooterComponent,
-		NavigationComponent
+		NavigationComponent,
+		NavItemDirective
 	],
 	providers: []
 })
