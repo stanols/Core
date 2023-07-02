@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { AppCommonModule } from "../common/common.module";
 import { RouterModule } from "@angular/router";
 import { SummaryComponent } from "./components/summary/summary.component";
@@ -8,6 +9,7 @@ import { UserService } from "../account/services/user.service";
 
 @NgModule({
 	imports: [
+		CommonModule,
 		AppCommonModule,
 		RouterModule,
 		SummaryRouterModule

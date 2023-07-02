@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { AdventureModel } from "app/modules/home/models/adventure.model";
+import { AdventureService } from "app/modules/home/services/adventure.service";
+import { firstValueFrom } from "rxjs";
 
 @Component({
 	selector: "app-adventures",
@@ -6,9 +9,16 @@ import { Component, Input, OnInit } from "@angular/core";
 	styleUrls: ["./adventures.component.scss"]
 })
 export class AdventuresComponent implements OnInit {
-	constructor() {
-		
+	adventures: AdventureModel[];
+
+	constructor(
+		private readonly adventureService: AdventureService
+	) {
 	}
 
-	ngOnInit(): void {}
+	async ngOnInit(): Promise<void> {
+		const adventures = await firstValueFrom(this.adventureService.getAdventures());
+
+		this.adventures = adventures;
+	}
 }
