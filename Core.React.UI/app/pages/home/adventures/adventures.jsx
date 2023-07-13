@@ -127,8 +127,8 @@ export default class Adventures extends React.Component {
 						</Modal.Body>
 
 						<Modal.Footer>
-							<Button onClick={event => this.onSave(event)} className={"btn btn-primary btn-sm"}>Save changes</Button>
 							<Button onClick={() => this.onClose()} className={"btn btn-danger btn-sm"}>Close</Button>
+							<Button onClick={event => this.onSave(event)} className={"btn btn-primary btn-sm"}>Save changes</Button>
 						</Modal.Footer>
 					</Modal>
 				</div>

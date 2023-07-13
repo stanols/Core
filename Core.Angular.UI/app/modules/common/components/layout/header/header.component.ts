@@ -20,7 +20,10 @@ export class HeaderComponent implements OnInit {
 
 	ngOnInit(): void {
 		const authorizationData = AuthorizationHelper.getAuthorizationData();
-		this.firstName = authorizationData.firstName;
+
+		if (authorizationData) {
+			this.firstName = authorizationData.firstName;
+		}
 	}
 
 	async onLogout(): Promise<void> {

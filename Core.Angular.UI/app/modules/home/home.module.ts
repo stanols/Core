@@ -9,19 +9,25 @@ import { UserService } from "../account/services/user.service";
 import { AdventuresComponent } from "./components/home/adventures/adventures.component";
 import { ExperiencesComponent } from "./components/home/experiences/experiences.component";
 import { AdventureService } from "./services/adventure.service";
+import { AdventureComponent } from "./components/home/adventures/adventure/adventure.component";
+import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		AppCommonModule,
 		RouterModule,
-		HomeRouterModule
+		HomeRouterModule,
+		NgbDatepickerModule,
+		FormsModule
 	],
 	declarations: [
 		HomeRouterComponent,
 		HomeComponent,
 		AdventuresComponent,
-		ExperiencesComponent
+		AdventureComponent,
+		ExperiencesComponent,
 	],
 	providers: [
 		UserService,
