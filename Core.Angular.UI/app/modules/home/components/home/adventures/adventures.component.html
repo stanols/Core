@@ -17,10 +17,10 @@
 					<div>Description: {{adventure.description}}</div>
 				</div>
 				<div class="col">
-					<button class="btn btn-danger btn-sm">
+					<button class="btn btn-danger btn-sm" (click)="onRemove(adventure.id)">
 						Remove
 					</button>
-					<button class="btn btn-primary btn-sm">
+					<button class="btn btn-primary btn-sm" (click)="onEdit(adventure)">
 						Edit
 					</button>
 				</div>

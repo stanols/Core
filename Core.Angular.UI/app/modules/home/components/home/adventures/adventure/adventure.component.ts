@@ -11,12 +11,11 @@ export class AdventureComponent implements OnInit {
 	@Input()
 	title: string;
 
-	@Output()
-	resultEmitter: EventEmitter<boolean> = new EventEmitter();
+	@Input()
+	data: any;
 
-	hoveredDate: NgbDate | null = null;
-	fromDate: NgbDate | null = null;
-	toDate: NgbDate | null = null;
+	@Output()
+	resultEmitter: EventEmitter<any> = new EventEmitter();
 
 	constructor(
 		private readonly modal: NgbActiveModal,
@@ -27,25 +26,34 @@ export class AdventureComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.fromDate = this.calendar.getToday();
-		this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 10);
+		if (!!this.data.id) {
+			const from = new Date(this.data.startsOn);
+			this.data.startsOn = new NgbDate(from.getFullYear(), from.getMonth() + 1, from.getDate());
+			const to = new Date(this.data.endsOn);
+			this.data.endsOn = new NgbDate(to.getFullYear(), to.getMonth() + 1, to.getDate());
+
+			return;
+		}
+
+		this.data.startsOn = this.calendar.getToday();
+		this.data.endsOn = this.calendar.getNext(this.calendar.getToday(), 'd', 10);
 	}
 
 	onDateSelection(date: NgbDate): void {
-		if (!this.fromDate && !this.toDate) {
-			this.fromDate = date;
-		} else if (this.fromDate && !this.toDate && date && date.after(this.fromDate)) {
-			this.toDate = date;
+		if (!this.data.startsOn && !this.data.endsOn) {
+			this.data.startsOn = date;
+		} else if (this.data.startsOn && !this.data.endsOn && date && date.after(this.data.startsOn)) {
+			this.data.endsOn = date;
 		} else {
-			this.toDate = null;
-			this.fromDate = date;
+			this.data.endsOn = null;
+			this.data.startsOn = date;
 		}
 	}
 
 	isRange(date: NgbDate) {
 		return (
-			date.equals(this.fromDate) ||
-			(this.toDate && date.equals(this.toDate)) ||
+			date.equals(this.data.startsOn) ||
+			(this.data.endsOn && date.equals(this.data.endsOn)) ||
 			this.isInside(date) ||
 			this.isHovered(date)
 		);
@@ -53,21 +61,29 @@ export class AdventureComponent implements OnInit {
 
 	isHovered(date: NgbDate) {
 		return (
-			this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate)
+			this.data.startsOn &&
+			!this.data.endsOn &&
+			this.data.hoveredDate &&
+			date.after(this.data.startsOn) &&
+			date.before(this.data.hoveredDate)
 		);
 	}
 
 	isInside(date: NgbDate) {
-		return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
+		return this.data.endsOn && date.after(this.data.startsOn) && date.before(this.data.endsOn);
 	}
 
 	cancel(): void {
-		this.resultEmitter.emit(false);
-		this.modal.close(true);
+		const model = { result: false, model: this.data };
+
+		this.resultEmitter.emit(model);
+		this.modal.close(model);
 	}
 
 	save(): void {
-		this.resultEmitter.emit(true);
-		this.modal.close(true);
+		const model = { result: true, model: this.data };
+
+		this.resultEmitter.emit(model);
+		this.modal.close(model);
 	}
 }
