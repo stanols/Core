@@ -5,7 +5,6 @@ namespace Core.WebApi.Hubs.Clients.Interfaces
 {
 	public interface IChartClient
 	{
-		Task ReceiveMessage(string user, ChatMessage message);
 		Task ReceiveMessage(ChatMessage message);
 	}
 }

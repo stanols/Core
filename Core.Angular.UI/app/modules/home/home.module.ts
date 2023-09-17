@@ -12,6 +12,8 @@ import { AdventureService } from "./services/adventure.service";
 import { AdventureComponent } from "./components/home/adventures/adventure/adventure.component";
 import { NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from '@angular/forms';
+import { AdventureHubService } from "./services/adventure-hub.service";
+import { ChatHubService } from "./services/chat-hub.service";
 
 @NgModule({
 	imports: [
@@ -31,7 +33,9 @@ import { FormsModule } from '@angular/forms';
 	],
 	providers: [
 		UserService,
-		AdventureService
+		AdventureService,
+		AdventureHubService,
+		ChatHubService
 	]
 })
 export class HomeModule {}

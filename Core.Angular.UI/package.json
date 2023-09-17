@@ -42,7 +42,8 @@
 		"@fortawesome/free-solid-svg-icons": "~6.2.1",
 		"@fortawesome/free-brands-svg-icons": "^6.2.1",
 		"@fortawesome/free-regular-svg-icons": "^6.2.1",
-		"@fortawesome/angular-fontawesome": "~0.12.1"
+		"@fortawesome/angular-fontawesome": "~0.12.1",
+		"@microsoft/signalr": "~7.0.11"
 	},
 	"devDependencies": {
 		"@angular-devkit/build-angular": "~15.0.4",

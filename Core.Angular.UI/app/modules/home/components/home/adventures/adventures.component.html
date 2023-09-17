@@ -27,4 +27,14 @@
 			</div>
 		</ng-container>
 	</ng-container>
+	<div class="row">
+		<h4>SignalR Messages</h4>
+		<input type="text" [(ngModel)]="messageToSend.message" class="col-4 me-2" />
+		<button type="button" class="col-2 btn btn-secondary btn-sm" (click)="sendMessage()">
+			Send Message
+		</button>
+		<div class="col-6" >
+			<div class="mt-2" *ngIf="!!receivedMessage.message">Received: {{ receivedMessage.user }}: {{ receivedMessage.message }} (id: {{receivedMessage.id}})</div>
+		</div>
+	</div>
 </div>
