@@ -1,5 +1,6 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
+//using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.JsonWebTokens;
 using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
@@ -17,13 +18,15 @@ namespace Core.WebApi.Controllers
 	{
 		private readonly IUserService _userService;
 		private readonly IConfiguration _config;
-		private readonly JwtSecurityTokenHandler _tokenHandler;
+		//private readonly JwtSecurityTokenHandler _tokenHandler;
+		private readonly JsonWebTokenHandler _tokenHandler;
 
 		public UserController(IUserService userService, IConfiguration config)
 		{
 			_userService = userService;
 			_config = config;
-			_tokenHandler = new JwtSecurityTokenHandler();
+			//_tokenHandler = new JwtSecurityTokenHandler();
+			_tokenHandler = new JsonWebTokenHandler();
 		}
 
 		[HttpPost]
@@ -75,7 +78,7 @@ namespace Core.WebApi.Controllers
 			};
 
 			var token = _tokenHandler.CreateToken(tokenDescriptor);
-			viewModel.Token = _tokenHandler.WriteToken(token);
+			viewModel.Token = token; //_tokenHandler.WriteToken(token);
 
 			return viewModel;
 		}

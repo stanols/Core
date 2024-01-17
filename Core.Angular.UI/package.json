@@ -6,7 +6,7 @@
 	"main": "./index.html",
 	"scripts": {
 		"build": "ng build --configuration=dev",
-		"build:watch": "ng build --configuration=dev --watch --output-path=\"../Core.Server/bin/Debug/net7.0/client/angular\"",
+		"build:watch": "ng build --configuration=dev --watch --output-path=\"../Core.Server/bin/Debug/net8.0/client/angular\"",
 		"build:prod": "ng build --configuration=prod"
 	},
 	"dependencies": {
