@@ -67,11 +67,12 @@ export class BaseService {
 	}
 
 	public put<T>(
-		data: object,
+		path?: string,
+		data?: object,
 		cancellationNotifier?: Observable<void>
 	): Observable<T> {
 		const request = this._httpClient.put<T>(
-			buildUrl(this._basePath),
+			buildUrl([this._basePath, path].join("/")),
 			data,
 			<Object>this._httpOptions);
 
@@ -83,11 +84,12 @@ export class BaseService {
 	}
 
 	public delete<T>(
-		data: object,
+		path?: string,
+		id?: number,
 		cancellationNotifier?: Observable<void>
 	): Observable<T> {
 		const request = this._httpClient.delete<T>(
-			buildUrl(this._basePath, data),
+			`${buildUrl([this._basePath, path].join("/"))}?id=${id}`,
 			<Object>this._httpOptions);
 
 		if(cancellationNotifier) {

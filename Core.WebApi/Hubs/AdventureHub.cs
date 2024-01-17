@@ -11,14 +11,9 @@ namespace Core.WebApi.Hubs
 		{
 		}
 
-		public async Task SendMessage(string user, AdventureMessage message)
+		public async Task SendMessageToAll(AdventureMessage message)
 		{
-			await Clients.All.ReceiveMessage(user, message);
-		}
-
-		public Task SendMessageToCaller(AdventureMessage message)
-		{
-			return Clients.Caller.ReceiveMessage(message);
+			await Clients.All.ReceiveMessage(message);
 		}
 	}
 }

@@ -3,7 +3,7 @@
 export const environment = {
 	name: "dev",
 	production: false,
-	apiUrl: "",
+	apiUrl: "http://localhost:3000",
 	version: "1.0.0",
 	idleTimeoutInSeconds: 1800,
 	tokenExpirationInSeconds: 60,

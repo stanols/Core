@@ -4,7 +4,7 @@
     "eslint.validate": ["javascript", "hrml"],
     "eslint.options": { "extensions":[".js", ".jsx", "hrml"] },
     "editor.codeActionsOnSave":{
-        "source.fixAll.eslint":true
+        "source.fixAll.eslint": "explicit"
     },
     "editor.insertSpaces": true,
     "editor.tabSize": 4,

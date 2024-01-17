@@ -11,14 +11,9 @@ namespace Core.WebApi.Hubs
 		{
 		}
 
-		public async Task SendMessage(string user, ChatMessage message)
+		public async Task SendMessageToAll(ChatMessage message)
 		{
-			await Clients.All.ReceiveMessage(user, message);
-		}
-
-		public Task SendMessageToCaller(ChatMessage message)
-		{
-			return Clients.Caller.ReceiveMessage(message);
+			await Clients.All.ReceiveMessage(message);
 		}
 	}
 }

@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Core.BLL;
 using Core.BLL.Interfaces;
 using Core.DAL;
+using Core.WebApi.Hubs;
 
 
 namespace Core.WebApi
@@ -82,16 +83,19 @@ namespace Core.WebApi
 			app.UseCors(x => x
 				.AllowAnyOrigin()
 				.AllowAnyMethod()
-				.AllowAnyHeader());//.AllowCredentials()
+				.AllowAnyHeader());
 
 			app.UseRouting();
 			app.UseAuthentication();
 			app.UseAuthorization();
+
 			app.UseEndpoints(routes =>
 			{
 				routes.MapControllers();
-				//routes.MapHub<ChatHub>($"/{nameof(ChatHub)}");
+				routes.MapHub<AdventureHub>($"/hubs/{nameof(AdventureHub)}");
+				routes.MapHub<ChatHub>($"/hubs/{nameof(ChatHub)}");
 			});
+
 			app.Build();
 		}
 	}

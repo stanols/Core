@@ -31,8 +31,7 @@ import { NavItemDirective } from './directives/nav-item.directive';
 		FooterComponent,
 		NavigationComponent,
 		NavItemDirective
-	],
-	providers: []
+	]
 })
 export class AppCommonModule {
 	constructor(library: FaIconLibrary) {

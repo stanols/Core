@@ -1,0 +1,80 @@
+<div class="modal-header">
+	<div class="modal-title h4">{{title}}</div>
+</div>
+<div class="modal-body">
+	<form>
+		<div class="form-group">
+			<label for="name" class="form-label">Name</label>
+			<input id="name" name="name" class="form-control" type="text" placeholder="Name" [(ngModel)]="data.name" />
+		</div>
+		<div class="form-group mt-2">
+			<label for="description" class="form-label">Description</label>
+			<textarea id="description" name="description" class="form-control" placeholder="Description" [(ngModel)]="data.description"></textarea>
+		</div>
+		<div class="form-group mt-2">
+			<label for="datepicker" class="form-label">From/To</label>
+			<div class="row">
+				<div class="dp-hidden position-absolute">
+					<div class="input-group">
+						<input
+							name="datepicker"
+							class="form-control"
+							style="z-index: -1;"
+							ngbDatepicker
+							#datepicker="ngbDatepicker"
+							outsideDays="hidden"
+							tabindex="-1"
+							[autoClose]="'outside'"
+							[displayMonths]="2"
+							[dayTemplate]="dateTemplate"
+							[startDate]="data.startsOn"
+							(dateSelect)="onDateSelection($event)"
+						/>
+						<ng-template #dateTemplate let-date let-focused="focused">
+							<span
+								class="custom-day"
+								[class.focused]="focused"
+								[class.range]="isRange(date)"
+								[class.faded]="isHovered(date) || isInside(date)"
+								(mouseenter)="hoveredDate = date"
+								(mouseleave)="hoveredDate = null"
+							>
+								{{ date.day }}
+							</span>
+						</ng-template>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="input-group">
+						<input
+							#dpstartsOn
+							class="form-control"
+							placeholder="yyyy-mm-dd"
+							name="dpstartsOn"
+							[value]="formatter.format(data.startsOn)"
+							(input)="data.startsOn = validateInput(data.startsOn, dpstartsOn.value)"
+						/>
+						<button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button"></button>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="input-group">
+						<input
+							#dpendsOn
+							class="form-control"
+							placeholder="yyyy-mm-dd"
+							name="dpendsOn"
+							[value]="formatter.format(data.endsOn)"
+							(input)="data.endsOn = validateInput(data.endsOn, dpendsOn.value)"
+						/>
+						<button class="btn btn-outline-secondary bi bi-calendar3" (click)="datepicker.toggle()" type="button"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-secondary btn-sm" (click)="cancel()">Cancel</button>
+	<button class="btn btn-primary btn-sm" (click)="save()">Save</button>
+</div>
