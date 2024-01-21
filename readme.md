@@ -72,6 +72,10 @@ cd {basePath}/Core/
 dotnet ef database update --context CoreDbContext --project ./Core.DAL/Core.DAL.csproj --startup-project ./Core.Server/Core.Server.csproj --verbose
 ```
 
+<p>Schema</p>
+
+![alt text](https://github.com/Stanols/Core/blob/master/Core.Docs/CoreProjectDatabaseScheme.png?raw=true)
+
 <h2>Run app and login</h2>
 
 1. Set {basePath}/Core/Core.Server as startup project in Visual Studio
@@ -100,8 +104,8 @@ password: montenegro44
 
 <p>Angular</p>
 
-![alt text](https://github.com/Stanols/Core/blob/master/CoreProjectAngular.png?raw=true)
+![alt text](https://github.com/Stanols/Core/blob/master/Core.Docs/CoreProjectAngular.png?raw=true)
 
 <p>React</p>
 
-![alt text](https://github.com/Stanols/Core/blob/master/CoreProjectReact.png?raw=true)
+![alt text](https://github.com/Stanols/Core/blob/master/Core.Docs/CoreProjectReact.png?raw=true)
