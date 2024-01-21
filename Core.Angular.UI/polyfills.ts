@@ -17,4 +17,4 @@ import "core-js/es/array/some";
 import "core-js/stable/array";
 import "core-js/stable/array/some";
 
-import "zone.js/dist/zone";
+import "zone.js";
