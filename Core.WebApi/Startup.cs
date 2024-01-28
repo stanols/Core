@@ -92,7 +92,6 @@ namespace Core.WebApi
 			app.UseEndpoints(routes =>
 			{
 				routes.MapControllers();
-				routes.MapHub<AdventureHub>($"/hubs/{nameof(AdventureHub)}");
 				routes.MapHub<ChatHub>($"/hubs/{nameof(ChatHub)}");
 			});
 

@@ -1,0 +1,20 @@
+<div class="chat">
+	<div class="chat-title row">
+		<div class="col">
+			<h3>Chat</h3>
+		</div>
+	</div>
+	<ng-container *ngFor="let message of messages">
+		<div class="message">
+			<div class="alert alert-dark" role="alert">
+				<div>{{message.userName}}: {{message.message}}</div>
+			</div>
+		</div>
+	</ng-container>
+	<div class="row">
+		<input type="text" class="col-4 me-2" [(ngModel)]="value"/>
+		<button type="submit" class="col-2 btn btn-secondary btn-sm" (click)="sendMessage()">
+			Send Message
+		</button>
+	</div>
+</div>
