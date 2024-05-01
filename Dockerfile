@@ -1,35 +1,46 @@
 # Environment
-FROM microsoft/dotnet:6.0-sdk AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:8.0 as build-env
+EXPOSE 80
+EXPOSE 443
+EXPOSE 3000
 
 # Installation
-RUN apt-get update && \
-	apt-get install -y wget && \
-	apt-get install -y gnupg2 && \
-	wget -qO- https://deb.nodesource.com/setup_6.x | bash - && \
-	apt-get install -y build-essential nodejs
-WORKDIR /app
+RUN apt-get update && apt-get upgrade -y && \
+	apt-get install -y nodejs \
+	npm
+WORKDIR /
 
-# Copy csproj and restore dependencies
+# Copy and restore dependencies
 COPY ./Core.Server/Core.Server.csproj ./Core.Server/
 COPY ./Core.WebApi/Core.WebApi.csproj ./Core.WebApi/
 COPY ./Core.BLL/Core.BLL.csproj ./Core.BLL/
 COPY ./Core.DAL/Core.DAL.csproj ./Core.DAL/
-COPY ./Core.UI/Core.UI.csproj ./Core.UI/
-COPY ./Core.Server.sln .
-RUN dotnet restore Core.Server.sln
+COPY ./Core.Angular.UI ./Core.Angular.UI
+COPY ./Core.React.UI ./Core.React.UI
+COPY ./Core.Server.sln ./
+RUN dotnet restore ./Core.Server/Core.Server.csproj
 
 # Copy all and build UI
-COPY . ./
+#webpack --mode=none
+#webpack --mode=none
 
 RUN npm install webpack-cli -g
 RUN npm install webpack -g
-RUN cd /app/Core.UI && npm install && webpack --mode=none
+
+WORKDIR /Core.Angular.UI
+RUN npm install 
+RUN npm run build:dev
+
+WORKDIR /Core.Angular.UI
+RUN npm install
+RUN npm run build:dev
 
 # Publish
-RUN cd /app/Core.Server && dotnet publish -v q -c Debug -o out -f netcoreapp6.0
+WORKDIR /
+RUN dotnet publish ./Core.Server/Core.Server.csproj --configuration Release --framework net8.0 --self-contained false --output /out
 
 # Build runtime image
-FROM microsoft/dotnet:6.0-aspnetcore-runtime
-WORKDIR /app
-COPY --from=build-env /app/Core.Server/out/ .
-ENTRYPOINT ["dotnet", "Core.Server.dll"]
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /
+COPY --from=build-env ./out .
+ENTRYPOINT ["dotnet", "./Core.Server/Core.Server.dll"]

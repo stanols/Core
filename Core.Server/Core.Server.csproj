@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Core.Server</RootNamespace>
+    <StartupObject>Core.Server.Program</StartupObject>
     <ApplicationIcon />
     <StartupObject />
   </PropertyGroup>
