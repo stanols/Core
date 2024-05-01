@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { BaseService } from "app/modules/common/services/base.service";
 import { UserModel } from "../models/user.model";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class UserService extends BaseService {
 	constructor(
 		httpClient: HttpClient
