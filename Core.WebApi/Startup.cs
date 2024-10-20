@@ -75,7 +75,7 @@ namespace Core.WebApi
 
 		public void Configure(IApplicationBuilder app)
 		{
-			app.UsePathBase("/client/react");
+			//app.UsePathBase("/client/react");
 			app.UsePathBase("/client/angular");
 
 			app.UseDefaultFiles();

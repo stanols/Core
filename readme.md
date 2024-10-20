@@ -84,7 +84,7 @@ dotnet ef database update --context CoreDbContext --project ./Core.DAL/Core.DAL.
 
 ```
 http://localhost:3000/react/
-http://localhost:3000/angular/
+http://localhost:8080/angular/
 ```
 
 <h2>Credentials</h2>
@@ -99,13 +99,3 @@ or
 username: katatinak
 password: montenegro44
 ```
-
-<h2>Screenshots</h2>
-
-<p>Angular</p>
-
-![alt text](https://github.com/Stanols/Core/blob/master/Core.Docs/CoreProjectAngular.png?raw=true)
-
-<p>React</p>
-
-![alt text](https://github.com/Stanols/Core/blob/master/Core.Docs/CoreProjectReact.png?raw=true)

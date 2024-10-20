@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
+using Core.DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Server
 {
@@ -19,6 +21,7 @@ namespace Core.Server
 			{
 				var webHostBuilder = CreateWebHostBuilder(arguments);
 				var webHost = webHostBuilder.Build();
+
 				_server.Run(webHost);
 			}
 			catch (Exception exception)
@@ -30,7 +33,9 @@ namespace Core.Server
 
 		public static IWebHostBuilder CreateWebHostBuilder(string[] arguments)
 		{
-			return _server.CreateWebHostBuilder(arguments);
+			var builder = _server.CreateWebHostBuilder(arguments);
+
+			return builder;
 		}
 	}
 }

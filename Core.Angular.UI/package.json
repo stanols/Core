@@ -7,8 +7,8 @@
 	"scripts": {
 		"build": "ng build --configuration=dev",
 		"build:watch": "ng build --configuration=dev --watch --output-path=\"../Core.Server/bin/Debug/net8.0/client/angular\"",
-		"build:dev": "ng build --configuration=dev --output-path=\"./client/angular\"",
-		"build:prod": "ng build --configuration=prod --output-path=\"../Core.Server/client/angular\""
+		"build:dev": "ng build --configuration=dev --output-path=\"../Core.Server/bin/Debug/net8.0/client/angular\"",
+		"build:prod": "ng build --configuration=dev --output-path=\"./out\""
 	},
 	"dependencies": {
 		"@angular/animations": "~17.1.0",
@@ -36,7 +36,6 @@
 		"@ngrx/store": "~17.1.0",
 		"@ngrx/store-devtools": "~17.1.0",
 		"bootstrap": "~5.3.2",
-		"devextreme": "~23.2.3",
 		"jquery": "~3.7.1",
 		"moment": "~2.30.1",
 		"moment-timezone": "~0.5.44",
