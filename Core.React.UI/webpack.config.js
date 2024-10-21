@@ -12,7 +12,7 @@ module.exports = (mode) => {
 			'./index.jsx'
 		],
 		output: {
-			path: path.join(__dirname, '/../Core.Server/bin/Debug/net8.0/client/react'),
+			path: mode === 'development' ? path.join(__dirname, '/../Core.Server/bin/Debug/net8.0/client/react') : './out',
 			filename: 'bundle.js',
 			clean: true
 		},

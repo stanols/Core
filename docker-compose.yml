@@ -15,7 +15,7 @@ services:
     working_dir: /app
     image: "core/server"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=development
       - ASPNETCORE_URLS=https://*:8081;http://*:8080
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081

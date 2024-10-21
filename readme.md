@@ -72,10 +72,6 @@ cd {basePath}/Core/
 dotnet ef database update --context CoreDbContext --project ./Core.DAL/Core.DAL.csproj --startup-project ./Core.Server/Core.Server.csproj --verbose
 ```
 
-<p>Schema</p>
-
-![alt text](https://github.com/Stanols/Core/blob/master/Core.Docs/CoreProjectDatabaseScheme.png?raw=true)
-
 <h2>Run app and login</h2>
 
 1. Set {basePath}/Core/Core.Server as startup project in Visual Studio
@@ -83,8 +79,14 @@ dotnet ef database update --context CoreDbContext --project ./Core.DAL/Core.DAL.
 2. Run (F5). Check if server is available on
 
 ```
-http://localhost:3000/react/
+http://localhost:8080/react/
 http://localhost:8080/angular/
+```
+
+3. Another option is to run using docker
+
+```
+docker compose up
 ```
 
 <h2>Credentials</h2>

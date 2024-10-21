@@ -9,6 +9,10 @@ using Core.BLL;
 using Core.BLL.Interfaces;
 using Core.DAL;
 using Core.WebApi.Hubs;
+using Microsoft.AspNetCore.Hosting;
+using System.Diagnostics.Metrics;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 
 namespace Core.WebApi
@@ -75,7 +79,7 @@ namespace Core.WebApi
 
 		public void Configure(IApplicationBuilder app)
 		{
-			//app.UsePathBase("/client/react");
+			app.UsePathBase("/client/react");
 			app.UsePathBase("/client/angular");
 
 			app.UseDefaultFiles();
@@ -92,10 +96,20 @@ namespace Core.WebApi
 			app.UseEndpoints(routes =>
 			{
 				routes.MapControllers();
-				routes.MapHub<ChatHub>($"/hubs/{nameof(ChatHub)}");
-			});
+                routes.MapHub<ChatHub>($"/hubs/{nameof(ChatHub)}");
+            });
 
-			app.Build();
-		}
+            app.Build();
+
+            var isDevelopment = string.Equals(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"), "development", StringComparison.InvariantCultureIgnoreCase);
+            if (!isDevelopment)
+			{
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var context = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
+                    context.Database.Migrate();
+                }
+            }
+        }
 	}
 }

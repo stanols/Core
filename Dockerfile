@@ -1,53 +1,41 @@
 # Environment
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 as base
-WORKDIR /app
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+
+WORKDIR /
 
 USER app
 
 EXPOSE 8080
 EXPOSE 8081
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 as build-server
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-server
 
 # Install
 RUN apt-get update && apt-get upgrade -y && \
 	apt-get install -y nodejs
 
 # Server
-WORKDIR /
-COPY ./Core.Server/Core.Server.csproj ./Core.Server/
-COPY ./Core.WebApi/Core.WebApi.csproj ./Core.WebApi/
-COPY ./Core.BLL/Core.BLL.csproj ./Core.BLL/
-COPY ./Core.DAL/Core.DAL.csproj ./Core.DAL/
-COPY ./Core.Angular.UI ./Core.Angular.UI/
-COPY ./Core.React.UI ./Core.React.UI/
-COPY ./Core.Server.sln ./
-COPY ./Core.Server/appsettings.json ./Core.Server/appsettings.json
+COPY . /coresrc
 
-WORKDIR /Core.Server
-RUN dotnet restore ./Core.Server.csproj
-COPY . ./
+RUN dotnet restore /coresrc/Core.Server/Core.Server.csproj
 
-WORKDIR /
-RUN dotnet publish ./Core.Server/Core.Server.csproj --configuration Release --output out
+RUN dotnet publish /coresrc/Core.Server/Core.Server.csproj --configuration Release --output /coresrc/Core.Server/out
 
 # Client
-FROM node:20.12.2-alpine as build-client
+FROM node:20.12.2-alpine AS build-client
 
 RUN npm install webpack-cli -g && \
 	npm install webpack -g && \
 	npm install -g @angular/cli
 
-WORKDIR /
-COPY ./Core.Angular.UI ./
+COPY ./Core.Angular.UI /coreuisrc/Core.Angular.UI
 
-FROM build-client
-WORKDIR /
+WORKDIR /coreuisrc/Core.Angular.UI
 RUN npm install && npm run build:prod
 
 # Image
-FROM base as final
-WORKDIR /app
-COPY --from=build-server ./out ./
-COPY --from=build-client ./out ./client/angular
+FROM base
+COPY --from=build-client /coreuisrc/Core.Angular.UI/out /app/client/angular
+COPY --from=build-server /coresrc/Core.Server/out /app
+
 ENTRYPOINT ["dotnet", "Core.Server.dll"]
