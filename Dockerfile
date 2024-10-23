@@ -39,9 +39,15 @@ COPY ./Core.Angular.UI /coreuisrc/Core.Angular.UI
 WORKDIR /coreuisrc/Core.Angular.UI
 RUN npm install && npm run build:prod
 
+COPY ./Core.React.UI /coreuisrc/Core.React.UI
+
+WORKDIR /coreuisrc/Core.React.UI
+RUN npm install && npm run build:prod
+
 # Image
 FROM base
 COPY --from=build-client /coreuisrc/Core.Angular.UI/out /app/client/angular
+COPY --from=build-client /coreuisrc/Core.React.UI/out /app/client/react
 COPY --from=build-server /coresrc/Core.Server/out /app
 
 ENTRYPOINT ["dotnet", "Core.Server.dll"]
