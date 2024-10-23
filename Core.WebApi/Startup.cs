@@ -96,20 +96,16 @@ namespace Core.WebApi
 			app.UseEndpoints(routes =>
 			{
 				routes.MapControllers();
-                routes.MapHub<ChatHub>($"/hubs/{nameof(ChatHub)}");
-            });
+				routes.MapHub<ChatHub>($"/hubs/{nameof(ChatHub)}");
+			});
 
-            app.Build();
+			app.Build();
 
-            var isDevelopment = string.Equals(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"), "development", StringComparison.InvariantCultureIgnoreCase);
-            if (!isDevelopment)
+			using (var scope = app.ApplicationServices.CreateScope())
 			{
-                using (var scope = app.ApplicationServices.CreateScope())
-                {
-                    var context = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
-                    context.Database.Migrate();
-                }
-            }
-        }
+				var context = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
+				context.Database.Migrate();
+			}
+		}
 	}
 }
