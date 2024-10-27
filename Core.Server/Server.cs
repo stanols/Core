@@ -27,10 +27,11 @@ namespace Core.Server
 		{
 			const string webRootKey = "webRoot";
 			const string urlKey = "url";
+			const string urlHttpsKey = "urlHttps";
 
 			var builder = WebHost.CreateDefaultBuilder(arguments);
 			//var webRoot = Path.Combine(Directory.GetCurrentDirectory(), _config[webRootKey]);
-			var urls = new[] { _config[urlKey] };
+			var urls = new[] { _config[urlKey], _config[urlHttpsKey] };
 			var webHostBuilder = builder
 				.UseConfiguration(_config)
 				.UseUrls(urls)

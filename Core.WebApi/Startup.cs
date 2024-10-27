@@ -9,6 +9,10 @@ using Core.BLL;
 using Core.BLL.Interfaces;
 using Core.DAL;
 using Core.WebApi.Hubs;
+using Microsoft.AspNetCore.Hosting;
+using System.Diagnostics.Metrics;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 
 namespace Core.WebApi
@@ -85,6 +89,11 @@ namespace Core.WebApi
 				.AllowAnyMethod()
 				.AllowAnyHeader());
 
+			app.UseHttpsRedirection();
+			app.UseHsts();
+
+			//app.UseExceptionHandler("/Error");
+
 			app.UseRouting();
 			app.UseAuthentication();
 			app.UseAuthorization();
@@ -96,6 +105,12 @@ namespace Core.WebApi
 			});
 
 			app.Build();
+
+			using (var scope = app.ApplicationServices.CreateScope())
+			{
+				var context = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
+				context.Database.Migrate();
+			}
 		}
 	}
 }
