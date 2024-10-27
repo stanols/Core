@@ -48,6 +48,7 @@ RUN npm install && npm run build:prod
 FROM base
 COPY --from=build-client /coreuisrc/Core.Angular.UI/out /app/client/angular
 COPY --from=build-client /coreuisrc/Core.React.UI/out /app/client/react
+COPY --from=build-server /coresrc/aspnetapp.pfx /app/aspnetapp.pfx
 COPY --from=build-server /coresrc/Core.Server/out /app
 
 ENTRYPOINT ["dotnet", "Core.Server.dll"]

@@ -19,6 +19,8 @@ services:
       - ASPNETCORE_URLS=https://*:8081;http://*:8080
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=asus
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/aspnetapp.pfx
     ports:
     - name: web
       target: 8080
@@ -44,8 +46,3 @@ services:
     depends_on:
       - core.database
     network_mode: host
-
-networks:
-  core-network:
-    driver_opts:
-      com.docker.network.bridge.host_binding_ipv4: "172.0.0.1"

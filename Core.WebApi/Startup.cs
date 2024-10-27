@@ -89,6 +89,11 @@ namespace Core.WebApi
 				.AllowAnyMethod()
 				.AllowAnyHeader());
 
+			app.UseHttpsRedirection();
+			app.UseHsts();
+
+			//app.UseExceptionHandler("/Error");
+
 			app.UseRouting();
 			app.UseAuthentication();
 			app.UseAuthorization();
