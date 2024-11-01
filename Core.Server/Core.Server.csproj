@@ -2,6 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>12.0</LangVersion>
     <RootNamespace>Core.Server</RootNamespace>
     <StartupObject>Core.Server.Program</StartupObject>
     <PlatformTarget>AnyCPU</PlatformTarget>

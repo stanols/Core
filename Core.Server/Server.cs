@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
@@ -26,16 +25,20 @@ namespace Core.Server
 		public IWebHostBuilder CreateWebHostBuilder(string[] arguments)
 		{
 			const string webRootKey = "webRoot";
-			const string urlKey = "url";
-			const string urlHttpsKey = "urlHttps";
+			const string httpUrlKey = "httpUrl";
+			const string httpsUrlKey = "httpsUrl";
 
 			var builder = WebHost.CreateDefaultBuilder(arguments);
-			//var webRoot = Path.Combine(Directory.GetCurrentDirectory(), _config[webRootKey]);
-			var urls = new[] { _config[urlKey], _config[urlHttpsKey] };
+			var urls = new[] {
+				_config[httpUrlKey],
+				_config[httpsUrlKey]
+			};
+			var webRoot = _config[webRootKey];
+
 			var webHostBuilder = builder
 				.UseConfiguration(_config)
 				.UseUrls(urls)
-				.UseWebRoot(_config[webRootKey])
+				.UseWebRoot(webRoot)
 				.UseKestrel()
 				.UseIISIntegration()
 				.ConfigureLogging((hostingContext, logging) =>

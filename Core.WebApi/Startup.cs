@@ -9,11 +9,7 @@ using Core.BLL;
 using Core.BLL.Interfaces;
 using Core.DAL;
 using Core.WebApi.Hubs;
-using Microsoft.AspNetCore.Hosting;
-using System.Diagnostics.Metrics;
-using Microsoft.EntityFrameworkCore;
-using System;
-
+using Core.DAL.Extensions;
 
 namespace Core.WebApi
 {
@@ -28,7 +24,7 @@ namespace Core.WebApi
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			const string secret = "secret";
+			const string secretKey = "secret";
 
 			services.AddSingleton(_config);
 			services.AddDbContext(_config);
@@ -37,8 +33,9 @@ namespace Core.WebApi
 			services.AddCors();
 			services.AddMvc();
 
-			var secretKey = _config[secret];
-			var key = Encoding.ASCII.GetBytes(secretKey);
+			var secret = _config[secretKey];
+			var symmetricSecurityKey = Encoding.ASCII.GetBytes(secret);
+
 			services
 				.AddAuthentication(x =>
 				{
@@ -67,7 +64,7 @@ namespace Core.WebApi
 					x.TokenValidationParameters = new TokenValidationParameters
 					{
 						ValidateIssuerSigningKey = true,
-						IssuerSigningKey = new SymmetricSecurityKey(key),
+						IssuerSigningKey = new SymmetricSecurityKey(symmetricSecurityKey),
 						ValidateIssuer = false,
 						ValidateAudience = false,
 						ValidateLifetime = true
@@ -92,8 +89,7 @@ namespace Core.WebApi
 			app.UseHttpsRedirection();
 			app.UseHsts();
 
-			//app.UseExceptionHandler("/Error");
-
+			app.UseExceptionHandler("/error");
 			app.UseRouting();
 			app.UseAuthentication();
 			app.UseAuthorization();
@@ -106,11 +102,7 @@ namespace Core.WebApi
 
 			app.Build();
 
-			using (var scope = app.ApplicationServices.CreateScope())
-			{
-				var context = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
-				context.Database.Migrate();
-			}
+			app.UseMigrations();
 		}
 	}
 }

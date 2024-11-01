@@ -5,7 +5,7 @@ using Core.WebApi.Hubs.Clients.Messages;
 
 namespace Core.WebApi.Hubs
 {
-	public class ChatHub : Hub<IChartClient>
+	public class ChatHub : Hub<IChatClient>
 	{
 		public ChatHub()
 		{
