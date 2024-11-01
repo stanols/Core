@@ -16,6 +16,8 @@
 
 <h3>Run using Docker</h3>
 
+Make sure host networking is enabled
+
 ```
 docker compose up
 ```

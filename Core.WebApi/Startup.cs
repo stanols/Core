@@ -1,7 +1,9 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -10,11 +12,6 @@ using Core.BLL.Interfaces;
 using Core.DAL;
 using Core.WebApi.Hubs;
 using Core.DAL.Extensions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.Certificate;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Claims;
-using Microsoft.Extensions.Options;
 
 namespace Core.WebApi
 {
@@ -90,6 +87,7 @@ namespace Core.WebApi
 							var userService = context.HttpContext.RequestServices.GetRequiredService<IUserService>();
 							var id = int.Parse(context.Principal.Identity.Name);
 							var user = userService.Get(id);
+
 							if (user == null)
 							{
 								context.Fail("Unauthorized");
@@ -143,12 +141,7 @@ namespace Core.WebApi
 
 			app.Build();
 
-            //app.UseMigrations();
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
-                context.Database.Migrate();
-            }
-        }
+			app.UseMigrations();
+		}
 	}
 }

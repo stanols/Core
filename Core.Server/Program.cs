@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Authentication.Certificate;
 
 namespace Core.Server
 {
