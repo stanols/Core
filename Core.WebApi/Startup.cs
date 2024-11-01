@@ -10,6 +10,7 @@ using Core.BLL.Interfaces;
 using Core.DAL;
 using Core.WebApi.Hubs;
 using Core.DAL.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.WebApi
 {
@@ -102,7 +103,12 @@ namespace Core.WebApi
 
 			app.Build();
 
-			app.UseMigrations();
-		}
+            //app.UseMigrations();
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<CoreDbContext>();
+                context.Database.Migrate();
+            }
+        }
 	}
 }
