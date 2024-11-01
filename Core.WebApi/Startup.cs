@@ -11,6 +11,10 @@ using Core.DAL;
 using Core.WebApi.Hubs;
 using Core.DAL.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Certificate;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Claims;
+using Microsoft.Extensions.Options;
 
 namespace Core.WebApi
 {
@@ -42,6 +46,40 @@ namespace Core.WebApi
 				{
 					x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 					x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+					x.DefaultScheme = CertificateAuthenticationDefaults.AuthenticationScheme;
+				})
+				.AddCertificate(x =>
+				{
+					x.Events = new CertificateAuthenticationEvents
+					{
+						OnCertificateValidated = context =>
+						{
+							var claims = new []
+							{
+								new Claim(
+									ClaimTypes.NameIdentifier,
+									context.ClientCertificate.Subject,
+									ClaimValueTypes.String,
+									context.Options.ClaimsIssuer
+								),
+								new Claim(
+									ClaimTypes.Name,
+									context.ClientCertificate.Subject,
+									ClaimValueTypes.String,
+									context.Options.ClaimsIssuer
+								)
+							};
+
+							var claimsIdentity = new ClaimsIdentity(claims, context.Scheme.Name);
+
+							context.Principal = new ClaimsPrincipal(claimsIdentity);
+							context.Success();
+
+							return Task.CompletedTask;
+						}
+					};
+					x.AllowedCertificateTypes = CertificateTypes.SelfSigned;
+					x.ValidateCertificateUse = true;
 				})
 				.AddJwtBearer(x =>
 				{
@@ -60,7 +98,7 @@ namespace Core.WebApi
 							return Task.CompletedTask;
 						}
 					};
-					x.RequireHttpsMetadata = false;
+					x.RequireHttpsMetadata = true;
 					x.SaveToken = true;
 					x.TokenValidationParameters = new TokenValidationParameters
 					{
@@ -87,11 +125,13 @@ namespace Core.WebApi
 				.AllowAnyMethod()
 				.AllowAnyHeader());
 
+			app.UseCertificateForwarding();
 			app.UseHttpsRedirection();
 			app.UseHsts();
 
 			app.UseExceptionHandler("/error");
 			app.UseRouting();
+
 			app.UseAuthentication();
 			app.UseAuthorization();
 

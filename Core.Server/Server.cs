@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore;
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
@@ -24,9 +28,11 @@ namespace Core.Server
 
 		public IWebHostBuilder CreateWebHostBuilder(string[] arguments)
 		{
-			const string webRootKey = "webRoot";
 			const string httpUrlKey = "httpUrl";
 			const string httpsUrlKey = "httpsUrl";
+			const string webRootKey = "webRoot";
+			const string certificateFileNameKey = "certificateFileName";
+			const string certificatePasswordKey = "certificatePassword";
 
 			var builder = WebHost.CreateDefaultBuilder(arguments);
 			var urls = new[] {
@@ -34,12 +40,25 @@ namespace Core.Server
 				_config[httpsUrlKey]
 			};
 			var webRoot = _config[webRootKey];
+			var certificateFileName = _config[certificateFileNameKey];
+			var certificatePassword = _config[certificatePasswordKey];
 
 			var webHostBuilder = builder
 				.UseConfiguration(_config)
 				.UseUrls(urls)
 				.UseWebRoot(webRoot)
-				.UseKestrel()
+				.UseKestrel(options =>
+				{
+					options.Listen(IPAddress.Loopback, 8080);
+					options.Listen(IPAddress.Loopback, 8081, listenOptions =>
+					{
+						var certificate = new X509Certificate2(
+							certificateFileName,
+							certificatePassword
+						);
+						listenOptions.UseHttps(certificate);
+					});
+				})
 				.UseIISIntegration()
 				.ConfigureLogging((hostingContext, logging) =>
 				{

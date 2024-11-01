@@ -5,7 +5,7 @@ export default class BaseService {
 	constructor(path) {
 		this.basePath = `/api/${path}`;
 		this.api = axios.create({
-			baseURL: 'http://localhost:3000',
+			baseURL: 'https://localhost:8081',
 			headers: {
 				'Content-Type': 'application/json'
 			}
