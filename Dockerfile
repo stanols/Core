@@ -28,7 +28,7 @@ RUN dotnet restore /coresrc/Core.Server/Core.Server.csproj
 RUN dotnet publish /coresrc/Core.Server/Core.Server.csproj --configuration Release --output /coresrc/Core.Server/out
 
 # Client
-FROM node:20.12.2-alpine AS build-client
+FROM node:20.12.2-alpine3.19 AS build-client
 
 RUN npm install webpack-cli -g && \
 	npm install webpack -g && \

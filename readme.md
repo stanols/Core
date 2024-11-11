@@ -44,6 +44,13 @@ username: katatinak
 password: montenegro44
 ```
 
+<h3>Swagger</h3>
+
+```
+http://localhost:8080/swagger/
+https://localhost:8081/swagger/
+```
+
 <h3>Build react UI</h3>
 
 1. Install npm packages specified in {basePath}/Core/Core.React.UI/package.json

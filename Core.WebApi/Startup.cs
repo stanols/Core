@@ -109,6 +109,10 @@ namespace Core.WebApi
 				});
 
 			services.AddSignalR();
+
+			services.AddEndpointsApiExplorer();
+			services.AddSwaggerGen();
+			services.AddSwaggerGenNewtonsoftSupport();
 		}
 
 		public void Configure(IApplicationBuilder app)
@@ -140,6 +144,9 @@ namespace Core.WebApi
 			});
 
 			app.Build();
+
+			app.UseSwagger();
+			app.UseSwaggerUI();
 
 			app.UseMigrations();
 		}
