@@ -4,7 +4,7 @@ using Core.DAL.Entities;
 
 namespace Core.DAL.Interfaces
 {
-	public interface IBaseRepository<T> where T : BaseEntity
+	public interface IBaseRepository<T> where T : class
 	{
 		T Get(int id);
 		T GetBy(Func<T, bool> predicate);

@@ -34,7 +34,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Core.BLL\Core.BLL.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Middlewares\" />
-  </ItemGroup>
 </Project>

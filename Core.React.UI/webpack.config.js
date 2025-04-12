@@ -4,7 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require('compression-webpack-plugin');
 
-module.exports = (mode) => {
+module.exports = (env, argv) => {
+	const mode = argv.mode || 'production';
+	const outputPath = mode === 'development'
+		? path.join(__dirname, '/../Core.Server/bin/Debug/net8.0/client/react')
+		: path.join(__dirname, '/out');
+	console.log("Mode: " + JSON.stringify(mode));
+	console.log("Output: " + outputPath);
+
 	const config = {
 		mode: mode,
 		devtool: 'source-map',
@@ -12,7 +19,7 @@ module.exports = (mode) => {
 			'./index.jsx'
 		],
 		output: {
-			path: mode === 'development' ? path.join(__dirname, '/../Core.Server/bin/Debug/net8.0/client/react') : path.join(__dirname, '/out'),
+			path: outputPath,
 			filename: 'bundle.js',
 			clean: true
 		},

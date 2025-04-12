@@ -11,6 +11,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.less';
 import { createBrowserHistory } from 'history';
 
+// Higher-Order Component for private routes
+const PrivateRoute = ({ element }) => (
+	<div className="content">
+		<HeaderContainer />
+		{element}
+		<FooterContainer />
+	</div>
+);
+
+// Factory function to create routes
+const createRoutes = (routes) => {
+	return routes.map((item, index) => {
+		const element = item.private ? <PrivateRoute element={item.element} /> : item.element;
+		return <Route exact={item.exact} key={index} path={item.path} element={element} />;
+	});
+};
+
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -56,25 +73,7 @@ export default class App extends React.Component {
 	render() {
 		const history = createBrowserHistory();
 		const routes = this.getRoutes();
-		const routeComponents = routes.map((item, index) => {
-			if (item.private) {
-				const element = (
-					<div className="content">
-						<HeaderContainer />
-						{item.element}
-						<FooterContainer />
-					</div>
-				);
-
-				return (
-					<Route exact={item.exact} key={index} path={item.path} element={element} />
-				);
-			}
-
-			return (
-				<Route exact={item.exact} key={index} path={item.path} element={item.element} />
-			);
-		});
+		const routeComponents = createRoutes(routes);
 
 		return (
 			<Container>

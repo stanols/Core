@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.WebApi.Controllers
 {
-	[Authorize]
 	public class AdventureController : BaseController
 	{
 		private readonly IAdventureService _adventureService;
@@ -17,12 +16,14 @@ namespace Core.WebApi.Controllers
 			_adventureService = adventureService;
 		}
 
+		[Authorize]
 		[HttpPost]
 		public int Create([FromBody]AdventureViewModel adventureViewModel)
 		{
 			return _adventureService.Create(adventureViewModel);
 		}
 
+		[Authorize]
 		[HttpGet]
 		public AdventureViewModel Get([FromQuery] int id)
 		{
@@ -31,6 +32,7 @@ namespace Core.WebApi.Controllers
 			return adventure;
 		}
 
+		[Authorize]
 		[HttpGet]
 		public List<AdventureViewModel> GetAll()
 		{
@@ -39,6 +41,7 @@ namespace Core.WebApi.Controllers
 			return adventures;
 		}
 
+		[Authorize]
 		[HttpGet]
 		public async Task<List<AdventureViewModel>> GetAdventuresList()
 		{
@@ -47,6 +50,7 @@ namespace Core.WebApi.Controllers
 			return adventures;
 		}
 
+		[Authorize]
 		[HttpGet]
 		public List<AdventureViewModel> GetAllBy([FromQuery] string name)
 		{
@@ -55,12 +59,14 @@ namespace Core.WebApi.Controllers
 			return adventures;
 		}
 
+		[Authorize]
 		[HttpPut]
 		public void Update([FromBody] AdventureViewModel adventureViewModel)
 		{
 			_adventureService.Update(adventureViewModel);
 		}
 
+		[Authorize]
 		[HttpDelete]
 		public void Remove([FromQuery]int id)
 		{

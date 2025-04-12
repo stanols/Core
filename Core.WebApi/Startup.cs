@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Core.DAL;
+using Core.DAL.Extensions;
 using Core.BLL;
 using Core.BLL.Interfaces;
-using Core.DAL;
 using Core.WebApi.Hubs;
-using Core.DAL.Extensions;
 
 namespace Core.WebApi
 {
@@ -136,6 +136,8 @@ namespace Core.WebApi
 
 			app.UseAuthentication();
 			app.UseAuthorization();
+
+			app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 			app.UseEndpoints(routes =>
 			{

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.WebApi.Controllers
 {
-	[Authorize]
 	public class ExperienceController : BaseController
 	{
 		private readonly IExperienceService _experienceService;
@@ -17,6 +16,7 @@ namespace Core.WebApi.Controllers
 			_experienceService = experienceService;
 		}
 
+		[Authorize]
 		[HttpGet]
 		public List<ExperienceInfoViewModel> GetAll()
 		{
