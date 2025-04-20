@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Controllers\**" />
+    <Content Remove="Models\**" />
+    <Content Include="app\pages\account\account.vue" />
+    <Content Include="app\pages\home\home.vue" />
+    <Content Include="app\pages\summary\summary.vue" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="img\favicon.ico" />
+    <TypeScriptCompile Include="vite.config.ts" />
+    <None Include="app\app.vue" />
+    <TypeScriptCompile Include="app\router.ts" />
+    <TypeScriptCompile Include="index.ts" />
+    <Content Include="eslint.config.js" />
+    <Content Include="index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="styles\" />
+  </ItemGroup>
+
+</Project>

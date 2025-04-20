@@ -96,7 +96,11 @@ module.exports = (env, argv) => {
 			]
 		},
 		resolve: {
-			extensions: ['*', '.js', '.jsx'],
+			modules: [
+				path.join(__dirname, '/'),
+				'node_modules'
+			],
+			extensions: ['*', '.webpack.js', '.web.js', '.json', '.js', '.jsx', '.react.js']
 		},
 		plugins: [
 			new webpack.ProvidePlugin({
@@ -114,13 +118,6 @@ module.exports = (env, argv) => {
 				favicon: 'img/favicon.ico',
 			})
 		],
-		resolve: {
-			modules: [
-				path.join(__dirname, '/'),
-				'node_modules'
-			],
-			extensions: ['*', '.webpack.js', '.web.js', '.json', '.js', '.jsx', '.react.js']
-		}
 	};
 
 	if (mode === 'production') {
