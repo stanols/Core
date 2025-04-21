@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import analyzer from 'rollup-plugin-analyzer';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { defineConfig } from 'vite';
+import * as path from 'path';
 
 export default defineConfig((arg) => {
     const environment = arg.mode == 'development'
@@ -10,14 +11,24 @@ export default defineConfig((arg) => {
         : 'production';
 
     return {
+        base: './',
         mode: environment,
         build: {
+            rollupOptions: {
+                input: {
+                    main: path.resolve(__dirname, 'index.html')
+                },
+                output: {
+                    assetFileNames: '[name][extname]',
+                    chunkFileNames: '[name].js',
+                    entryFileNames: '[name].js'
+                }
+            },
             outDir: '../Core.Server/bin/Debug/net8.0/client/vue',
             emptyOutDir: true
         },
         resolve: {
             alias: {
-                src: fileURLToPath(new URL('app', import.meta.url)),
             }
         },
         plugins: [

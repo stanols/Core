@@ -6,11 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="angular.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="app\modules\home\" />
+    <Folder Include="app\" />
+    <Folder Include="img\" />
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

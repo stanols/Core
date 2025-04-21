@@ -2,25 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ApplicationIcon />
     <OutputType>Library</OutputType>
-    <StartupObject />
-    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="app\components\common\dashboard\**" />
-    <Compile Remove="app\components\common\list\**" />
-    <Content Remove="app\components\common\dashboard\**" />
-    <Content Remove="app\components\common\list\**" />
-    <EmbeddedResource Remove="app\components\common\dashboard\**" />
-    <EmbeddedResource Remove="app\components\common\list\**" />
-    <None Remove="app\components\common\dashboard\**" />
-    <None Remove="app\components\common\list\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="app\components\common\" />
+    <Folder Include="app\" />
     <Folder Include="img\" />
     <Folder Include="Properties\" />
   </ItemGroup>

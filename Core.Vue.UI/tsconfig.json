@@ -8,6 +8,7 @@
         "downlevelIteration": true,
         "experimentalDecorators": true,
         "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
         "importHelpers": true,
         "useDefineForClassFields": false,
         "target": "es2022",
@@ -15,13 +16,8 @@
         "lib": [
             "es2022",
             "dom"
-        ]
+        ],
+        "types": ["vite/client"]
     },
-    "angularCompilerOptions": {
-        "enableI18nLegacyMessageIdFormat": false,
-        "strictInjectionParameters": true,
-        "strictInputAccessModifiers": true,
-        "strictTemplates": true,
-        "sourceMap": true
-    }
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
 }
