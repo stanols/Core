@@ -26,9 +26,10 @@ docker compose up
 
 ```
 http://localhost:8080/react/
-http://localhost:8080/angular/
 https://localhost:8081/react/
+http://localhost:8080/angular/
 https://localhost:8081/angular/
+https://localhost:8081/vue/
 ```
 
 <h3>Credentials:</h3>
