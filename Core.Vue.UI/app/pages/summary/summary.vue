@@ -1,13 +1,14 @@
 <template>
-    I am Summary!
+	<div>
+		I am Summary!
+	</div>
 </template>
 
 <script setup lang="ts">
-    import { SummaryComponent } from './summary.view.ts';
+	import { Summary } from './summary.ts';
 
-    const SummaryComponent = new SummaryComponent();
+	const summary = new Summary();
 </script>
 
 <style scoped>
-
 </style>

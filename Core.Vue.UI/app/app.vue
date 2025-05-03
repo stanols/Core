@@ -1,16 +1,21 @@
-<template>
-    <div class="app">Vue application</div>
-    <div @click="appComponent.increment">
-        Count: {{ appComponent.count }}
-    </div>
-</template>
-
 <script setup lang="ts">
-    import { AppComponent } from './app.view.ts';
+	import { ref } from 'vue';
+	import { App } from './app.ts';
+	import Login from './pages/login/Login.vue';
+	import Header from './pages/layout/header/Header.vue';
+	import Footer from './pages/layout/footer/Footer.vue';
 
-    const appComponent = new AppComponent();
+	const app = new App();
+	const title = ref('Sign In');
 </script>
 
+<template>
+	<div class="app">
+		<Header></Header>
+		<!-- <Login v-bind:title="title"></Login> -->
+		<Footer></Footer>
+	</div>
+</template>
+
 <style scoped>
-    
 </style>

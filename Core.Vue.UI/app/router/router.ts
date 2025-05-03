@@ -5,42 +5,44 @@ import Summary from '../pages/summary/summary.vue';
 import Account from '../pages/account/account.vue';
 
 export type AppRouteNames =
-    | 'home'
-    | 'summary'
-    | 'account'
-    | '**';
+	| 'home'
+	| 'summary'
+	| 'account'
+	| '**';
 
 export const routes: RouteRecordRaw[] = [
-    {
-       name: 'home',
-       path: '/',
-       component: Home
-    },
-    {
-       name: 'home',
-       path: '/home',
-       component: Home,
-    },
-    {
-       name: 'summary',
-       path: '/summary',
-       component: Summary
-    },
-    {
-        name: 'account',
-        path: '/account',
-        component: Account
-    }
+	{
+		name: 'home',
+		path: '/',
+		component: Home
+	},
+	{
+		name: 'home',
+		path: '/home',
+		component: Home,
+	},
+	{
+		name: 'summary',
+		path: '/summary',
+		component: Summary
+	},
+	{
+		name: 'account',
+		path: '/account',
+		component: Account
+	}
 ];
 
-export const router = createRouter({
-    linkActiveClass: 'active',
-    history: createWebHashHistory(),
-    routes,
+const router = createRouter({
+	linkActiveClass: 'active',
+	history: createWebHashHistory(),
+	routes,
 });
 
-export function routerPush(name: AppRouteNames, params?: RouteParams): ReturnType<typeof router.push> {
-    return params === undefined
-        ? router.push({ name })
-        : router.push({ name, params });
+export function push(name: AppRouteNames, params?: RouteParams): ReturnType<typeof router.push> {
+	return params === undefined
+		? router.push({ name })
+		: router.push({ name, params });
 }
+
+export default router;

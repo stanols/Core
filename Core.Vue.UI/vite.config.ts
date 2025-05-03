@@ -6,42 +6,42 @@ import { defineConfig } from 'vite';
 import * as path from 'path';
 
 export default defineConfig((arg) => {
-    const environment = arg.mode == 'development'
-        ? 'development'
-        : 'production';
+	const environment = arg.mode == 'development'
+		? 'development'
+		: 'production';
 
-    return {
-        base: './',
-        mode: environment,
-        build: {
-            rollupOptions: {
-                input: {
-                    main: path.resolve(__dirname, 'index.html')
-                },
-                output: {
-                    assetFileNames: '[name][extname]',
-                    chunkFileNames: '[name].js',
-                    entryFileNames: '[name].js'
-                }
-            },
-            outDir: '../Core.Server/bin/Debug/net8.0/client/vue',
-            emptyOutDir: true
-        },
-        resolve: {
-            alias: {
-            }
-        },
-        plugins: [
-            vue(),
-            analyzer({ summaryOnly: true }),
-            viteStaticCopy({
-                targets: [
-                    {
-                        src: 'img/*',
-                        dest: './'
-                    }
-                ]
-            })
-        ]
-    };
+	return {
+		base: './',
+		mode: environment,
+		build: {
+			rollupOptions: {
+				input: {
+					main: path.resolve(__dirname, 'index.html')
+				},
+				output: {
+					assetFileNames: '[name][extname]',
+					chunkFileNames: '[name].js',
+					entryFileNames: '[name].js'
+				}
+			},
+			outDir: '../Core.Server/bin/Debug/net8.0/client/vue',
+			emptyOutDir: true
+		},
+		resolve: {
+			alias: {
+			}
+		},
+		plugins: [
+			vue(),
+			analyzer({ summaryOnly: true }),
+			viteStaticCopy({
+				targets: [
+					{
+						src: 'img/*',
+						dest: './'
+					}
+				]
+			})
+		]
+	};
 });

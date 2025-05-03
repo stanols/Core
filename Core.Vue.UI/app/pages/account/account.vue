@@ -1,12 +1,11 @@
 <template>
-    I am Account!
+	I am Account!
 </template>
 
 <script setup lang="ts">
-    import { AccountComponent } from './account.view.ts';
-    const accountComponent = new AccountComponent();
+	import { Account } from './account.ts';
+	const account = new Account();
 </script>
 
 <style scoped>
-
 </style>
