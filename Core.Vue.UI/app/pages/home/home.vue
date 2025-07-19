@@ -1,15 +1,15 @@
-<template>
-	<div class="home">
-		<h1>Home</h1>
-		<p>Welcome to the home page!</p>
-	</div>
-</template>
-
 <script setup lang="ts">
 	import { Home } from './home.ts';
+	import Navigation from '../../pages/layout/navigation/Navigation.vue';
 
 	const home = new Home();
 </script>
+
+<template>
+	<div class="home">
+		<Navigation></Navigation>
+	</div>
+</template>
 
 <style scoped>
 </style>

@@ -22,10 +22,15 @@ export default defineConfig((arg) => {
 					assetFileNames: '[name][extname]',
 					chunkFileNames: '[name].js',
 					entryFileNames: '[name].js'
-				}
+				},
+				external: [
+					"node_modules/jquery/dist/jquery.min.js",
+					"node_modules/bootstrap/dist/js/bootstrap.min.js"
+				]
 			},
 			outDir: '../Core.Server/bin/Debug/net8.0/client/vue',
-			emptyOutDir: true
+			emptyOutDir: true,
+			sourcemap: environment === 'development',
 		},
 		resolve: {
 			alias: {
