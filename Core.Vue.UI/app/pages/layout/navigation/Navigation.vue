@@ -1,12 +1,32 @@
 <script setup lang="ts">
-	import { ref, onMounted } from 'vue';
+	import { ref, reactive, onMounted } from 'vue';
 	import { useRoute, useRouter } from 'vue-router';
-	import { Navigation } from './navigation.ts';
 
-	const navigation = new Navigation();
+	let activeId = ref(1);
+	const items = ref([
+		{
+			id: 1,
+			name: 'Adventures',
+			icon: "th-list",
+			route: 'adventures'
+		},
+		{
+			id: 2,
+			name: 'Experiences',
+			icon: "tasks",
+			route: 'experiences'
+		},
+		{
+			id: 3,
+			name: 'Group Chat',
+			icon: "comment",
+			route: 'chat'
+		}
+	]);
 
-	const items = ref(navigation.items);
-	const activeId = ref(navigation.activeId);
+	const onItemClick = (item: any) => {
+		activeId.value = item.id;
+	};
 </script>
 
 <template>
@@ -16,32 +36,25 @@
 				<div
 					class="nav nav-pills flex-column"
 					orientation="vertical"
-					v-bind:activeId="navigation.activeId"
+					v-bind:activeId="activeId"
 				>
 					<div
 						class="nav-item"
-						v-for="item in navigation.items"
+						v-for="item in items"
 						:key="item.id"
-						@click="navigation.onItemClick(item)"
+						@click="onItemClick(item)"
 					>
-						<router-link to="#" class="nav-link navigation-link">
+						<router-link v-bind:to="item.route" :class="['nav-link', 'navigation-link', { active: item.id === activeId }]">
+							<font-awesome-icon class="icon" v-bind:icon="item.icon" />
 							{{ item.name }}
-							<!-- <fa-icon class="icon" v-bind:icon="item.icon"></fa-icon>
-							 v-bind:to="item.route"
-							<span>{{item.name}}</span> -->
 						</router-link>
-						<!-- <a
-							class="nav-link navigation-link"
-						>
-							{{ item.name }}
-						</a> -->
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-9">
 				<div class="tab-content" animation="true">
 					<div class="fade tab-pane active show">
-						<!-- <ng-template navItem></ng-template> -->
+						<!-- <ng-template navItem></ng-template> class="nav-link navigation-link" -->
 					</div>
 				</div>
 			</div>

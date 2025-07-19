@@ -7,7 +7,9 @@
 
 <template>
 	<div class="home">
-		<Navigation></Navigation>
+		<div class="container">
+			<Navigation></Navigation>
+		</div>
 	</div>
 </template>
 

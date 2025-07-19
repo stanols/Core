@@ -11,31 +11,33 @@ export type AppRouteNames =
 	| 'home'
 	| 'summary'
 	| 'account'
+	| 'login'
+	| 'registration'
 	| '**';
 
 export const routes: RouteRecordRaw[] = [
 	{
 		name: 'home',
 		path: '/',
-		component: Home,
+		component: () => import('../pages/home/Home.vue'),
 		meta: { requiresAuth: true }
 	},
 	{
 		name: 'home',
 		path: '/home',
-		component: Home,
+		component: () => import('../pages/home/Home.vue'),
 		meta: { requiresAuth: true }
 	},
 	{
 		name: 'summary',
 		path: '/summary',
-		component: Summary,
+		component: () => import('../pages/summary/Summary.vue'),
 		meta: { requiresAuth: true }
 	},
 	{
 		name: 'account',
 		path: '/account',
-		component: Account,
+		component: () => import('../pages/account/Account.vue'),
 		meta: { requiresAuth: true }
 	},
 	{
@@ -47,7 +49,7 @@ export const routes: RouteRecordRaw[] = [
 	{
 		name: 'registration',
 		path: '/registration',
-		component: Registration,
+		component: () => import('../pages/account/registration/Registration.vue'),
 		meta: { requiresAuth: false }
 	}
 ];

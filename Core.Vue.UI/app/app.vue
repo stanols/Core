@@ -10,6 +10,7 @@
 	const app = new App();
 	const title = ref('Sign In');
 	const isAuthorized = ref(AuthorizationHelper.isAuthorized());
+
 </script>
 
 <template>
