@@ -1,26 +1,32 @@
 <script setup lang="ts">
 	import { ref, reactive, onMounted } from 'vue';
 	import { useRoute, useRouter } from 'vue-router';
+	import Adventures from '../../adventures/Adventures.vue';
+	import Experiences from '../../experiences/Experiences.vue';
+	import Chat from '../../chat/Chat.vue';
 
-	let activeId = ref(1);
+	let activeId = ref(0);
 	const items = ref([
 		{
-			id: 1,
+			id: 0,
 			name: 'Adventures',
 			icon: "th-list",
-			route: 'adventures'
+			route: 'adventures',
+			component: Adventures
+		},
+		{
+			id: 1,
+			name: 'Experiences',
+			icon: "tasks",
+			route: 'experiences',
+			component: Experiences
 		},
 		{
 			id: 2,
-			name: 'Experiences',
-			icon: "tasks",
-			route: 'experiences'
-		},
-		{
-			id: 3,
 			name: 'Group Chat',
 			icon: "comment",
-			route: 'chat'
+			route: 'chat',
+			component: Chat
 		}
 	]);
 
@@ -44,10 +50,10 @@
 						:key="item.id"
 						@click="onItemClick(item)"
 					>
-						<router-link v-bind:to="item.route" :class="['nav-link', 'navigation-link', { active: item.id === activeId }]">
+						<!-- <router-link v-bind:to="item.route" :class="['nav-link', 'navigation-link', { active: item.id === activeId }]"> -->
 							<font-awesome-icon class="icon" v-bind:icon="item.icon" />
 							{{ item.name }}
-						</router-link>
+						<!-- </router-link> -->
 					</div>
 				</div>
 			</div>
@@ -55,6 +61,7 @@
 				<div class="tab-content" animation="true">
 					<div class="fade tab-pane active show">
 						<!-- <ng-template navItem></ng-template> class="nav-link navigation-link" -->
+						<component :is="items[activeId].component" />
 					</div>
 				</div>
 			</div>

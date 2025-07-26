@@ -1,8 +1,17 @@
 <script setup lang="ts">
 	import { ref } from 'vue';
-	import { Header } from './header.ts';
+	import { userService } from '../../../services/user.service.ts';
+	import { AuthorizationHelper } from '../../../helpers/authorization.helper.ts';
+	import router from '../../../router/router.ts';
 
-	const header = new Header();
+	const firstName = ref('John');
+
+	const onLogout = async () => {
+		await userService.logout();
+
+		AuthorizationHelper.removeAuthorizationData();
+		router.push({ name: 'login', replace: true });
+	};
 </script>
 
 <template>
@@ -38,10 +47,10 @@
 								tabindex="0"
 								href="#"
 							>
-								Hello, {{ header.firstName }}!
+								Hello, {{ firstName }}!
 							</a>
 						</div>
-						<div class="nav-item" @click="header.onLogout">
+						<div class="nav-item" @click="onLogout">
 							<a
 								role="button"
 								class="nav-link"

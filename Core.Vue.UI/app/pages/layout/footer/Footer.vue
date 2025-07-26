@@ -1,8 +1,6 @@
 <script setup lang="ts">
 	import { ref } from 'vue';
-	import { Footer } from './footer.ts';
 
-	const footer = new Footer();
 </script>
 
 <template>

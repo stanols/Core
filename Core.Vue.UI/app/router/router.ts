@@ -1,10 +1,5 @@
 import type { RouteParams, RouteRecordRaw } from 'vue-router';
 import { createRouter, createWebHashHistory } from 'vue-router';
-import Home from '../pages/home/Home.vue';
-import Summary from '../pages/summary/Summary.vue';
-import Account from '../pages/account/Account.vue';
-import Login from '../pages/account/login/Login.vue';
-import Registration from '../pages/account/registration/Registration.vue';
 import { AuthorizationHelper } from '../helpers/authorization.helper';
 
 export type AppRouteNames =
@@ -17,7 +12,7 @@ export type AppRouteNames =
 
 export const routes: RouteRecordRaw[] = [
 	{
-		name: 'home',
+		name: 'default',
 		path: '/',
 		component: () => import('../pages/home/Home.vue'),
 		meta: { requiresAuth: true }
@@ -60,19 +55,17 @@ const router = createRouter({
 	routes,
 });
 
-export function push(name: AppRouteNames, params?: RouteParams): ReturnType<typeof router.push> {
-	return params === undefined
-		? router.push({ name })
-		: router.push({ name, params });
-}
-
 router.beforeEach((to, from, next) => {
 	const isAuthorized = AuthorizationHelper.isAuthorized();
 
 	if (to.meta.requiresAuth && !isAuthorized) {
-		next('/login')
-	} else {
-		next()
+		next('/login');
+	}
+	else if (to.path === '/login' && isAuthorized) {
+		next('home');
+	}
+	else {
+		next();
 	}
 })
 

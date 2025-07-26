@@ -1,25 +1,29 @@
 <script setup lang="ts">
-	import { ref, reactive, computed, watch, onMounted, onUpdated, onUnmounted } from 'vue';
+	import { reactive } from 'vue';
 	import { userService } from '../../../services/user.service.ts';
 	import { AuthorizationHelper } from '../../../helpers/authorization.helper.ts';
-	import { push } from '../../../router/router.ts';
+	import router from '../../../router/router.ts';
 
 	const model = reactive({
 		userName: '',
 		userPassword: ''
 	});
 
-	const onLogin = async () => {
+	const onLogin = async (e) => {
+		e.preventDefault();
+
 		const data = await userService.login({ name: model.userName, password: model.userPassword });
 		AuthorizationHelper.setAuthorizationData(data);
 
 		if (AuthorizationHelper.isAuthorized()) {
-			push("home");
+			router.push({ name: 'home', replace: true });
 		}
 	};
 
-	const onRegister = () => {
-		push("registration");
+	const onRegister = (e) => {
+		e.preventDefault();
+
+		router.push({ name: 'registration' });
 	};
 </script>
 
@@ -41,10 +45,10 @@
 			</div>
 			<div class="form-group mt-4">
 				<a
-					class="form-control btn btn-secondary" 
+					class="form-control btn btn-secondary"
 					role="button"
-					href="#/account/registration"
-					v-on:click="onRegister"
+					href="#"
+					@click="onRegister"
 				>
 					Sign Up
 				</a>

@@ -2,14 +2,13 @@ export class AuthorizationHelper {
 	static isAuthorized() {
 		const authorizationDataKey = "authorizationData";
 		const authorizationData = sessionStorage.getItem(authorizationDataKey);
-		let data = null;
 
 		if (authorizationData) {
-			data = JSON.parse(authorizationData);
-		}
+			const data = JSON.parse(authorizationData);
 
-		if (data && data.token) {
-			return true;
+			if (data && data.token) {
+				return true;
+			}
 		}
 
 		return false;
