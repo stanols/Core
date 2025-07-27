@@ -1,6 +1,5 @@
 <script setup lang="ts">
 	import { ref, reactive, onMounted } from 'vue';
-	import { useRoute, useRouter } from 'vue-router';
 	import Adventures from '../../adventures/Adventures.vue';
 	import Experiences from '../../experiences/Experiences.vue';
 	import Chat from '../../chat/Chat.vue';
@@ -50,17 +49,18 @@
 						:key="item.id"
 						@click="onItemClick(item)"
 					>
-						<!-- <router-link v-bind:to="item.route" :class="['nav-link', 'navigation-link', { active: item.id === activeId }]"> -->
+						<a
+							:class="['nav-link', 'navigation-link', { active: item.id === activeId }]"
+						>
 							<font-awesome-icon class="icon" v-bind:icon="item.icon" />
-							{{ item.name }}
-						<!-- </router-link> -->
+							<span>{{ item.name }}</span>
+						</a>
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-9">
 				<div class="tab-content" animation="true">
 					<div class="fade tab-pane active show">
-						<!-- <ng-template navItem></ng-template> class="nav-link navigation-link" -->
 						<component :is="items[activeId].component" />
 					</div>
 				</div>
