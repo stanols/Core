@@ -4,7 +4,9 @@
 	import { AuthorizationHelper } from '../../../helpers/authorization.helper.ts';
 	import router from '../../../router/router.ts';
 
-	const firstName = ref('John');
+	const authorizationData = AuthorizationHelper.getAuthorizationData();
+
+	const firstName = authorizationData ? ref(authorizationData.firstName) : null;
 
 	const onLogout = async () => {
 		await userService.logout();
