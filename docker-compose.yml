@@ -3,46 +3,34 @@ services:
     working_dir: /
     image: "postgres"
     environment:
-      POSTGRES_DB: "coredb"
-      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_DB: coredb
+      POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - "5432:5432"
-    expose:
-        - "5432"
     build:
       context: .
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    
   core.server:
     working_dir: /app
     image: "core/server"
     environment:
       - ASPNETCORE_ENVIRONMENT=development
-      - ASPNETCORE_URLS=https://*:8081;http://*:8080
+      - "ASPNETCORE_URLS=http://0.0.0.0:8080;https://0.0.0.0:8081"
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ASPNETCORE_Kestrel__Certificates__Default__Password=asus
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/aspnetapp.pfx
     ports:
-    - name: web
-      target: 8080
-      host_ip: 127.0.0.1
-      published: "8080"
-      protocol: tcp
-      app_protocol: http
-      mode: host
-
-    - name: web-secured
-      target: 8081
-      host_ip: 127.0.0.1
-      published: "8081"
-      protocol: tcp
-      app_protocol: https
-      mode: host
-    expose:
-      - "8080"
-      - "8081"
+      - "8080:8080"
+      - "8081:8081"
     build:
       context: .
       dockerfile: ./Dockerfile
     depends_on:
-      - core.database
-    network_mode: host
+      core.database:
+        condition: service_healthy

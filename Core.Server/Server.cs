@@ -47,8 +47,8 @@ namespace Core.Server
 				.UseWebRoot(webRoot)
 				.UseKestrel(options =>
 				{
-					options.Listen(IPAddress.Loopback, 8080);
-					options.Listen(IPAddress.Loopback, 8081, listenOptions =>
+					options.ListenAnyIP(8080); //Listen IPAddress.Loopback
+					options.ListenAnyIP(8081, listenOptions =>
 					{
 						var certificate = new X509Certificate2(
 							certificateFileName,
