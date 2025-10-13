@@ -9,6 +9,9 @@ export default defineConfig((arg) => {
 	const environment = arg.mode == 'development'
 		? 'development'
 		: 'production';
+	const outDir = environment == 'development'
+		? '../Core.Server/bin/Debug/net8.0/client/vue'
+		: './out';
 
 	return {
 		base: './',
@@ -28,7 +31,7 @@ export default defineConfig((arg) => {
 					"node_modules/bootstrap/dist/js/bootstrap.min.js"
 				]
 			},
-			outDir: '../Core.Server/bin/Debug/net8.0/client/vue',
+			outDir: outDir,
 			emptyOutDir: true,
 			sourcemap: environment === 'development',
 		},

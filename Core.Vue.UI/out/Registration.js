@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper.js";import{c as o,o as r,a as s}from"./main.js";const n={},a={class:"registration"};function c(i,e){return r(),o("div",a,e[0]||(e[0]=[s("h3",null,"Sign Up",-1)]))}const l=t(n,[["render",c]]);export{l as default};

@@ -119,6 +119,7 @@ namespace Core.WebApi
 		{
 			app.UsePathBase("/client/react");
 			app.UsePathBase("/client/angular");
+			app.UsePathBase("/client/vue");
 
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
