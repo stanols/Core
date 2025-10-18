@@ -1,6 +1,6 @@
 <script setup lang="ts">
 	import { ref } from 'vue';
-	import { userService } from '../../../services/user.service.ts';
+	import { userService } from '../../../services/userService.ts';
 	import { AuthorizationHelper } from '../../../helpers/authorization.helper.ts';
 	import router from '../../../router/router.ts';
 
