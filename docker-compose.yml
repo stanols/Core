@@ -1,5 +1,5 @@
 services:
-  core.database:
+  core-database:
     working_dir: /
     image: "postgres"
     environment:
@@ -15,8 +15,8 @@ services:
       timeout: 3s
       retries: 5
     
-  core.server:
-    working_dir: /app
+  core-server:
+    working_dir: /
     image: "core/server"
     environment:
       - ASPNETCORE_ENVIRONMENT=development
@@ -24,7 +24,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       - ASPNETCORE_HTTPS_PORTS=8081
       - ASPNETCORE_Kestrel__Certificates__Default__Password=asus
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/aspnetapp.pfx
     ports:
       - "8080:8080"
       - "8081:8081"
@@ -32,5 +32,5 @@ services:
       context: .
       dockerfile: ./Dockerfile
     depends_on:
-      core.database:
+      core-database:
         condition: service_healthy

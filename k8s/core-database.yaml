@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: core-database
+  template:
+    metadata:
+      labels:
+        app: core-database
+    spec:
+      containers:
+        - name: core-database
+          image: postgres
+          env:
+            - name: POSTGRES_DB
+              value: coredb
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: trust
+          ports:
+            - containerPort: 5432
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "postgres"]
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            exec:
+              command: ["pg_isready", "-U", "postgres"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: core-database
+spec:
+  selector:
+    app: core-database
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
