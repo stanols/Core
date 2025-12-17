@@ -9,6 +9,7 @@ import { FontAwesomeModule, FaIconLibrary } from "@fortawesome/angular-fontaweso
 import { fas, faThList, faTasks } from "@fortawesome/free-solid-svg-icons";
 import { NgbNavModule, NgbCollapseModule, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NavItemDirective } from './directives/nav-item.directive';
+import { BaseCrudService } from './services/base-crud.service';
 
 @NgModule({
 	imports: [
@@ -31,6 +32,9 @@ import { NavItemDirective } from './directives/nav-item.directive';
 		FooterComponent,
 		NavigationComponent,
 		NavItemDirective
+	],
+	providers: [
+		BaseCrudService
 	]
 })
 export class AppCommonModule {

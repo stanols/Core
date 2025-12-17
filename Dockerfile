@@ -1,5 +1,5 @@
 # Environment
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 
 # Working directory in container
 WORKDIR /
@@ -12,7 +12,7 @@ EXPOSE 8080
 EXPOSE 8081
 
 # Software development kit
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-server
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-server
 
 # Copy project files
 COPY ./Core.Database/Core.Database.csproj /src/Core.Database/
@@ -32,7 +32,8 @@ RUN dotnet publish /src/Core.Server/Core.Server.csproj --configuration Release -
 
 
 # Clients
-FROM node:20.12.2-alpine3.19 AS build-client
+#20.12.2-alpine3.19
+FROM node:24.11.0-alpine3.22 AS build-client
 
 # Install webpack, angularcli and rollup
 RUN npm install webpack-cli -g && \

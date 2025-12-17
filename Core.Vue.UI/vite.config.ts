@@ -10,7 +10,7 @@ export default defineConfig((arg) => {
 		? 'development'
 		: 'production';
 	const outDir = environment == 'development'
-		? '../Core.Server/bin/Debug/net8.0/client/vue'
+		? '../Core.Server/bin/Debug/net10.0/client/vue'
 		: './out';
 
 	return {

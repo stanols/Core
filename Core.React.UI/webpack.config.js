@@ -7,7 +7,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 module.exports = (env, argv) => {
 	const mode = argv.mode || 'production';
 	const outputPath = mode === 'development'
-		? path.join(__dirname, '/../Core.Server/bin/Debug/net8.0/client/react')
+		? path.join(__dirname, '/../Core.Server/bin/Debug/net10.0/client/react')
 		: path.join(__dirname, '/out');
 	console.log("Mode: " + JSON.stringify(mode));
 	console.log("Output: " + outputPath);
