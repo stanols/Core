@@ -8,7 +8,7 @@ import { AppComponent } from "../../app.component";
 @NgModule({
 	imports: [
 		AppModule,
-		BrowserModule.withServerTransition({ appId: "DotnetCoreAngularApplication" })
+		BrowserModule
 	],
 	bootstrap: [
 		AppComponent

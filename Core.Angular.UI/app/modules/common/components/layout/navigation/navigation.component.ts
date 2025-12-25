@@ -2,11 +2,24 @@ import { Component, Input, Output, OnInit, ViewChild, ViewContainerRef } from "@
 import { NavigationItemModel } from "app/modules/common/models/navigation-item.model";
 import { NavItemDirective } from "app/modules/common/directives/nav-item.directive";
 import { NavigationItem } from "./navigation-item/navigation-item.component";
+import { NgbNavModule, NgbNavItem } from "@ng-bootstrap/ng-bootstrap";
+import { RouterLink } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
 	selector: "app-navigation",
 	templateUrl: "./navigation.component.html",
-	styleUrls: ["./navigation.component.scss"]
+	styleUrls: ["./navigation.component.scss"],
+	standalone: true,
+	imports: [
+		NgbNavModule,
+		NgbNavItem,
+		NavItemDirective,
+		RouterLink,
+		CommonModule,
+		FontAwesomeModule
+	]
 })
 export class NavigationComponent implements OnInit {
 	@Input()

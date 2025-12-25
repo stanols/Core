@@ -6,11 +6,25 @@ import { NavigationItemModel } from "app/modules/common/models/navigation-item.m
 import { AdventuresComponent } from "app/modules/home/components/home/adventures/adventures.component";
 import { ExperiencesComponent } from "app/modules/home/components/home/experiences/experiences.component";
 import { ChatComponent } from "./chat/chat.component";
+import { CommonModule } from "@angular/common";
+import { HeaderComponent } from "app/modules/common/components/layout/header/header.component";
+import { FooterComponent } from "app/modules/common/components/layout/footer/footer.component";
+import { NavigationComponent } from "app/modules/common/components/layout/navigation/navigation.component";
+import { NgbNavModule } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
 	selector: "app-home",
 	templateUrl: "./home.component.html",
-	styleUrls: ["./home.component.scss"]
+	styleUrls: ["./home.component.scss"],
+	standalone: true,
+	imports: [
+		CommonModule,
+		HeaderComponent,
+		FooterComponent,
+		NavigationComponent,
+		NavigationItem,
+		NgbNavModule
+	],
 })
 export class HomeComponent implements OnInit {
 	navItems: NavigationItemModel[];

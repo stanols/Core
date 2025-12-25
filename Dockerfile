@@ -33,7 +33,7 @@ RUN dotnet publish /src/Core.Server/Core.Server.csproj --configuration Release -
 
 # Clients
 #20.12.2-alpine3.19
-FROM node:24.11.0-alpine3.22 AS build-client
+FROM node:20-alpine AS build-client
 
 # Install webpack, angularcli and rollup
 RUN npm install webpack-cli -g && \

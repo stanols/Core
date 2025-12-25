@@ -17,21 +17,19 @@ namespace Core.DAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("Relational:Sequence:.EntityFrameworkHiLoSequence", "'EntityFrameworkHiLoSequence', '', '1', '10', '', '', 'Int64', 'False'");
+                .HasDefaultSchema("public")
+                .HasAnnotation("ProductVersion", "10.0.1")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.UseHiLo(modelBuilder, "EntityFrameworkHiLoSequence");
-
-            modelBuilder.HasSequence("EntityFrameworkHiLoSequence")
-                .IncrementsBy(10);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Core.DAL.Entities.Adventure", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CreatedById")
                         .HasColumnType("integer");
@@ -52,15 +50,19 @@ namespace Core.DAL.Migrations
 
                     b.HasIndex("CreatedById");
 
-                    b.ToTable("Adventures", (string)null);
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Adventures", "public");
                 });
 
             modelBuilder.Entity("Core.DAL.Entities.AdventureUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AdventureId")
                         .HasColumnType("integer");
@@ -74,15 +76,16 @@ namespace Core.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AdventureUsers", (string)null);
+                    b.ToTable("AdventureUsers", "public");
                 });
 
             modelBuilder.Entity("Core.DAL.Entities.Experience", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AdventureId")
                         .HasColumnType("integer");
@@ -108,15 +111,19 @@ namespace Core.DAL.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.ToTable("Experiences", (string)null);
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Experiences", "public");
                 });
 
             modelBuilder.Entity("Core.DAL.Entities.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<double>("Latitude")
                         .HasColumnType("double precision");
@@ -129,15 +136,19 @@ namespace Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Locations", (string)null);
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Locations", "public");
                 });
 
             modelBuilder.Entity("Core.DAL.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -163,13 +174,13 @@ namespace Core.DAL.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users", "public");
                 });
 
             modelBuilder.Entity("Core.DAL.Entities.Adventure", b =>
                 {
                     b.HasOne("Core.DAL.Entities.User", "CreatedBy")
-                        .WithMany()
+                        .WithMany("Adventures")
                         .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -225,6 +236,8 @@ namespace Core.DAL.Migrations
             modelBuilder.Entity("Core.DAL.Entities.User", b =>
                 {
                     b.Navigation("AdventureUsers");
+
+                    b.Navigation("Adventures");
                 });
 #pragma warning restore 612, 618
         }

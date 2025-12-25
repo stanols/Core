@@ -11,6 +11,9 @@ namespace Core.DAL.Migrations
 			var file = Path.Combine(AppContext.BaseDirectory, @"Migrations/Scripts/20190210120504_InitialMigration_Up.sql");
 			migrationBuilder.Sql(File.ReadAllText(file));
 
+			migrationBuilder.EnsureSchema(
+				name: "public");
+
 			//UpdateTablesData(migrationBuilder);
 		}
 

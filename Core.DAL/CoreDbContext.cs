@@ -22,31 +22,29 @@ namespace Core.DAL
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.HasDefaultSchema(defaultSchema);
-			
-			modelBuilder.UseIdentityColumns();
 			modelBuilder.UseIdentityByDefaultColumns();
 
-			modelBuilder.Entity<User>().Property(b => b.Id).HasIdentityOptions(startValue: defaultStartValue);
+			modelBuilder.Entity<User>().Property(b => b.Id).UseIdentityByDefaultColumn();
 			modelBuilder.Entity<User>()
 				.HasIndex(b => b.Name)
 				.IsUnique();
 
-			modelBuilder.Entity<Location>().Property(b => b.Id).HasIdentityOptions(startValue: defaultStartValue);
+			modelBuilder.Entity<Location>().Property(b => b.Id).UseIdentityByDefaultColumn();
 			modelBuilder.Entity<Location>()
 				.HasIndex(x => x.Name)
 				.IsUnique();
 
-			modelBuilder.Entity<Experience>().Property(b => b.Id).HasIdentityOptions(startValue: defaultStartValue);
+			modelBuilder.Entity<Experience>().Property(b => b.Id).UseIdentityByDefaultColumn();
 			modelBuilder.Entity<Experience>()
 				.HasIndex(x => x.Name)
 				.IsUnique();
 
-			modelBuilder.Entity<Adventure>().Property(b => b.Id).HasIdentityOptions(startValue: defaultStartValue);
+			modelBuilder.Entity<Adventure>().Property(b => b.Id).UseIdentityByDefaultColumn();
 			modelBuilder.Entity<Adventure>()
 				.HasIndex(x => x.Name)
 				.IsUnique();
 
-			modelBuilder.Entity<AdventureUser>().Property(b => b.Id).HasIdentityOptions(startValue: defaultStartValue);
+			modelBuilder.Entity<AdventureUser>().Property(b => b.Id).UseIdentityByDefaultColumn();
 
 			base.OnModelCreating(modelBuilder);
 		}

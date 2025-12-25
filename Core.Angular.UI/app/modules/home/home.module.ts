@@ -22,9 +22,8 @@ import { ChatComponent } from "./components/home/chat/chat.component";
 		RouterModule,
 		HomeRouterModule,
 		NgbDatepickerModule,
-		FormsModule
-	],
-	declarations: [
+		FormsModule,
+
 		HomeRouterComponent,
 		HomeComponent,
 		AdventuresComponent,

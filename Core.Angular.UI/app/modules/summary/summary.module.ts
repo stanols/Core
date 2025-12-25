@@ -12,9 +12,8 @@ import { UserService } from "../account/services/user.service";
 		CommonModule,
 		AppCommonModule,
 		RouterModule,
-		SummaryRouterModule
-	],
-	declarations: [
+		SummaryRouterModule,
+
 		SummaryRouterComponent,
 		SummaryComponent
 	],

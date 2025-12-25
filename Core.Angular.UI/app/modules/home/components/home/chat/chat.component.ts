@@ -4,12 +4,19 @@ import { filter } from "rxjs";
 import { ChatMessage } from "app/modules/home/models/messages/chat.message";
 import { ChatHubService } from "app/modules/home/services/chat-hub.service";
 import { AuthorizationHelper } from "app/modules/common/helpers/authorization.helper";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @UntilDestroy()
 @Component({
 	selector: "app-chat",
 	templateUrl: "./chat.component.html",
-	styleUrls: ["./chat.component.scss"]
+	styleUrls: ["./chat.component.scss"],
+	standalone: true,
+	imports: [
+		FormsModule,
+		CommonModule
+	],
 })
 export class ChatComponent implements OnInit, OnDestroy {
 	isConnected: boolean = false;

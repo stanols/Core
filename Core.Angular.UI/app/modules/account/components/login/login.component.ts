@@ -4,11 +4,16 @@ import { UserService } from "../../services/user.service";
 import { UserModel } from "../../models/user.model";
 import { AuthorizationHelper } from "app/modules/common/helpers/authorization.helper";
 import { firstValueFrom } from "rxjs";
+import { FormsModule } from "@angular/forms";
 
 @Component({
 	selector: "app-login",
 	templateUrl: "./login.component.html",
-	styleUrls: ["./login.component.scss"]
+	styleUrls: ["./login.component.scss"],
+	standalone: true,
+	imports: [
+		FormsModule
+	],
 })
 export class LoginComponent implements OnInit {
 	model: any;

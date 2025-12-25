@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Hosting;
 
 namespace Core.Server
 {
@@ -17,23 +16,13 @@ namespace Core.Server
 		{
 			try
 			{
-				var webHostBuilder = CreateWebHostBuilder(arguments);
-				var webHost = webHostBuilder.Build();
-
-				_server.Run(webHost);
+				_server.RunWebApplication(arguments);
 			}
 			catch (Exception exception)
 			{
 				Console.WriteLine($"Message: {exception.Message}; Inner Exception: {exception.InnerException}");
 				Console.ReadLine();
 			}
-		}
-
-		public static IWebHostBuilder CreateWebHostBuilder(string[] arguments)
-		{
-			var builder = _server.CreateWebHostBuilder(arguments);
-
-			return builder;
 		}
 	}
 }

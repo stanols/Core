@@ -19,9 +19,8 @@ import { BaseCrudService } from './services/base-crud.service';
 		NgbCollapseModule,
 		NgbNavModule,
 		FontAwesomeModule,
-		NgbModule
-	],
-	declarations: [
+		NgbModule,
+
 		HeaderComponent,
 		FooterComponent,
 		NavigationComponent,

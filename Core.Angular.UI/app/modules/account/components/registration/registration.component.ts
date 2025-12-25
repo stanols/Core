@@ -1,11 +1,16 @@
 import { Component, OnInit } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { faArrowAltCircleLeft, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: "app-registration",
 	templateUrl: "./registration.component.html",
-	styleUrls: ["./registration.component.scss"]
+	styleUrls: ["./registration.component.scss"],
+	standalone: true,
+	imports: [
+		FormsModule,
+	],
 })
 export class RegistrationComponent implements OnInit {
 	FaArrowAltCircleLeft: IconDefinition;

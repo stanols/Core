@@ -18,9 +18,8 @@ import { UserService } from "./services/user.service";
 		AppCommonModule,
 		RouterModule,
 		AccountRouterModule,
-		FontAwesomeModule
-	],
-	declarations: [
+		FontAwesomeModule,
+
 		AccountRouterComponent,
 		LoginComponent,
 		RegistrationComponent

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { UserService } from "app/modules/account/services/user.service";
 import { AuthorizationHelper } from "app/modules/common/helpers/authorization.helper";
 import { firstValueFrom } from "rxjs";
@@ -7,7 +7,11 @@ import { firstValueFrom } from "rxjs";
 @Component({
 	selector: "app-header",
 	templateUrl: "./header.component.html",
-	styleUrls: ["./header.component.scss"]
+	styleUrls: ["./header.component.scss"],
+	standalone: true,
+	imports: [
+		RouterLink
+	]
 })
 export class HeaderComponent implements OnInit {
 	firstName: string;

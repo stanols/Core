@@ -9,14 +9,9 @@ import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http"
 import { AppInitService } from "app-init.service";
 import { environment } from "environments/environment";
-//import { CrudModule } from "ngx-simple-crud";
 
 @NgModule({
-	declarations: [
-		AppComponent
-	],
 	imports: [
-		//CrudModule,
 		FormsModule,
 		BrowserModule,
 		AppRouterModule,
@@ -33,7 +28,8 @@ import { environment } from "environments/environment";
 			}
 		),
 		EffectsModule.forRoot([]),
-		...environment.devModules
+		...environment.devModules,
+		AppComponent
 	],
 	providers: [
 		{

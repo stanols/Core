@@ -5,11 +5,16 @@ import { firstValueFrom } from "rxjs";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { AdventureComponent } from "./adventure/adventure.component";
 import { AuthorizationHelper } from "app/modules/common/helpers/authorization.helper";
+import { CommonModule } from "@angular/common";
 
 @Component({
 	selector: "app-adventures",
 	templateUrl: "./adventures.component.html",
-	styleUrls: ["./adventures.component.scss"]
+	styleUrls: ["./adventures.component.scss"],
+	standalone: true,
+	imports: [
+		CommonModule
+	],
 })
 export class AdventuresComponent implements OnInit {
 	adventures: AdventureModel[];

@@ -1,11 +1,21 @@
+import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
+import { FormsModule } from "@angular/forms";
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDatepickerModule } from "@ng-bootstrap/ng-bootstrap";
+import { AppCommonModule } from "app/modules/common/common.module";
 import { AdventureService } from "app/modules/home/services/adventure.service";
 
 @Component({
 	selector: "app-adventure",
 	templateUrl: "./adventure.component.html",
-	styleUrls: ["./adventure.component.scss"]
+	styleUrls: ["./adventure.component.scss"],
+	standalone: true,
+	imports: [
+		CommonModule,
+		AppCommonModule,
+		FormsModule,
+		NgbDatepickerModule
+	],
 })
 export class AdventureComponent implements OnInit {
 	@Input()
