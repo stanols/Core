@@ -1,10 +1,11 @@
-﻿using System.IO;
-using System.Reflection;
-using Core.DAL.Interfaces;
+﻿using Core.DAL.Interfaces;
 using Core.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Core.DAL
 {
@@ -18,13 +19,15 @@ namespace Core.DAL
 			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<IAdventureRepository, AdventureRepository>();
 			services.AddTransient<IExperienceRepository, ExperienceRepository>();
+			services.AddTransient<ILocationRepository, LocationRepository>();
 
 			return services;
 		}
 
 		public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration config)
 		{
-			var connectionString = config.GetValue<string>(ConnectionStringKey);
+			var environmentConnectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+			var connectionString = environmentConnectionString ?? config.GetValue<string>(ConnectionStringKey);
 			var timeout = config.GetValue<int>(CommandTimeoutSecondsKey);
 			var assembly = Assembly.GetExecutingAssembly();
 			var assemblyName = assembly.GetName().Name;

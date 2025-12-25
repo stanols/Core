@@ -29,8 +29,8 @@ spec:
               value: asus
             - name: ASPNETCORE_Kestrel__Certificates__Default__Path
               value: /aspnetapp.pfx
-            - name: connectionString
-              value: "Host=core-database;Port=5432;Database=coredb;User ID=postgres;Password=;"
+            - name: CONNECTION_STRING
+              value: "User ID=postgres;Password=password1;Host=core-database;Port=5432;Database=coredb;Pooling=true;Include Error Detail=true;"
           ports:
             - containerPort: 8080
             - containerPort: 8081

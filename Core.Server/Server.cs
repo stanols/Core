@@ -69,7 +69,8 @@ namespace Core.Server
 				})
 				.UseDefaultServiceProvider((context, options) =>
 				{
-					options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+					options.ValidateScopes = true;
+					options.ValidateOnBuild = true;
 				});
 
 			const string secretKey = "secret";
