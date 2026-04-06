@@ -1,70 +1,61 @@
 ﻿using Core.BLL.ViewModels;
 using Core.DAL.Entities;
-using AutoMapper;
+using Mapster;
 
 namespace Core.BLL.Mappers
 {
-	public class MappingProfile : Profile
+	public class MappingProfile : IRegister
 	{
-		public MappingProfile()
+		public void Register(TypeAdapterConfig config)
 		{
-			CreateMap<User, UserViewModel>();
-			CreateMap<UserViewModel, User>();
+			config.NewConfig<User, UserViewModel>()
+				.TwoWays();
 
-			CreateMap<User, UserInfoViewModel>()
-				.ForMember(viewModel => viewModel.Id, user => user.MapFrom(y => y.Id))
-				.ForMember(viewModel => viewModel.Name, user => user.MapFrom(y => y.Name))
-				.ForMember(viewModel => viewModel.FirstName, user => user.MapFrom(y => y.FirstName))
-				.ForMember(viewModel => viewModel.LastName, user => user.MapFrom(y => y.LastName))
-				.ForMember(viewModel => viewModel.Email, user => user.MapFrom(y => y.Email));
-			CreateMap<UserInfoViewModel, User>()
-				.ForMember(user => user.Id, viewModel => viewModel.MapFrom(y => y.Id))
-				.ForMember(user => user.Name, viewModel => viewModel.MapFrom(y => y.Name))
-				.ForMember(user => user.FirstName, viewModel => viewModel.MapFrom(y => y.FirstName))
-				.ForMember(user => user.LastName, viewModel => viewModel.MapFrom(y => y.LastName))
-				.ForMember(user => user.Email, viewModel => viewModel.MapFrom(y => y.Email));
+			config.NewConfig<User, UserInfoViewModel>()
+				.Map(viewModel => viewModel.Id, user => user.Id)
+				.Map(viewModel => viewModel.Name, user => user.Name)
+				.Map(viewModel => viewModel.FirstName, user => user.FirstName)
+				.Map(viewModel => viewModel.LastName, user => user.LastName)
+				.Map(viewModel => viewModel.Email, user => user.Email)
+				.TwoWays();
 
-			CreateMap<Experience, ExperienceViewModel>()
-				.ForMember(viewModel => viewModel.Id, experience => experience.MapFrom(y => y.Id))
-				.ForMember(viewModel => viewModel.Name, experience => experience.MapFrom(y => y.Name))
-				.ForMember(viewModel => viewModel.Description, experience => experience.MapFrom(y => y.Description))
-				.ForMember(viewModel => viewModel.StartsOn, experience => experience.MapFrom(y => y.StartsOn))
-				.ForMember(viewModel => viewModel.EndsOn, experience => experience.MapFrom(y => y.EndsOn));
-			CreateMap<ExperienceViewModel, Experience>()
-				.ForMember(experience => experience.Id, viewModel => viewModel.MapFrom(y => y.Id))
-				.ForMember(experience => experience.Name, viewModel => viewModel.MapFrom(y => y.Name))
-				.ForMember(experience => experience.Description, viewModel => viewModel.MapFrom(y => y.Description))
-				.ForMember(experience => experience.StartsOn, viewModel => viewModel.MapFrom(y => y.StartsOn))
-				.ForMember(experience => experience.EndsOn, viewModel => viewModel.MapFrom(y => y.EndsOn))
-				.ForMember(experience => experience.Location, viewModel => viewModel.MapFrom(y => y.Location));
+			config.NewConfig<Experience, ExperienceViewModel>()
+				.Map(viewModel => viewModel.Id, experience => experience.Id)
+				.Map(viewModel => viewModel.Name, experience => experience.Name)
+				.Map(viewModel => viewModel.Description, experience => experience.Description)
+				.Map(viewModel => viewModel.StartsOn, experience => experience.StartsOn)
+				.Map(viewModel => viewModel.EndsOn, experience => experience.EndsOn);
+			config.NewConfig<ExperienceViewModel, Experience>()
+				.Map(experience => experience.Id, viewModel => viewModel.Id)
+				.Map(experience => experience.Name, viewModel => viewModel.Name)
+				.Map(experience => experience.Description, viewModel => viewModel.Description)
+				.Map(experience => experience.StartsOn, viewModel => viewModel.StartsOn)
+				.Map(experience => experience.EndsOn, viewModel => viewModel.EndsOn)
+				.Map(experience => experience.Location, viewModel => viewModel.Location);
 
-			CreateMap<Adventure, AdventureViewModel>()
-				.ForMember(viewModel => viewModel.Id, adventure => adventure.MapFrom(y => y.Id))
-				.ForMember(viewModel => viewModel.Name, adventure => adventure.MapFrom(y => y.Name))
-				.ForMember(viewModel => viewModel.Description, adventure => adventure.MapFrom(y => y.Description))
-				.ForMember(viewModel => viewModel.StartsOn, adventure => adventure.MapFrom(y => y.StartsOn))
-				.ForMember(viewModel => viewModel.EndsOn, adventure => adventure.MapFrom(y => y.EndsOn));
-			CreateMap<AdventureViewModel, Adventure>()
-				.ForMember(adventure => adventure.Id, viewModel => viewModel.MapFrom(y => y.Id))
-				.ForMember(adventure => adventure.Name, viewModel => viewModel.MapFrom(y => y.Name))
-				.ForMember(adventure => adventure.Description, viewModel => viewModel.MapFrom(y => y.Description))
-				.ForMember(adventure => adventure.CreatedBy, viewModel => viewModel.Ignore())
-				.ForMember(adventure => adventure.CreatedById, viewModel => viewModel.Ignore())
-				.ForMember(adventure => adventure.StartsOn, viewModel => viewModel.MapFrom(y => y.StartsOn))
-				.ForMember(adventure => adventure.EndsOn, viewModel => viewModel.MapFrom(y => y.EndsOn))
-				.ForMember(adventure => adventure.Experiences, viewModel => viewModel.Ignore())
-				.ForMember(adventure => adventure.AdventureUsers, viewModel => viewModel.Ignore());
+			config.NewConfig<Adventure, AdventureViewModel>()
+				.Map(viewModel => viewModel.Id, adventure => adventure.Id)
+				.Map(viewModel => viewModel.Name, adventure => adventure.Name)
+				.Map(viewModel => viewModel.Description, adventure => adventure.Description)
+				.Map(viewModel => viewModel.StartsOn, adventure => adventure.StartsOn)
+				.Map(viewModel => viewModel.EndsOn, adventure => adventure.EndsOn);
+			config.NewConfig<AdventureViewModel, Adventure>()
+				.Map(adventure => adventure.Id, viewModel => viewModel.Id)
+				.Map(adventure => adventure.Name, viewModel => viewModel.Name)
+				.Map(adventure => adventure.Description, viewModel => viewModel.Description)
+				.Ignore(adventure => adventure.CreatedBy)
+				.Ignore(adventure => adventure.CreatedById)
+				.Map(adventure => adventure.StartsOn, viewModel => viewModel.StartsOn)
+				.Map(adventure => adventure.EndsOn, viewModel => viewModel.EndsOn)
+				.Ignore(adventure => adventure.Experiences)
+				.Ignore(adventure => adventure.AdventureUsers);
 
-			CreateMap<Location, LocationViewModel>()
-				.ForMember(viewModel => viewModel.Id, location => location.MapFrom(y => y.Id))
-				.ForMember(viewModel => viewModel.Name, location => location.MapFrom(y => y.Name))
-				.ForMember(viewModel => viewModel.Latitude, location => location.MapFrom(y => y.Latitude))
-				.ForMember(viewModel => viewModel.Longitude, location => location.MapFrom(y => y.Longitude));
-			CreateMap<LocationViewModel, Location>()
-				.ForMember(location => location.Id, viewModel => viewModel.MapFrom(y => y.Id))
-				.ForMember(location => location.Name, viewModel => viewModel.MapFrom(y => y.Name))
-				.ForMember(location => location.Latitude, viewModel => viewModel.MapFrom(y => y.Latitude))
-				.ForMember(location => location.Longitude, viewModel => viewModel.MapFrom(y => y.Longitude));
+			config.NewConfig<Location, LocationViewModel>()
+				.Map(viewModel => viewModel.Id, location => location.Id)
+				.Map(viewModel => viewModel.Name, location => location.Name)
+				.Map(viewModel => viewModel.Latitude, location => location.Latitude)
+				.Map(viewModel => viewModel.Longitude, location => location.Longitude)
+				.TwoWays();
 		}
 	}
 }
