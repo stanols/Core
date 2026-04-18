@@ -1,7 +1,7 @@
 <script setup lang="ts">
-	import Navigation from '../../pages/layout/navigation/Navigation.vue';
-	import Header from '../../pages/layout/header/Header.vue';
-	import Footer from '../../pages/layout/footer/Footer.vue';
+	import Navigation from '../../pages/layout/navigation/navigation.vue';
+	import Header from '../../pages/layout/header/header.vue';
+	import Footer from '../../pages/layout/footer/footer.vue';
 
 </script>
 

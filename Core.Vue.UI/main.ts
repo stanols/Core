@@ -4,7 +4,7 @@ import { createApp } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faThList, faTasks, faComment } from '@fortawesome/free-solid-svg-icons';
-import App from './app/App.vue';
+import App from './app/app.vue';
 import router from './app/router/router';
 
 library.add(faThList, faTasks, faComment);
