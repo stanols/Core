@@ -1,14 +1,14 @@
 ﻿using System;
-using Microsoft.IdentityModel.JsonWebTokens;
 using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
-using Core.BLL.Interfaces;
-using Core.BLL.ViewModels;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
+using Core.BLL.Interfaces;
+using Core.BLL.ViewModels;
 
 namespace Core.WebApi.Controllers
 {

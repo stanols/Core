@@ -23,6 +23,16 @@ namespace Core.Server
 {
 	public class Server
 	{
+		private const string HttpUrlKey = "httpUrl";
+		private const string HttpsUrlKey = "httpsUrl";
+		private const string WebRootKey = "webRoot";
+		private const string CertificateFileNameKey = "certificateFileName";
+		private const string CertificatePasswordKey = "certificatePassword";
+		private const string SecretKey = "secret";
+		private const string UrlsKey = "Urls";
+		private const int HttpPort = 8080;
+		private const int HttpsPort = 8081;
+
 		private readonly IConfiguration _config;
 
 		public Server(IConfiguration config)
@@ -32,37 +42,27 @@ namespace Core.Server
 
 		public void RunWebApplication(string[] arguments)
 		{
-			const string httpUrlKey = "httpUrl";
-			const string httpsUrlKey = "httpsUrl";
-			const string webRootKey = "webRoot";
-			const string certificateFileNameKey = "certificateFileName";
-			const string certificatePasswordKey = "certificatePassword";
-
-			var webRoot = _config[webRootKey];
 			var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 			{
-				WebRootPath = webRoot
+				WebRootPath = _config[WebRootKey]
 			});
 			var urls = new[] {
-				_config[httpUrlKey],
-				_config[httpsUrlKey]
+				_config[HttpUrlKey],
+				_config[HttpsUrlKey]
 			};
-			
-			var certificateFileName = _config[certificateFileNameKey];
-			var certificatePassword = _config[certificatePasswordKey];
 
 			builder.Configuration.AddConfiguration(_config);
-			builder.Configuration["Urls"] = string.Join(';', urls);
+			builder.Configuration[UrlsKey] = string.Join(';', urls);
 
 			var webHostBuilder = builder.WebHost
 				.UseKestrel(options =>
 				{
-					options.ListenAnyIP(8080); //Listen IPAddress.Loopback
-					options.ListenAnyIP(8081, listenOptions =>
+					options.ListenAnyIP(HttpPort);
+					options.ListenAnyIP(HttpsPort, listenOptions =>
 					{
-						var certificate = new X509Certificate2(
-							certificateFileName,
-							certificatePassword
+						var certificate = X509CertificateLoader.LoadPkcs12FromFile(
+							_config[CertificateFileNameKey],
+							_config[CertificatePasswordKey]
 						);
 						listenOptions.UseHttps(certificate);
 					});
@@ -73,8 +73,6 @@ namespace Core.Server
 					options.ValidateOnBuild = true;
 				});
 
-			const string secretKey = "secret";
-
 			builder.Services.AddSingleton(_config);
 			builder.Services.AddDbContext(_config);
 			builder.Services.AddRepositories();
@@ -83,7 +81,7 @@ namespace Core.Server
 			builder.Services.AddControllers()
 				.AddApplicationPart(typeof(BaseController).Assembly);
 
-			var secret = _config[secretKey];
+			var secret = _config[SecretKey];
 			var symmetricSecurityKey = Encoding.ASCII.GetBytes(secret);
 
 			builder.Services
@@ -162,11 +160,6 @@ namespace Core.Server
 			builder.Services.AddSwaggerGenNewtonsoftSupport();
 
 			var app = builder.Build();
-
-			//app.UsePathBase("/client/react");
-			//app.UsePathBase("/client/angular");
-			//app.UsePathBase("/client/vue");
-			//app.UsePathBase("/");
 
 			app.UseDefaultFiles();
 			app.UseStaticFiles();

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using MapsterMapper;
 using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
 using Core.DAL.Entities;

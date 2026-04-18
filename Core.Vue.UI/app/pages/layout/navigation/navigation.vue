@@ -1,8 +1,8 @@
 <script setup lang="ts">
 	import { ref, reactive, onMounted } from 'vue';
-	import Adventures from '../../adventures/Adventures.vue';
-	import Experiences from '../../experiences/Experiences.vue';
-	import Chat from '../../chat/Chat.vue';
+	import Adventures from '../../adventures/adventures.vue';
+	import Experiences from '../../experiences/experiences.vue';
+	import Chat from '../../chat/chat.vue';
 
 	let activeId = ref(0);
 	const items = ref([

@@ -14,37 +14,37 @@ export const routes: RouteRecordRaw[] = [
 	{
 		name: 'default',
 		path: '/',
-		component: () => import('../pages/home/Home.vue'),
+		component: () => import('../pages/home/home.vue'),
 		meta: { requiresAuth: true }
 	},
 	{
 		name: 'home',
 		path: '/home',
-		component: () => import('../pages/home/Home.vue'),
+		component: () => import('../pages/home/home.vue'),
 		meta: { requiresAuth: true }
 	},
 	{
 		name: 'summary',
 		path: '/summary',
-		component: () => import('../pages/summary/Summary.vue'),
+		component: () => import('../pages/summary/summary.vue'),
 		meta: { requiresAuth: true }
 	},
 	{
 		name: 'account',
 		path: '/account',
-		component: () => import('../pages/account/Account.vue'),
+		component: () => import('../pages/account/account.vue'),
 		meta: { requiresAuth: true }
 	},
 	{
 		name: 'login',
 		path: '/login',
-		component: () => import('../pages/account/login/Login.vue'),
+		component: () => import('../pages/account/login/login.vue'),
 		meta: { requiresAuth: false }
 	},
 	{
 		name: 'registration',
 		path: '/registration',
-		component: () => import('../pages/account/registration/Registration.vue'),
+		component: () => import('../pages/account/registration/registration.vue'),
 		meta: { requiresAuth: false }
 	}
 ];

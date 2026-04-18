@@ -4,7 +4,7 @@ using Core.DAL.Entities;
 using Core.DAL.Interfaces;
 using Core.BLL.Interfaces;
 using Core.BLL.ViewModels;
-using AutoMapper;
+using MapsterMapper;
 
 namespace Core.BLL.Services
 {
